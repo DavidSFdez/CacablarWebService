@@ -5,6 +5,6 @@ import javax.ejb.Remote;
 import uo.sdi.business.RattingsService;
 
 @Remote
-public interface RemoteRattingsService extends RattingsService{
+public interface RemoteRattingsService extends RattingsService {
 
 }

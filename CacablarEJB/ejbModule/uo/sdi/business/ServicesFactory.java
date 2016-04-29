@@ -11,5 +11,7 @@ public interface ServicesFactory {
 	SeatsService createSeatsService();
 	
 	ApplicationService createApplicationService();
+	
+	RattingsService createRattingsService();
 
 }

@@ -6,7 +6,7 @@ import uo.sdi.business.exception.EntityAlreadyExistsException;
 import uo.sdi.business.exception.EntityNotFoundException;
 import uo.sdi.model.Trip;
 
-public class EjbTripsService implements LocalTripsService,RemoteTripsService{
+public class EJBTripsService implements LocalTripsService, RemoteTripsService{
 
     @Override
     public List<Trip> listActive() {
