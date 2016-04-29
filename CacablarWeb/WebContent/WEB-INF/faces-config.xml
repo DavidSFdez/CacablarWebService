@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
+	version="2.2">
+	
+	<application>
+		<resource-bundle>
+			<base-name>messages</base-name>
+			<var>msgs</var>
+		</resource-bundle>
+	</application>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>home</from-outcome>
+			<to-view-id>/index.xhtml</to-view-id> 	 	
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>error</from-outcome>
+			<to-view-id>/error.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/index.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>login</from-outcome>
+			<to-view-id>/login.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>register</from-outcome>
+			<to-view-id>/register.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>list</from-outcome>
+			<to-view-id>/listTrips.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>registTrip</from-outcome>
+			<to-view-id>/manageTrip.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>listRelated</from-outcome>
+			<to-view-id>/listTripsRelated.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/login.xhtml</from-view-id>
+		<navigation-case>
+			<from-action>#{user.login}</from-action>
+			<from-outcome>exito</from-outcome>
+			<to-view-id>/index.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/register.xhtml</from-view-id>
+		<navigation-case>
+			<from-action>#{user.register}</from-action>
+			<from-outcome>exito</from-outcome>
+			<to-view-id>/index.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>fracaso</from-outcome>
+			<to-view-id>/index.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/manageTrip.xhtml</from-view-id>
+		<navigation-case>
+			<from-action>#{wizard.save(user.user.id)}</from-action>
+			<from-outcome>exito</from-outcome>
+			<to-view-id>/index.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+		<from-action>#{wizard.modifyTrip(user.user.id)}</from-action>
+		<from-outcome>exito</from-outcome>
+		<to-view-id>/index.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/listTripsRelated.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>updateTrip</from-outcome>
+			<to-view-id>/manageTrip.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>showTrip</from-outcome>
+			<to-view-id>/showTrip.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+		<navigation-rule>
+		<from-view-id>/showTrip.xhtml</from-view-id>
+		<navigation-case>
+			<from-action>#{seat.cancelSeat}</from-action>
+			<from-outcome>exito</from-outcome>
+			<to-view-id>/showTrip.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>/listTrips.xhtml</from-view-id>
+		<!-- Este caso de navegación es con el comman viejo -->
+		<!-- <navigation-case> <from-action>#{trip.view(var.id)}</from-action> 
+			<from-outcome>exito</from-outcome> <to-view-id>/showTrip.xhtml</to-view-id> 
+			</navigation-case> -->
+		<navigation-case>
+			<from-outcome>showTrip</from-outcome>
+			<to-view-id>/showTrip.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+</faces-config>
