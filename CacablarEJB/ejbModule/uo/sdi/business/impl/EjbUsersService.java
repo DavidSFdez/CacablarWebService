@@ -5,8 +5,14 @@ import uo.sdi.business.exception.EntityNotFoundException;
 import uo.sdi.model.User;
 
 
-public class EjbUsuarioService implements LocalUsersService, RemoteUsersService{
+public class EjbUsersService implements LocalUsersService, RemoteUsersService{
 
+    private static final String USERS_SERVICE_JNDI_KEY =
+	    "java:global/"
+	    + "sdi3-204/"
+	    + "sdi3-204.EJB"
+	    + "EjbUsersService!" + "com.sdi.business.impl.RemoteUsersService";
+    
     @Override
     public User findById(Long id) throws EntityNotFoundException {
 	// TODO Auto-generated method stub
