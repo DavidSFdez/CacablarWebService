@@ -1,5 +1,5 @@
 package uo.sdi.business.impl;
 
-public class EJBRattingsService {
+public class EJBRattingsService implements LocalRattingsService,RemoteRattingsService {
  
 }

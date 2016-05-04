@@ -20,7 +20,6 @@ public class RemoteEJBServiceLocator implements ServicesFactory{
 	    + "sdi3-204.EJB"
 	    + "EjbUsersService!" + "com.sdi.business.impl.RemoteUsersService";
     
-    
     private static final String TRIPS_SERVICE_JNDI_KEY =
 	    "java:global/"
 	    + "sdi3-204/"
@@ -32,6 +31,25 @@ public class RemoteEJBServiceLocator implements ServicesFactory{
 	    + "sdi3-204/"
 	    + "sdi3-204.EJB"
 	    + "EjbRattingsService!" + "com.sdi.business.impl.RemoteRattingsService";
+    
+    private static final String LOGGIN_SERVICE_JNDI_KEY =
+	    "java:global/"
+	    + "sdi3-204/"
+	    + "sdi3-204.EJB"
+	    + "EjbLoginService!" + "com.sdi.business.impl.RemoteLoginService";
+    
+    private static final String SEATS_SERVICE_JNDI_KEY =
+	    "java:global/"
+	    + "sdi3-204/"
+	    + "sdi3-204.EJB"
+	    + "EjbSeatsService!" + "com.sdi.business.impl.RemoteSeatsService";
+    
+    private static final String APPLICATIONS_SERVICE_JNDI_KEY =
+	    "java:global/"
+	    + "sdi3-204/"
+	    + "sdi3-204.EJB"
+	    + "EjbApplicationsService!" + "com.sdi.business.impl.RemoteApplicationsService";
+    
 
     @Override
     public UsersService createUsersService() {
@@ -45,9 +63,12 @@ public class RemoteEJBServiceLocator implements ServicesFactory{
 
     @Override
     public LoginService createLoginService() {
-	// TODO Auto-generated method stub
-	
-	return null;
+	try {
+		Context ctx = new InitialContext();
+		return (LoginService) ctx.lookup(LOGGIN_SERVICE_JNDI_KEY);
+	} catch (NamingException e) {
+		throw new RuntimeException("JNDI problem", e);
+	}
     }
 
     @Override
@@ -62,14 +83,22 @@ public class RemoteEJBServiceLocator implements ServicesFactory{
 
     @Override
     public SeatsService createSeatsService() {
-	// TODO Auto-generated method stub
-	return null;
+	try {
+		Context ctx = new InitialContext();
+		return (SeatsService) ctx.lookup(SEATS_SERVICE_JNDI_KEY);
+	} catch (NamingException e) {
+		throw new RuntimeException("JNDI problem", e);
+	}
     }
 
     @Override
     public ApplicationService createApplicationService() {
-	// TODO Auto-generated method stub
-	return null;
+	try {
+		Context ctx = new InitialContext();
+		return (ApplicationService) ctx.lookup(APPLICATIONS_SERVICE_JNDI_KEY);
+	} catch (NamingException e) {
+		throw new RuntimeException("JNDI problem", e);
+	}
     }
 
     @Override
@@ -82,5 +111,6 @@ public class RemoteEJBServiceLocator implements ServicesFactory{
 	}
     }
 
+   
 
 }

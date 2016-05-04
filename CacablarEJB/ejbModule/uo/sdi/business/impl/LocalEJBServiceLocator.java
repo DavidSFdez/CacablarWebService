@@ -31,6 +31,25 @@ public class LocalEJBServiceLocator implements ServicesFactory{
 	    + "sdi3-204/"
 	    + "sdi3-204.EJB"
 	    + "EjbRattingsService!" + "com.sdi.business.impl.LocalRattingsService";
+    
+    private static final String LOGGIN_SERVICE_JNDI_KEY =
+	    "java:global/"
+	    + "sdi3-204/"
+	    + "sdi3-204.EJB"
+	    + "EjbLoginService!" + "com.sdi.business.impl.LocalLoginService";
+    
+    private static final String SEATS_SERVICE_JNDI_KEY =
+	    "java:global/"
+	    + "sdi3-204/"
+	    + "sdi3-204.EJB"
+	    + "EjbSeatsService!" + "com.sdi.business.impl.LocalSeatsService";
+    
+    private static final String APPLICATIONS_SERVICE_JNDI_KEY =
+	    "java:global/"
+	    + "sdi3-204/"
+	    + "sdi3-204.EJB"
+	    + "EjbApplicationsService!" + "com.sdi.business.impl.LocalApplicationsService";
+    
 
     @Override
     public UsersService createUsersService() {
@@ -44,9 +63,12 @@ public class LocalEJBServiceLocator implements ServicesFactory{
 
     @Override
     public LoginService createLoginService() {
-	// TODO Auto-generated method stub
-	
-	return null;
+	try {
+		Context ctx = new InitialContext();
+		return (LoginService) ctx.lookup(LOGGIN_SERVICE_JNDI_KEY);
+	} catch (NamingException e) {
+		throw new RuntimeException("JNDI problem", e);
+	}
     }
 
     @Override
@@ -61,14 +83,22 @@ public class LocalEJBServiceLocator implements ServicesFactory{
 
     @Override
     public SeatsService createSeatsService() {
-	// TODO Auto-generated method stub
-	return null;
+	try {
+		Context ctx = new InitialContext();
+		return (SeatsService) ctx.lookup(SEATS_SERVICE_JNDI_KEY);
+	} catch (NamingException e) {
+		throw new RuntimeException("JNDI problem", e);
+	}
     }
 
     @Override
     public ApplicationService createApplicationService() {
-	// TODO Auto-generated method stub
-	return null;
+	try {
+		Context ctx = new InitialContext();
+		return (ApplicationService) ctx.lookup(APPLICATIONS_SERVICE_JNDI_KEY);
+	} catch (NamingException e) {
+		throw new RuntimeException("JNDI problem", e);
+	}
     }
 
     @Override
