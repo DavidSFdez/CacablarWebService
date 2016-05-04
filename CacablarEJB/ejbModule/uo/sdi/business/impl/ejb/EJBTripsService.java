@@ -2,6 +2,8 @@ package uo.sdi.business.impl.ejb;
 
 import java.util.List;
 
+import javax.ejb.Stateless;
+
 import uo.sdi.business.exception.EntityAlreadyExistsException;
 import uo.sdi.business.exception.EntityNotFoundException;
 import uo.sdi.business.impl.classes.trip.TripsCancel;
@@ -16,7 +18,7 @@ import uo.sdi.business.impl.classes.trip.TripsUpdateTripsStatus;
 import uo.sdi.business.impl.local.LocalTripsService;
 import uo.sdi.business.impl.remote.RemoteTripsService;
 import uo.sdi.model.Trip;
-
+@Stateless
 public class EJBTripsService implements LocalTripsService, RemoteTripsService{
 
     @Override

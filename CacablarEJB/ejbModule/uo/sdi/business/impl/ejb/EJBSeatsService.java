@@ -2,6 +2,8 @@ package uo.sdi.business.impl.ejb;
 
 import java.util.List;
 
+import javax.ejb.Stateless;
+
 import uo.sdi.business.exception.EntityAlreadyExistsException;
 import uo.sdi.business.exception.EntityNotFoundException;
 import uo.sdi.business.impl.classes.application.ApplicationsByTrip;
@@ -17,6 +19,7 @@ import uo.sdi.model.Application;
 import uo.sdi.model.Seat;
 import uo.sdi.model.User;
 
+@Stateless
 public class EJBSeatsService implements LocalSeatsService,RemoteSeatsService{
 
     @Override

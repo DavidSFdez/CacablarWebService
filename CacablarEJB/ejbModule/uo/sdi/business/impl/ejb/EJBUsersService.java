@@ -1,5 +1,7 @@
 package uo.sdi.business.impl.ejb;
 
+import javax.ejb.Stateless;
+
 import uo.sdi.business.exception.EntityAlreadyExistsException;
 import uo.sdi.business.exception.EntityNotFoundException;
 import uo.sdi.business.impl.classes.user.UsersAlta;
@@ -7,7 +9,7 @@ import uo.sdi.business.impl.local.LocalUsersService;
 import uo.sdi.business.impl.remote.RemoteUsersService;
 import uo.sdi.model.User;
 
-
+@Stateless
 public class EJBUsersService implements LocalUsersService, RemoteUsersService{
 
     @Override

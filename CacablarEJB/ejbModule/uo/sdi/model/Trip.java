@@ -1,5 +1,6 @@
 package uo.sdi.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.xml.crypto.Data;
@@ -12,7 +13,9 @@ import javax.xml.crypto.Data;
  * @author alb
  *
  */
-public class Trip {
+public class Trip implements Serializable{
+    
+    private static final long serialVersionUID = 1L;
 	
 	private Long id;
 	

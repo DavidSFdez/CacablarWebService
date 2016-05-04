@@ -17,38 +17,38 @@ public class RemoteEJBServiceLocator implements ServicesFactory{
     private static final String USERS_SERVICE_JNDI_KEY =
 	    "java:global/"
 	    + "sdi3-204/"
-	    + "sdi3-204.EJB"
-	    + "EjbUsersService!" + "com.sdi.business.impl.RemoteUsersService";
+	    + "sdi3-204.EJB/"
+	    + "EJBUsersService!" + "uo.sdi.business.impl.remote.RemoteUsersService";
     
     private static final String TRIPS_SERVICE_JNDI_KEY =
 	    "java:global/"
 	    + "sdi3-204/"
-	    + "sdi3-204.EJB"
-	    + "EjbTripsService!" + "com.sdi.business.impl.RemoteTripsService";
+	    + "sdi3-204.EJB/"
+	    + "EJBTripsService!" + "uo.sdi.business.impl.remote.RemoteTripsService";
     
     private static final String RATTINGS_SERVICE_JNDI_KEY =
 	    "java:global/"
 	    + "sdi3-204/"
-	    + "sdi3-204.EJB"
-	    + "EjbRattingsService!" + "com.sdi.business.impl.RemoteRattingsService";
+	    + "sdi3-204.EJB/"
+	    + "EJBRattingsService!" + "uo.sdi.business.impl.remote.RemoteRattingsService";
     
     private static final String LOGGIN_SERVICE_JNDI_KEY =
 	    "java:global/"
 	    + "sdi3-204/"
-	    + "sdi3-204.EJB"
-	    + "EjbLoginService!" + "com.sdi.business.impl.RemoteLoginService";
+	    + "sdi3-204.EJB/"
+	    + "EJBLoginService!" + "uo.sdi.business.impl.remote.RemoteLoginService";
     
     private static final String SEATS_SERVICE_JNDI_KEY =
 	    "java:global/"
 	    + "sdi3-204/"
-	    + "sdi3-204.EJB"
-	    + "EjbSeatsService!" + "com.sdi.business.impl.RemoteSeatsService";
+	    + "sdi3-204.EJB/"
+	    + "EJBSeatsService!" + "uo.sdi.business.impl.remote.RemoteSeatsService";
     
     private static final String APPLICATIONS_SERVICE_JNDI_KEY =
 	    "java:global/"
 	    + "sdi3-204/"
-	    + "sdi3-204.EJB"
-	    + "EjbApplicationsService!" + "com.sdi.business.impl.RemoteApplicationsService";
+	    + "sdi3-204.EJB/"
+	    + "EJBApplicationsService!" + "uo.sdi.business.impl.remote.RemoteApplicationsService";
     
 
     @Override

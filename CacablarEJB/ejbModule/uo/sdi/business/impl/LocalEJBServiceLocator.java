@@ -17,38 +17,38 @@ public class LocalEJBServiceLocator implements ServicesFactory{
     private static final String USERS_SERVICE_JNDI_KEY =
 	    "java:global/"
 	    + "sdi3-204/"
-	    + "sdi3-204.EJB"
-	    + "EjbUsersService!" + "com.sdi.business.impl.LocalUsersService";
+	    + "sdi3-204.EJB/"
+	    + "EJBUsersService!" + "uo.sdi.business.impl.local.LocalUsersService";
     
     private static final String TRIPS_SERVICE_JNDI_KEY =
 	    "java:global/"
 	    + "sdi3-204/"
-	    + "sdi3-204.EJB"
-	    + "EjbTripsService!" + "com.sdi.business.impl.LocalTripsService";
+	    + "sdi3-204.EJB/"
+	    + "EJBTripsService!" + "uo.sdi.business.impl.local.LocalTripsService";
     
     private static final String RATTINGS_SERVICE_JNDI_KEY =
 	    "java:global/"
 	    + "sdi3-204/"
-	    + "sdi3-204.EJB"
-	    + "EjbRattingsService!" + "com.sdi.business.impl.LocalRattingsService";
+	    + "sdi3-204.EJB/"
+	    + "EJBRattingsService!" + "uo.sdi.business.impl.local.LocalRattingsService";
     
     private static final String LOGGIN_SERVICE_JNDI_KEY =
 	    "java:global/"
 	    + "sdi3-204/"
-	    + "sdi3-204.EJB"
-	    + "EjbLoginService!" + "com.sdi.business.impl.LocalLoginService";
+	    + "sdi3-204.EJB/"
+	    + "EJBLoginService!" + "uo.sdi.business.impl.local.LocalLoginService";
     
     private static final String SEATS_SERVICE_JNDI_KEY =
 	    "java:global/"
 	    + "sdi3-204/"
-	    + "sdi3-204.EJB"
-	    + "EjbSeatsService!" + "com.sdi.business.impl.LocalSeatsService";
+	    + "sdi3-204.EJB/"
+	    + "EJBSeatsService!" + "uo.sdi.business.impl.local.LocalSeatsService";
     
     private static final String APPLICATIONS_SERVICE_JNDI_KEY =
 	    "java:global/"
 	    + "sdi3-204/"
-	    + "sdi3-204.EJB"
-	    + "EjbApplicationsService!" + "com.sdi.business.impl.LocalApplicationsService";
+	    + "sdi3-204.EJB/"
+	    + "EJBApplicationsService!" + "uo.sdi.business.impl.local.LocalApplicationsService";
     
 
     @Override
