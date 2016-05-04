@@ -1,4 +1,4 @@
-package uo.sdi.business.impl;
+package uo.sdi.business.impl.local;
 
 import javax.ejb.Local;
 
