@@ -1,5 +1,6 @@
 package uo.sdi.business.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import uo.sdi.business.exception.EntityAlreadyExistsException;
@@ -11,7 +12,7 @@ public class EJBTripsService implements LocalTripsService, RemoteTripsService{
     @Override
     public List<Trip> listActive() {
 	// TODO Auto-generated method stub
-	return null;
+	return new ArrayList<Trip>();
     }
 
     @Override

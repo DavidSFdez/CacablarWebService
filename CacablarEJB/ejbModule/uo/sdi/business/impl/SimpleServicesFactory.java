@@ -3,6 +3,7 @@ package uo.sdi.business.impl;
 
 import uo.sdi.business.ApplicationService;
 import uo.sdi.business.LoginService;
+import uo.sdi.business.RattingsService;
 import uo.sdi.business.SeatsService;
 import uo.sdi.business.ServicesFactory;
 import uo.sdi.business.TripsService;
@@ -38,6 +39,12 @@ public class SimpleServicesFactory implements ServicesFactory {
 	public ApplicationService createApplicationService() {
 	    
 	    return new SimpleApplicationsService();
+	}
+
+	@Override
+	public RattingsService createRattingsService() {
+	    // TODO Auto-generated method stub
+	    return null;
 	}
 
 	

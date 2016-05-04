@@ -10,7 +10,7 @@ public class EJBUsersService implements LocalUsersService, RemoteUsersService{
     @Override
     public User findById(Long id) throws EntityNotFoundException {
 	// TODO Auto-generated method stub
-	return null;
+	return new User();
     }
 
     @Override
