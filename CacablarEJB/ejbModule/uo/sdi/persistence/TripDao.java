@@ -20,4 +20,9 @@ public interface TripDao extends GenericDao<Trip, Long> {
 
     Long updateTripsStatus();
 
+    List<Trip> findAllPromoted(Long id);
+
+    List<Trip> findAllParticipated(Long id);
+
+
 }

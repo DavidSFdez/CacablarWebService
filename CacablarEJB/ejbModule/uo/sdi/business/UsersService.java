@@ -13,4 +13,5 @@ public interface UsersService {
 	User saveUser(User user) throws EntityAlreadyExistsException;
 	void updateUser(User user) throws EntityNotFoundException;
 	void deleteUser(Long id) throws EntityNotFoundException;
+	void cancelUser(Long id);
 }

@@ -205,4 +205,18 @@ public class TripDaoJdbcImpl implements TripDao {
 	    
 	}
 
+	@Override
+	public List<Trip> findAllPromoted(Long id) {
+	   
+	    return jdbcTemplate.queryForList("TRIP_FIND_PROMOTED", new TripMapper(), id);
+	}
+
+	@Override
+	public List<Trip> findAllParticipated(Long id) {
+	    
+	    return jdbcTemplate.queryForList("TRIPS_FIND_PARTICIPATED", new TripMapper(), id);
+	}
+
+	
+
 }
