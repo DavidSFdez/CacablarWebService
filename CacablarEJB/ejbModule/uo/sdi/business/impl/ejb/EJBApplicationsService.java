@@ -18,7 +18,7 @@ import uo.sdi.model.Application;
 @Stateless
 public class EJBApplicationsService implements LocalApplicationsService,
 	RemoteApplicationsService {
-
+    
     @Override
     public Application find(Long idTrip, Long idUser)
 	    throws EntityNotFoundException {

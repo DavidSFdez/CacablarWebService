@@ -2,9 +2,9 @@ package uo.sdi.business.impl.local;
 
 import javax.ejb.Local;
 
-import uo.sdi.business.LoginService;
+import uo.sdi.business.SeatsService;
 
 @Local
-public interface LocalSeatsService extends LoginService{
+public interface LocalSeatsService extends SeatsService{
 
 }

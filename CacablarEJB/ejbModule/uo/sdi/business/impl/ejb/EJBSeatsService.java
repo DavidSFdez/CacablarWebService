@@ -64,10 +64,5 @@ public class EJBSeatsService implements LocalSeatsService,RemoteSeatsService{
 	
     }
 
-    @Override
-    public User verify(String name, String password) {
-	// TODO Auto-generated method stub
-	return null;
-    }
 
 }
