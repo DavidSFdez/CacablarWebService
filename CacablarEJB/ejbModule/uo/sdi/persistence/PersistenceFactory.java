@@ -21,6 +21,8 @@ public interface PersistenceFactory {
     ApplicationDao createApplicationDao();
 
     Transaction createTransaction();
+
+    RatingDao createRattingDao();
     
 }
 

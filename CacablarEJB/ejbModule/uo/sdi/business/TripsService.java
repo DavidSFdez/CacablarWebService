@@ -19,6 +19,7 @@ public interface TripsService {
     void updateTripsStatus();
     List<Trip> findAllPromoted(Long id);
     List<Trip> findAllParticipated(Long id);
+    List<Trip> findAll();
  
     
    

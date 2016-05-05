@@ -11,86 +11,75 @@ import uo.sdi.persistence.util.RowMapper;
 
 public class RatingDaoJdbcImpl implements RatingDao {
 
-	public class RatingMapper implements RowMapper<Rating> {
-
-		@Override
-		public Rating toObject(ResultSet rs) throws SQLException {
-			Rating dto = new Rating();
-			
-			dto.setId( rs.getLong( "ID" ) );
-			dto.setComment( rs.getString( "COMMENT" ) );
-			dto.setValue( rs.getInt( "VALUE" ) );
-			dto.setSeatAboutTripId( rs.getLong( "ABOUT_TRIP_ID" ) );
-			dto.setSeatAboutUserId( rs.getLong( "ABOUT_USER_ID" ) );
-			dto.setSeatFromTripId( rs.getLong( "FROM_TRIP_ID" ) );
-			dto.setSeatFromUserId( rs.getLong( "FROM_USER_ID" ) );
-			
-			return dto;
-		}
-
-	}
-
-	private JdbcTemplate jdbcTemplate = new JdbcTemplate();
+    public class RatingMapper implements RowMapper<Rating> {
 
 	@Override
-	public Long save(Rating dto) {
-		jdbcTemplate.execute("RATING_INSERT",
-				dto.getComment(),
-				dto.getValue(),
-				dto.getSeatAboutTripId(),
-				dto.getSeatAboutUserId(),
-				dto.getSeatFromTripId(),
-				dto.getSeatFromUserId()
-			);
-		return jdbcTemplate.getGeneratedKey();
+	public Rating toObject(ResultSet rs) throws SQLException {
+	    Rating dto = new Rating();
+
+	    dto.setId(rs.getLong("ID"));
+	    dto.setComment(rs.getString("COMMENT"));
+	    dto.setValue(rs.getInt("VALUE"));
+	    dto.setSeatAboutTripId(rs.getLong("ABOUT_TRIP_ID"));
+	    dto.setSeatAboutUserId(rs.getLong("ABOUT_USER_ID"));
+	    dto.setSeatFromTripId(rs.getLong("FROM_TRIP_ID"));
+	    dto.setSeatFromUserId(rs.getLong("FROM_USER_ID"));
+
+	    return dto;
 	}
 
-	@Override
-	public int update(Rating dto) {
-		return jdbcTemplate.execute("RATING_UPDATE",
-				dto.getComment(),
-				dto.getValue(),
-				dto.getSeatAboutTripId(),
-				dto.getSeatAboutUserId(),
-				dto.getSeatFromTripId(),
-				dto.getSeatFromUserId(),
-				
-				dto.getId()
-			);
+    }
 
-	}
+    private JdbcTemplate jdbcTemplate = new JdbcTemplate();
 
-	@Override
-	public int delete(Long id) {
-		return jdbcTemplate.execute("RATING_DELETE", id );
-	}
+    @Override
+    public Long save(Rating dto) {
+	jdbcTemplate.execute("RATING_INSERT", dto.getComment(), dto.getValue(),
+		dto.getSeatAboutTripId(), dto.getSeatAboutUserId(),
+		dto.getSeatFromTripId(), dto.getSeatFromUserId());
+	return jdbcTemplate.getGeneratedKey();
+    }
 
-	@Override
-	public Rating findById(Long id) {
-		return jdbcTemplate.queryForObject(
-				"RATING_FIND_BY_ID", 
-				new RatingMapper(), 
-				id
-			);
-	}
+    @Override
+    public int update(Rating dto) {
+	return jdbcTemplate.execute("RATING_UPDATE", dto.getComment(),
+		dto.getValue(), dto.getSeatAboutTripId(),
+		dto.getSeatAboutUserId(), dto.getSeatFromTripId(),
+		dto.getSeatFromUserId(),
 
-	@Override
-	public List<Rating> findAll() {
-		return jdbcTemplate.queryForList("RATING_FIND_ALL", new RatingMapper());
-	}
+		dto.getId());
 
-	@Override
-	public Rating findByAboutFrom(
-			Long aboutUserId, Long aboutTripId, Long fromUserId, Long fromTripId) {
-		
-		return jdbcTemplate.queryForObject(
-				"RATING_FIND_BY_ABOUT_FROM", 
-				new RatingMapper(), 
-				aboutUserId,
-				aboutTripId,
-				fromUserId,
-				fromTripId
-			);
-	}
+    }
+
+    @Override
+    public int delete(Long id) {
+	return jdbcTemplate.execute("RATING_DELETE", id);
+    }
+
+    @Override
+    public Rating findById(Long id) {
+	return jdbcTemplate.queryForObject("RATING_FIND_BY_ID",
+		new RatingMapper(), id);
+    }
+
+    @Override
+    public List<Rating> findAll() {
+	return jdbcTemplate.queryForList("RATING_FIND_ALL", new RatingMapper());
+    }
+
+    @Override
+    public Rating findByAboutFrom(Long aboutUserId, Long aboutTripId,
+	    Long fromUserId, Long fromTripId) {
+
+	return jdbcTemplate.queryForObject("RATING_FIND_BY_ABOUT_FROM",
+		new RatingMapper(), aboutUserId, aboutTripId, fromUserId,
+		fromTripId);
+    }
+
+    @Override
+    public Rating findByTrip(Long idTrip) {
+	return jdbcTemplate.queryForObject("RATING_FIND_BY_TRIP",
+		new RatingMapper(), idTrip);
+    }
 
 }
