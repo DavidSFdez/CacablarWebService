@@ -9,7 +9,7 @@ import uo.sdi.model.User;
 import uo.sdi.persistence.UserDao;
 
 @Stateless
-public class EJBLoginService implements LocalLoginService,RemoteLoginService{
+public class EJBLoginService implements LocalLoginService, RemoteLoginService{
 
     @Override
     public User verify(String login, String password) {

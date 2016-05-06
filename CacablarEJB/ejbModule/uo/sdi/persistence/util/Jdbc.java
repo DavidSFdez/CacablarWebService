@@ -46,45 +46,46 @@ public class Jdbc {
     }
 
     private static ThreadLocal<Connection> threadLocal = new ThreadLocal<>();
-    
+
     private Connection con;
 
     public static Connection createConnection() {
 	try {
-//	    Connection con = DriverManager.getConnection(DATABASE_URL,
-//		    DATABASE_USER, DATABASE_PASSWORD);
-	    
+	    // Connection con = DriverManager.getConnection(DATABASE_URL,
+	    // DATABASE_USER, DATABASE_PASSWORD);
+
 	    Connection con;
-	    
+
 	    String jndiKey = JNDI_DATASOURCE;
 
 	    Context ctx = new InitialContext();
 	    DataSource ds = (DataSource) ctx.lookup(jndiKey);
 	    con = ds.getConnection();
-	    
+
 	    threadLocal.set(con);
 
 	    return con;
-	    
+
 	} catch (NamingException e) {
-		throw new RuntimeException("Can't open JDBC conection from JNDI", e);
+	    throw new RuntimeException("Can't open JDBC conection from JNDI", e);
 	} catch (SQLException e) {
-		throw new RuntimeException("Can't open JDBC conection", e);
-	} 
-//	catch (SQLTimeoutException e) {
-//	    throw new PersistenceException("Timeout opennig JDBC conection", e);
-//	} catch (SQLException e) {
-//	    throw new PersistenceException("An unexpected JDBC error has ocurred", e);
-//	}
+	    throw new RuntimeException("Can't open JDBC conection", e);
+	}
+	// catch (SQLTimeoutException e) {
+	// throw new PersistenceException("Timeout opennig JDBC conection", e);
+	// } catch (SQLException e) {
+	// throw new
+	// PersistenceException("An unexpected JDBC error has ocurred", e);
+	// }
     }
 
     public static Connection getCurrentConnection() {
-
-	 Connection con = threadLocal.get(); 
-	 	if(con == null) { con = createConnection(); } 
-	 return con;
+	Connection con = threadLocal.get();
+	if (con == null) {
+	    con = createConnection();
+	}
+	return con;
     }
-    
 
     public static String getSqlQuery(String queryKey) {
 	return sqlQueries.getProperty(queryKey).trim();
@@ -147,10 +148,6 @@ public class Jdbc {
 
     private static boolean isInAutoCommitMode(Connection con) {
 	try {
-
-
-
-	    
 	    return con.getAutoCommit();
 	} catch (SQLException e) {
 	    throw new PersistenceException("Unexpected exception", e);

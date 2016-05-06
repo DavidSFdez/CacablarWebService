@@ -25,24 +25,22 @@ public class Main {
     private static void run() throws Exception {
 	metodocutre();
 
-//	System.out.println("###listarUsuariosSistema();");
-//	listarUsuariosSistema();
-//
-//	System.out.println("###deshabilitarUsuario();");
-//	deshabilitarUsuario();
-//
-//	System.out.println("###listarComentariosYPuntuaciones();");
-//	listarComentariosYPuntuaciones();
-//	
-//	System.out.println("###eliminarRatting();");
-//	eliminarRatting();
+	System.out.println("###listarUsuariosSistema();");
+	listarUsuariosSistema();
+
+	System.out.println("###deshabilitarUsuario();");
+	deshabilitarUsuario();
+
+	System.out.println("###listarComentariosYPuntuaciones();");
+	listarComentariosYPuntuaciones();
+	
+	System.out.println("###eliminarRatting();");
+	eliminarRatting();
     }
 
 
     private static void metodocutre() throws EntityNotFoundException {
 	RemoteEJBServiceLocator ejbl = new RemoteEJBServiceLocator();
-	
-	
 	
 	System.out.println(ejbl.createUsersService());
 	System.out.println(ejbl.createTripsService());
@@ -53,9 +51,15 @@ public class Main {
 	
 	UsersService us = new RemoteEJBServiceLocator().createUsersService();
 	
+	System.out.println("Usuarios del sistema");
 	List<User> users = us.findAll();
 	for(User u : users)
 	    System.out.println(u);
+	
+	System.out.println("Viajes del sistema");
+	List<Trip> trips = ejbl.createTripsService().findAll();
+	for(Trip t : trips)
+	    System.out.println(t);
     }
 
     private static void listarUsuariosSistema() throws Exception {

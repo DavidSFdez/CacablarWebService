@@ -1,9 +1,7 @@
 package uo.sdi.infrastructure;
 
 import uo.sdi.business.ServicesFactory;
-import uo.sdi.business.impl.LocalEJBServiceLocator;
 import uo.sdi.persistence.PersistenceFactory;
-import uo.sdi.persistence.impl.SimplePersistenceFactory;
 
 /**
  * Esta clase es la que realemente relaciona las interfaces de las capas con sus
