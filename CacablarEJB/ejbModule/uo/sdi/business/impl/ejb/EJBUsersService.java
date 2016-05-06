@@ -6,9 +6,11 @@ import javax.ejb.Stateless;
 
 import uo.sdi.business.exception.EntityAlreadyExistsException;
 import uo.sdi.business.exception.EntityNotFoundException;
-import uo.sdi.business.impl.classes.user.UserBaja;
-import uo.sdi.business.impl.classes.user.UserListAll;
 import uo.sdi.business.impl.classes.user.UsersAlta;
+import uo.sdi.business.impl.classes.user.UsersBaja;
+import uo.sdi.business.impl.classes.user.UsersFindById;
+import uo.sdi.business.impl.classes.user.UsersListAll;
+import uo.sdi.business.impl.classes.user.UsersUpdate;
 import uo.sdi.business.impl.local.LocalUsersService;
 import uo.sdi.business.impl.remote.RemoteUsersService;
 import uo.sdi.model.User;
@@ -18,8 +20,7 @@ public class EJBUsersService implements LocalUsersService, RemoteUsersService {
 
     @Override
     public User findById(Long id) throws EntityNotFoundException {
-	// TODO Auto-generated method stub
-	return null;
+	return new UsersFindById().find(id);
     }
 
     @Override
@@ -29,21 +30,21 @@ public class EJBUsersService implements LocalUsersService, RemoteUsersService {
 
     @Override
     public void updateUser(User user) throws EntityNotFoundException {
-	// TODO Auto-generated method stub
+	new UsersUpdate().update(user);
     }
 
     @Override
     public void deleteUser(Long id) throws EntityNotFoundException {
-	new UserBaja().cancelUser(id);
+	new UsersBaja().cancelUser(id);
     }
 
     @Override
     public void cancelUser(Long id) {
-	new UserBaja().cancelUser(id);
+	new UsersBaja().cancelUser(id);
     }
 
     @Override
     public List<User> findAll() {
-	return new UserListAll().listAll();
+	return new UsersListAll().listAll();
     }
 }

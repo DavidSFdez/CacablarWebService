@@ -14,7 +14,7 @@ import uo.sdi.persistence.TripDao;
 import uo.sdi.persistence.UserDao;
 import uo.sdi.persistence.exception.NotPersistedException;
 
-public class UserBaja {
+public class UsersBaja {
 
     public void cancelUser(Long id) {
 	UserDao dao = Factories.persistence.createUserDao();
