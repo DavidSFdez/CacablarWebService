@@ -8,7 +8,6 @@ import java.util.List;
 import uo.sdi.business.RattingsService;
 import uo.sdi.business.TripsService;
 import uo.sdi.business.UsersService;
-import uo.sdi.business.exception.EntityNotFoundException;
 import uo.sdi.business.impl.RemoteEJBServiceLocator;
 import uo.sdi.model.Rating;
 import uo.sdi.model.Trip;
@@ -23,12 +22,17 @@ public class Main {
 
     private static void run() throws Exception {
 
+	
+	System.out.println("###listarUsuariosSistema();");
 	listarUsuariosSistema();
 
+	System.out.println("###deshabilitarUsuario();");
 	deshabilitarUsuario();
 
+	System.out.println("###listarComentariosYPuntuaciones();");
 	listarComentariosYPuntuaciones();
 	
+	System.out.println("###eliminarRatting();");
 	eliminarRatting();
     }
 
