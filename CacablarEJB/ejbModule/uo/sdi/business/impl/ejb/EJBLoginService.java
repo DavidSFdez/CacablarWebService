@@ -13,10 +13,8 @@ public class EJBLoginService implements LocalLoginService,RemoteLoginService{
 
     @Override
     public User verify(String login, String password) {
-	
 	UserDao userDao = Factories.persistence.createUserDao();
 	User user = userDao.validateLogin(login, password);
-	
 	return user;
     }
 }

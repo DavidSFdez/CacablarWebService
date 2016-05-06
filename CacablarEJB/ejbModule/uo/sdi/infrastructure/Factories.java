@@ -23,15 +23,13 @@ import uo.sdi.persistence.impl.SimplePersistenceFactory;
  * 
  */
 public class Factories {
-
-    
     
 	private static String CONFIG_FILE = "/factories.properties";
 	
-	public static ServicesFactory services = new LocalEJBServiceLocator();
-		//(ServicesFactory) FactoriesHelper.createFactory(CONFIG_FILE, "SERVICES_FACTORY");
+	public static ServicesFactory services = //new LocalEJBServiceLocator();
+		(ServicesFactory) FactoriesHelper.createFactory(CONFIG_FILE, "SERVICES_FACTORY");
 	
-	public static PersistenceFactory persistence = new SimplePersistenceFactory();
-		//(PersistenceFactory) FactoriesHelper.createFactory(CONFIG_FILE, "PERSISTENCE_FACTORY");
+	public static PersistenceFactory persistence = //new SimplePersistenceFactory();
+		(PersistenceFactory) FactoriesHelper.createFactory(CONFIG_FILE, "PERSISTENCE_FACTORY");
 
 }

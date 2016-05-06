@@ -13,13 +13,11 @@ public class EJBRattingsService implements LocalRattingsService,RemoteRattingsSe
 
     @Override
     public Rating listByTrip(Long idTrip) {
-	
 	return new RattingsFindByTrip().find(idTrip);
     }
 
     @Override
     public void delete(Long id) {
-
 	new RattingsDelete().delete(id);
 	
     }

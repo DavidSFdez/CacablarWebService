@@ -17,7 +17,6 @@ import uo.sdi.business.impl.local.LocalSeatsService;
 import uo.sdi.business.impl.remote.RemoteSeatsService;
 import uo.sdi.model.Application;
 import uo.sdi.model.Seat;
-import uo.sdi.model.User;
 
 @Stateless
 public class EJBSeatsService implements LocalSeatsService,RemoteSeatsService{
@@ -29,20 +28,16 @@ public class EJBSeatsService implements LocalSeatsService,RemoteSeatsService{
 
     @Override
     public void request(Long idTrip, Long idUser) throws EntityAlreadyExistsException {
-
 	new SeatsRequest().request(idTrip,idUser);
-	
     }
 
     @Override
     public void cancelSeat(Seat seat) throws EntityNotFoundException {
-	
 	new SeatsCancelSeat().cancel(seat);
     }
 
     @Override
     public List<Seat> findByTrip(Long idTrip) {
-
 	return new SeatsFindByTrip().find(idTrip);
     }
 

@@ -1,5 +1,6 @@
 package uo.sdi.client;
 
+import java.rmi.Remote;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
@@ -8,6 +9,7 @@ import java.util.List;
 import uo.sdi.business.RattingsService;
 import uo.sdi.business.TripsService;
 import uo.sdi.business.UsersService;
+import uo.sdi.business.exception.EntityNotFoundException;
 import uo.sdi.business.impl.RemoteEJBServiceLocator;
 import uo.sdi.model.Rating;
 import uo.sdi.model.Trip;
@@ -21,21 +23,40 @@ public class Main {
     }
 
     private static void run() throws Exception {
+	metodocutre();
 
-	
-	System.out.println("###listarUsuariosSistema();");
-	listarUsuariosSistema();
-
-	System.out.println("###deshabilitarUsuario();");
-	deshabilitarUsuario();
-
-	System.out.println("###listarComentariosYPuntuaciones();");
-	listarComentariosYPuntuaciones();
-	
-	System.out.println("###eliminarRatting();");
-	eliminarRatting();
+//	System.out.println("###listarUsuariosSistema();");
+//	listarUsuariosSistema();
+//
+//	System.out.println("###deshabilitarUsuario();");
+//	deshabilitarUsuario();
+//
+//	System.out.println("###listarComentariosYPuntuaciones();");
+//	listarComentariosYPuntuaciones();
+//	
+//	System.out.println("###eliminarRatting();");
+//	eliminarRatting();
     }
 
+
+    private static void metodocutre() throws EntityNotFoundException {
+	RemoteEJBServiceLocator ejbl = new RemoteEJBServiceLocator();
+	
+	
+	
+	System.out.println(ejbl.createUsersService());
+	System.out.println(ejbl.createTripsService());
+	System.out.println(ejbl.createRattingsService());
+	System.out.println(ejbl.createSeatsService());
+	System.out.println(ejbl.createApplicationService());
+	System.out.println(ejbl.createLoginService());
+	
+	UsersService us = new RemoteEJBServiceLocator().createUsersService();
+	
+	List<User> users = us.findAll();
+	for(User u : users)
+	    System.out.println(u);
+    }
 
     private static void listarUsuariosSistema() throws Exception {
 	User user;
@@ -50,7 +71,6 @@ public class Main {
 
 	imprimirDatosUsuarioViajes(user, promotedTrips.size(),
 		participateTrips.size());
-
     }
 
     private static void imprimirDatosUsuarioViajes(User user,
