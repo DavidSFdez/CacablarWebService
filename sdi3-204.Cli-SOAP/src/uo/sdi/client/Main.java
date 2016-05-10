@@ -23,34 +23,33 @@ public class Main {
     }
 
     private static void run() throws Exception {
-	// metodocutre();
+	metodocutre();
 
-	System.out.println("###listarUsuariosSistema();");
-	listarUsuariosSistema();
-
-	System.out.println("###deshabilitarUsuario();");
-	deshabilitarUsuario();
-
-	System.out.println("###listarComentariosYPuntuaciones();");
-	listarComentariosYPuntuaciones();
-
-	System.out.println("###eliminarRatting();");
-	eliminarRatting();
+	// System.out.println("###listarUsuariosSistema();");
+	// listarUsuariosSistema();
+	//
+	// System.out.println("###deshabilitarUsuario();");
+	// deshabilitarUsuario();
+	//
+	// System.out.println("###listarComentariosYPuntuaciones();");
+	// listarComentariosYPuntuaciones();
+	//
+	// System.out.println("###eliminarRatting();");
+	// eliminarRatting();
     }
 
     private static void metodocutre() {
 
 	UsersService us = new EJBUsersServiceService().getUsersServicePort();
-	;
 
 	System.out.println("Usuarios del sistema");
-	List<User> users = us.findAll();
+	List<User> users = us.findAllUsers();
 	for (User u : users)
 	    System.out.println(u);
 
 	System.out.println("Viajes del sistema");
 	List<Trip> trips = new EJBTripsServiceService().getTripsServicePort()
-		.findAll();
+		.findAllTrips();
 	for (Trip t : trips)
 	    System.out.println(t);
     }
@@ -58,7 +57,7 @@ public class Main {
     private static void listarUsuariosSistema() throws Exception {
 	UsersService us = new EJBUsersServiceService().getUsersServicePort();
 	TripsService ts = new EJBTripsServiceService().getTripsServicePort();
-	List<User> users = us.findAll();
+	List<User> users = us.findAllUsers();
 	System.out.println("-----------------------------");
 	for (User u : users) {
 	    List<Trip> promotedTrips = ts.findAllPromoted(u.getId());
@@ -85,7 +84,7 @@ public class Main {
 	User user;
 
 	UsersService us = new EJBUsersServiceService().getUsersServicePort();
-	user = us.findById(101L);
+	user = us.findUserById(101L);
 
 	if (user != null)
 	    us.cancelUser(user.getId());
@@ -98,7 +97,7 @@ public class Main {
 	TripsService ts = new EJBTripsServiceService().getTripsServicePort();
 	try {
 
-	    List<Trip> trips = ts.findAll();
+	    List<Trip> trips = ts.findAllTrips();
 
 	    List<Trip> tripsLastMonth = new LinkedList<>();
 	    Date actual = new Date();

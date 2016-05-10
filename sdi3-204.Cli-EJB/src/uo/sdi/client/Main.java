@@ -52,7 +52,7 @@ public class Main {
 	UsersService us = new RemoteEJBServiceLocator().createUsersService();
 	
 	System.out.println("Usuarios del sistema");
-	List<User> users = us.findAllTrips();
+	List<User> users = us.findAllUsers();
 	for(User u : users)
 	    System.out.println(u);
 	
@@ -65,7 +65,7 @@ public class Main {
     private static void listarUsuariosSistema() throws Exception {
 	UsersService us = new RemoteEJBServiceLocator().createUsersService();
 	TripsService ts = new RemoteEJBServiceLocator().createTripsService();	
-	List<User> users = us.findAllTrips();
+	List<User> users = us.findAllUsers();
 	System.out.println("-----------------------------");
 	for(User u : users){
 	    List<Trip> promotedTrips = ts.findAllPromoted(u.getId());
