@@ -23,7 +23,7 @@ public class Main {
     }
 
     private static void run() throws Exception {
-	metodocutre();
+//	metodocutre();
 
 	System.out.println("###listarUsuariosSistema();");
 	listarUsuariosSistema();
@@ -63,30 +63,29 @@ public class Main {
     }
 
     private static void listarUsuariosSistema() throws Exception {
-	User user;
-
 	UsersService us = new RemoteEJBServiceLocator().createUsersService();
-	user = us.findById(101L);
-
-	TripsService ts = new RemoteEJBServiceLocator().createTripsService();
-
-	List<Trip> promotedTrips = ts.findAllPromoted(user.getId());
-	List<Trip> participateTrips = ts.findAllParticipated(user.getId());
-
-	imprimirDatosUsuarioViajes(user, promotedTrips.size(),
-		participateTrips.size());
+	TripsService ts = new RemoteEJBServiceLocator().createTripsService();	
+	List<User> users = us.findAll();
+	System.out.println("-----------------------------");
+	for(User u : users){
+	    List<Trip> promotedTrips = ts.findAllPromoted(u.getId());
+	    List<Trip> participateTrips = ts.findAllParticipated(u.getId());    
+	    imprimirDatosUsuarioViajes(u, promotedTrips.size(),
+			participateTrips.size());
+	    System.out.println("-------");
+	}	
     }
 
     private static void imprimirDatosUsuarioViajes(User user,
 	    int numberPromoted, int numberParticipated) {
+	
 	System.out.println("\nId: " + user.getId() + "\nUsuario: "
 		+ user.getLogin());
 
-	System.out.println("-----------------------------");
 	System.out.println("\nPromocionados: " + numberPromoted
 		+ "\nParticipa: " + numberParticipated);
-	System.out.println("-----------------------------");
 
+	
     }
 
     private static void deshabilitarUsuario() throws Exception {

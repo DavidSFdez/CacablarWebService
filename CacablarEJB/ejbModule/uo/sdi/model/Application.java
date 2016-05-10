@@ -2,6 +2,10 @@ package uo.sdi.model;
 
 import java.io.Serializable;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "application")
 public class Application implements Serializable{
     
     private static final long serialVersionUID = 1L;
@@ -17,6 +21,7 @@ public class Application implements Serializable{
 		this.tripId = tripId;
 	}
 
+	@XmlElement
 	public Long getUserId() {
 		return userId;
 	}
@@ -25,6 +30,7 @@ public class Application implements Serializable{
 		this.userId = userId;
 	}
 
+	@XmlElement
 	public Long getTripId() {
 		return tripId;
 	}

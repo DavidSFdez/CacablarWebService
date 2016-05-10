@@ -3,6 +3,7 @@ package uo.sdi.business.impl.ejb;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.jws.WebService;
 
 import uo.sdi.business.exception.EntityAlreadyExistsException;
 import uo.sdi.business.exception.EntityNotFoundException;
@@ -22,6 +23,7 @@ import uo.sdi.business.impl.local.LocalTripsService;
 import uo.sdi.business.impl.remote.RemoteTripsService;
 import uo.sdi.model.Trip;
 @Stateless
+@WebService (name="TripsService")
 public class EJBTripsService implements LocalTripsService, RemoteTripsService{
 
     @Override
@@ -78,7 +80,6 @@ public class EJBTripsService implements LocalTripsService, RemoteTripsService{
 
     @Override
     public List<Trip> findAllParticipated(Long id) {
-	
 	return new TripsFindParticipated().find(id);
     }
 

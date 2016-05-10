@@ -9,7 +9,7 @@ public class TripsFindPromoted {
 
     public List<Trip> find(Long id) {
 	
-	return Factories.services.createTripsService().findAllPromoted(id);
+	return Factories.persistence.createTripDao().findAllPromoted(id);
     }
 
 }

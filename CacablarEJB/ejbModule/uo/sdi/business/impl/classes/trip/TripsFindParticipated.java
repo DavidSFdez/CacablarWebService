@@ -8,8 +8,7 @@ import uo.sdi.model.Trip;
 public class TripsFindParticipated {
 
     public List<Trip> find(Long id) {
-	
-	return Factories.services.createTripsService().findAllParticipated(id);
+	return Factories.persistence.createTripDao().findAllParticipated(id);
     }
 
 }

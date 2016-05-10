@@ -3,6 +3,7 @@ package uo.sdi.business.impl.ejb;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.jws.WebService;
 
 import uo.sdi.business.exception.EntityAlreadyExistsException;
 import uo.sdi.business.exception.EntityNotFoundException;
@@ -16,6 +17,7 @@ import uo.sdi.business.impl.remote.RemoteApplicationsService;
 import uo.sdi.model.Application;
 
 @Stateless
+@WebService (name="ApplicationsService")
 public class EJBApplicationsService implements LocalApplicationsService,
 	RemoteApplicationsService {
 
