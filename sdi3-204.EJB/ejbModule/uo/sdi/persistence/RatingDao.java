@@ -8,4 +8,6 @@ public interface RatingDao extends GenericDao<Rating, Long> {
     Rating findByAboutFrom(Long aboutUserId, Long aboutTripId, Long fromUserId,
 	    Long fromTripId);
 
+    Rating findByTrip(Long idTrip);
+
 }

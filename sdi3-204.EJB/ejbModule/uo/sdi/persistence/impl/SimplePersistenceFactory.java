@@ -3,6 +3,7 @@ package uo.sdi.persistence.impl;
 
 import uo.sdi.persistence.ApplicationDao;
 import uo.sdi.persistence.PersistenceFactory;
+import uo.sdi.persistence.RatingDao;
 import uo.sdi.persistence.SeatDao;
 import uo.sdi.persistence.Transaction;
 import uo.sdi.persistence.TripDao;
@@ -40,6 +41,12 @@ public class SimplePersistenceFactory implements PersistenceFactory {
     @Override
     public Transaction createTransaction() {
 	return new TransactionJdbcImpl();
+    }
+
+    @Override
+    public RatingDao createRattingDao() {
+	// TODO Auto-generated method stub
+	return new RatingDaoJdbcImpl();
     }
 
 
