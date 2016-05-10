@@ -8,15 +8,16 @@ import uo.sdi.model.User;
 
 public interface UsersService {
 
-    User findById(Long id) throws EntityNotFoundException;
+    User findUserById(Long id) throws EntityNotFoundException;
 
     User saveUser(User user) throws EntityAlreadyExistsException;
     
-    List<User> findAll();
+    List<User> findAllUsers();
 
     void updateUser(User user) throws EntityNotFoundException;
 
     void deleteUser(Long id) throws EntityNotFoundException;
 
     void cancelUser(Long id);
+
 }

@@ -52,12 +52,12 @@ public class Main {
 	UsersService us = new RemoteEJBServiceLocator().createUsersService();
 	
 	System.out.println("Usuarios del sistema");
-	List<User> users = us.findAll();
+	List<User> users = us.findAllTrips();
 	for(User u : users)
 	    System.out.println(u);
 	
 	System.out.println("Viajes del sistema");
-	List<Trip> trips = ejbl.createTripsService().findAll();
+	List<Trip> trips = ejbl.createTripsService().findAllTrips();
 	for(Trip t : trips)
 	    System.out.println(t);
     }
@@ -65,7 +65,7 @@ public class Main {
     private static void listarUsuariosSistema() throws Exception {
 	UsersService us = new RemoteEJBServiceLocator().createUsersService();
 	TripsService ts = new RemoteEJBServiceLocator().createTripsService();	
-	List<User> users = us.findAll();
+	List<User> users = us.findAllTrips();
 	System.out.println("-----------------------------");
 	for(User u : users){
 	    List<Trip> promotedTrips = ts.findAllPromoted(u.getId());
@@ -93,7 +93,7 @@ public class Main {
 	User user;
 
 	UsersService us = new RemoteEJBServiceLocator().createUsersService();
-	user = us.findById(101L);
+	user = us.findUserById(101L);
 
 	if (user != null)
 	    us.cancelUser(user.getId());
@@ -106,7 +106,7 @@ public class Main {
 	try {
 	    
 		List<Trip> trips = new RemoteEJBServiceLocator()
-			.createTripsService().findAll();
+			.createTripsService().findAllTrips();
 
 		List<Trip> tripsLastMonth = new LinkedList<>();
 		Date actual = new Date();

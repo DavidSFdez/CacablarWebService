@@ -22,7 +22,7 @@ public class EJBApplicationsService implements LocalApplicationsService,
 	RemoteApplicationsService {
 
     @Override
-    public Application find(Long idTrip, Long idUser)
+    public Application findApplication(Long idTrip, Long idUser)
 	    throws EntityNotFoundException {
 	return new ApplicationsFind().find(idTrip, idUser);
     }

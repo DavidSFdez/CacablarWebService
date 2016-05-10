@@ -21,7 +21,7 @@ import uo.sdi.model.User;
 public class EJBUsersService implements LocalUsersService, RemoteUsersService {
 
     @Override
-    public User findById(Long id) throws EntityNotFoundException {
+    public User findUserById(Long id) throws EntityNotFoundException {
 	return new UsersFindById().find(id);
     }
 
@@ -46,7 +46,7 @@ public class EJBUsersService implements LocalUsersService, RemoteUsersService {
     }
 
     @Override
-    public List<User> findAll() {
+    public List<User> findAllUsers() {
 	return new UsersListAll().listAll();
     }
 }

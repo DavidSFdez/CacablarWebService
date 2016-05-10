@@ -146,7 +146,7 @@ public class TripWizardBean implements Serializable {
 
 	if (id != null) {
 	    try {
-		this.trip = Factories.services.createTripsService().findById(
+		this.trip = Factories.services.createTripsService().findTripById(
 			Long.parseLong(id));
 	    } catch (NumberFormatException | EntityNotFoundException e) {
 

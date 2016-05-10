@@ -79,7 +79,7 @@ public class TripBean implements Serializable {
 
     public boolean isInApplications(Long idUser) {
 	try {
-	    Factories.services.createApplicationService().find(trip.getId(),
+	    Factories.services.createApplicationService().findApplication(trip.getId(),
 		    idUser);
 	} catch (EntityNotFoundException e1) {
 	    return false;
@@ -133,7 +133,7 @@ public class TripBean implements Serializable {
     public Application getApplicationUser(Long idUser) {
 	try {
 	    if (trip.getId() != null)
-		return Factories.services.createApplicationService().find(
+		return Factories.services.createApplicationService().findApplication(
 			trip.getId(), idUser);
 	} catch (EntityNotFoundException e) {
 	    return null;
@@ -181,7 +181,7 @@ public class TripBean implements Serializable {
 
     public String view(Long idTrip) {
 	try {
-	    trip = Factories.services.createTripsService().findById(idTrip);
+	    trip = Factories.services.createTripsService().findTripById(idTrip);
 	} catch (EntityNotFoundException e) {
 	    Log.error("Fracaso view trip",e);
 	    return "fracaso";
@@ -227,7 +227,7 @@ public class TripBean implements Serializable {
 
     public boolean isUserInApplications(Long idUser) {
 	try {
-	    Factories.services.createApplicationService().find(trip.getId(),
+	    Factories.services.createApplicationService().findApplication(trip.getId(),
 		    idUser);
 	} catch (EntityNotFoundException e1) {
 	    return false;
@@ -266,7 +266,7 @@ public class TripBean implements Serializable {
     }
 
     private void actualizarTrip() throws EntityNotFoundException {
-	trip = Factories.services.createTripsService().findById(
+	trip = Factories.services.createTripsService().findTripById(
 		Long.parseLong(id));
     }
 
