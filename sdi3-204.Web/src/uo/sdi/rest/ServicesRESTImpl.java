@@ -23,11 +23,10 @@ public class ServicesRESTImpl implements ServiceREST {
 
     @Override
     public List<Trip> listPromotedActiveTrips() {
-	long idUser
+	long idUser=101L;
 //		= TODO sacar el ID user de donde sea porque se ha identificado ya
 	;
-	List<Trip> trips  = null;
-		//= tripsService.findAllPromotedAndActive(idUser)// TODO que este metodo exista
+	List<Trip> trips  = tripsService.findAllPromotedAndActive(idUser);// TODO que este metodo exista
 
 	return trips;
     }

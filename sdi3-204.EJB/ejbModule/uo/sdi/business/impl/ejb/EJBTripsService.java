@@ -9,6 +9,7 @@ import uo.sdi.business.exception.EntityAlreadyExistsException;
 import uo.sdi.business.exception.EntityNotFoundException;
 import uo.sdi.business.impl.classes.trip.TripsCancel;
 import uo.sdi.business.impl.classes.trip.TripsFindAll;
+import uo.sdi.business.impl.classes.trip.TripsFindAllPromotedAndActive;
 import uo.sdi.business.impl.classes.trip.TripsFindById;
 import uo.sdi.business.impl.classes.trip.TripsFindByIdAndPromoter;
 import uo.sdi.business.impl.classes.trip.TripsFindParticipated;
@@ -86,6 +87,12 @@ public class EJBTripsService implements LocalTripsService, RemoteTripsService{
     @Override
     public List<Trip> findAll() {
 	return new TripsFindAll().find();
+    }
+
+    @Override
+    public List<Trip> findAllPromotedAndActive(long idUser) {
+	
+	return new TripsFindAllPromotedAndActive().find(idUser);
     }
 
 }

@@ -20,6 +20,7 @@ public interface TripsService {
     List<Trip> findAllPromoted(Long id);
     List<Trip> findAllParticipated(Long id);
     List<Trip> findAll();
+    List<Trip> findAllPromotedAndActive(long idUser);
  
     
    
