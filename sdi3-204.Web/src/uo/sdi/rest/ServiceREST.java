@@ -2,6 +2,7 @@ package uo.sdi.rest;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -17,7 +18,12 @@ public interface ServiceREST {
     @GET
     // Produce Trips en xml o json
     @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-    List<Trip> listPromotedActiveTrips();
+    boolean login(String usuario, String password, HttpServletRequest req);
+    
+    @GET
+    // Produce Trips en xml o json
+    @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+    List<Trip> listPromotedActiveTrips(HttpServletRequest req);
     
     @GET
     @Path("{idTrip}")
@@ -29,5 +35,9 @@ public interface ServiceREST {
     // Consume Applications en xml o json
     @Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
     void acceptSeat(uo.sdi.model.Application application);
+
+   
+
+    
 
 }

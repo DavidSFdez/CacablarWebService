@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://ejb.impl.business.sdi.uo/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="EJBRattingsServiceService" targetNamespace="http://ejb.impl.business.sdi.uo/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema elementFormDefault="unqualified" targetNamespace="http://ejb.impl.business.sdi.uo/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="delete" type="tns:delete" />
+      <xs:element name="deleteResponse" type="tns:deleteResponse" />
+      <xs:element name="listByTrip" type="tns:listByTrip" />
+      <xs:element name="listByTripResponse" type="tns:listByTripResponse" />
+      <xs:complexType name="listByTrip">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="xs:long" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="listByTripResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:rating" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="rating">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="comment" type="xs:string" />
+          <xs:element minOccurs="0" name="id" type="xs:long" />
+          <xs:element minOccurs="0" name="seatAboutTripId" type="xs:long" />
+          <xs:element minOccurs="0" name="seatAboutUserId" type="xs:long" />
+          <xs:element minOccurs="0" name="seatFromTripId" type="xs:long" />
+          <xs:element minOccurs="0" name="seatFromUserId" type="xs:long" />
+          <xs:element minOccurs="0" name="value" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="delete">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="xs:long" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="deleteResponse">
+        <xs:sequence />
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="deleteResponse">
+    <wsdl:part name="parameters" element="tns:deleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="listByTrip">
+    <wsdl:part name="parameters" element="tns:listByTrip" />
+  </wsdl:message>
+  <wsdl:message name="delete">
+    <wsdl:part name="parameters" element="tns:delete" />
+  </wsdl:message>
+  <wsdl:message name="listByTripResponse">
+    <wsdl:part name="parameters" element="tns:listByTripResponse" />
+  </wsdl:message>
+  <wsdl:portType name="RattingsService">
+    <wsdl:operation name="listByTrip">
+      <wsdl:input name="listByTrip" message="tns:listByTrip" />
+      <wsdl:output name="listByTripResponse" message="tns:listByTripResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="delete">
+      <wsdl:input name="delete" message="tns:delete" />
+      <wsdl:output name="deleteResponse" message="tns:deleteResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="EJBRattingsServiceServiceSoapBinding" type="tns:RattingsService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="listByTrip">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="listByTrip">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="listByTripResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="delete">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="delete">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="deleteResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="EJBRattingsServiceService">
+    <wsdl:port name="RattingsServicePort" binding="tns:EJBRattingsServiceServiceSoapBinding">
+      <soap:address location="http://localhost:8180/sdi3-204.EJB/RattingsService" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

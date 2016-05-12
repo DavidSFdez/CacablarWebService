@@ -25,17 +25,17 @@ public class Main {
     private static void run() throws Exception {
 	metodocutre();
 
-	// System.out.println("###listarUsuariosSistema();");
-	// listarUsuariosSistema();
-	//
-	// System.out.println("###deshabilitarUsuario();");
-	// deshabilitarUsuario();
-	//
-	// System.out.println("###listarComentariosYPuntuaciones();");
-	// listarComentariosYPuntuaciones();
-	//
-	// System.out.println("###eliminarRatting();");
-	// eliminarRatting();
+	 System.out.println("###listarUsuariosSistema();");
+	 listarUsuariosSistema();
+	
+	 System.out.println("###deshabilitarUsuario();");
+	 deshabilitarUsuario();
+	
+	 System.out.println("###listarComentariosYPuntuaciones();");
+	 listarComentariosYPuntuaciones();
+	
+	 System.out.println("###eliminarRatting();");
+	 eliminarRatting();
     }
 
     private static void metodocutre() {

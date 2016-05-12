@@ -1,0 +1,494 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://ejb.impl.business.sdi.uo/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="EJBTripsServiceService" targetNamespace="http://ejb.impl.business.sdi.uo/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://ejb.impl.business.sdi.uo/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="cancel" type="tns:cancel" />
+      <xs:element name="cancelResponse" type="tns:cancelResponse" />
+      <xs:element name="findAllParticipated" type="tns:findAllParticipated" />
+      <xs:element name="findAllParticipatedResponse" type="tns:findAllParticipatedResponse" />
+      <xs:element name="findAllPromoted" type="tns:findAllPromoted" />
+      <xs:element name="findAllPromotedAndActive" type="tns:findAllPromotedAndActive" />
+      <xs:element name="findAllPromotedAndActiveResponse" type="tns:findAllPromotedAndActiveResponse" />
+      <xs:element name="findAllPromotedResponse" type="tns:findAllPromotedResponse" />
+      <xs:element name="findAllTrips" type="tns:findAllTrips" />
+      <xs:element name="findAllTripsResponse" type="tns:findAllTripsResponse" />
+      <xs:element name="findByIdandPromoter" type="tns:findByIdandPromoter" />
+      <xs:element name="findByIdandPromoterResponse" type="tns:findByIdandPromoterResponse" />
+      <xs:element name="findTripById" type="tns:findTripById" />
+      <xs:element name="findTripByIdResponse" type="tns:findTripByIdResponse" />
+      <xs:element name="listActive" type="tns:listActive" />
+      <xs:element name="listActiveResponse" type="tns:listActiveResponse" />
+      <xs:element name="listActiveToUser" type="tns:listActiveToUser" />
+      <xs:element name="listActiveToUserResponse" type="tns:listActiveToUserResponse" />
+      <xs:element name="listRelated" type="tns:listRelated" />
+      <xs:element name="listRelatedResponse" type="tns:listRelatedResponse" />
+      <xs:element name="save" type="tns:save" />
+      <xs:element name="saveResponse" type="tns:saveResponse" />
+      <xs:element name="trip" type="tns:trip" />
+      <xs:element name="update" type="tns:update" />
+      <xs:element name="updateResponse" type="tns:updateResponse" />
+      <xs:element name="updateTripsStatus" type="tns:updateTripsStatus" />
+      <xs:element name="updateTripsStatusResponse" type="tns:updateTripsStatusResponse" />
+      <xs:complexType name="findAllPromoted">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="xs:long" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="findAllPromotedResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:trip" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="trip">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arrivalDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="availablePax" type="xs:int" />
+          <xs:element minOccurs="0" name="closingDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="comments" type="xs:string" />
+          <xs:element minOccurs="0" name="departure" type="tns:addressPoint" />
+          <xs:element minOccurs="0" name="departureDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="destination" type="tns:addressPoint" />
+          <xs:element minOccurs="0" name="estimatedCost" type="xs:double" />
+          <xs:element minOccurs="0" name="id" type="xs:long" />
+          <xs:element minOccurs="0" name="maxPax" type="xs:int" />
+          <xs:element minOccurs="0" name="promoterId" type="xs:long" />
+          <xs:element minOccurs="0" name="status" type="tns:tripStatus" />
+          <xs:element minOccurs="0" name="stringId" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="addressPoint">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="findByIdandPromoter">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="xs:long" />
+          <xs:element minOccurs="0" name="arg1" type="xs:long" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="findByIdandPromoterResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:trip" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="listRelated">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="xs:long" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="listRelatedResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:trip" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="listActiveToUser">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="xs:long" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="listActiveToUserResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:trip" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="findAllParticipated">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="xs:long" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="findAllParticipatedResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:trip" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="updateTripsStatus">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="updateTripsStatusResponse">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="findAllPromotedAndActive">
+        <xs:sequence>
+          <xs:element name="arg0" type="xs:long" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="findAllPromotedAndActiveResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:trip" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="findAllTrips">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="findAllTripsResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:trip" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="save">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="tns:trip" />
+          <xs:element minOccurs="0" name="arg1" type="xs:long" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="saveResponse">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="cancel">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="tns:trip" />
+          <xs:element minOccurs="0" name="arg1" type="xs:long" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="cancelResponse">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="update">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="tns:trip" />
+          <xs:element minOccurs="0" name="arg1" type="xs:long" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="updateResponse">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="listActive">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="listActiveResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:trip" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="findTripById">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="xs:long" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="findTripByIdResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:trip" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:simpleType name="tripStatus">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="OPEN" />
+          <xs:enumeration value="CLOSED" />
+          <xs:enumeration value="CANCELLED" />
+          <xs:enumeration value="DONE" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="Exception" type="tns:Exception" />
+      <xs:complexType name="Exception">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="message" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="EntityAlreadyExistsException" type="tns:EntityAlreadyExistsException" />
+      <xs:complexType name="EntityAlreadyExistsException">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="message" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="EntityNotFoundException" type="tns:EntityNotFoundException" />
+      <xs:complexType name="EntityNotFoundException">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="message" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="saveResponse">
+    <wsdl:part name="parameters" element="tns:saveResponse" />
+  </wsdl:message>
+  <wsdl:message name="updateResponse">
+    <wsdl:part name="parameters" element="tns:updateResponse" />
+  </wsdl:message>
+  <wsdl:message name="listActiveToUser">
+    <wsdl:part name="parameters" element="tns:listActiveToUser" />
+  </wsdl:message>
+  <wsdl:message name="findAllPromoted">
+    <wsdl:part name="parameters" element="tns:findAllPromoted" />
+  </wsdl:message>
+  <wsdl:message name="cancelResponse">
+    <wsdl:part name="parameters" element="tns:cancelResponse" />
+  </wsdl:message>
+  <wsdl:message name="updateTripsStatusResponse">
+    <wsdl:part name="parameters" element="tns:updateTripsStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="findTripByIdResponse">
+    <wsdl:part name="parameters" element="tns:findTripByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="findAllParticipated">
+    <wsdl:part name="parameters" element="tns:findAllParticipated" />
+  </wsdl:message>
+  <wsdl:message name="listRelated">
+    <wsdl:part name="parameters" element="tns:listRelated" />
+  </wsdl:message>
+  <wsdl:message name="save">
+    <wsdl:part name="parameters" element="tns:save" />
+  </wsdl:message>
+  <wsdl:message name="findAllPromotedAndActive">
+    <wsdl:part name="parameters" element="tns:findAllPromotedAndActive" />
+  </wsdl:message>
+  <wsdl:message name="listActiveResponse">
+    <wsdl:part name="parameters" element="tns:listActiveResponse" />
+  </wsdl:message>
+  <wsdl:message name="Exception">
+    <wsdl:part name="Exception" element="tns:Exception" />
+  </wsdl:message>
+  <wsdl:message name="update">
+    <wsdl:part name="parameters" element="tns:update" />
+  </wsdl:message>
+  <wsdl:message name="findAllTripsResponse">
+    <wsdl:part name="parameters" element="tns:findAllTripsResponse" />
+  </wsdl:message>
+  <wsdl:message name="findAllPromotedAndActiveResponse">
+    <wsdl:part name="parameters" element="tns:findAllPromotedAndActiveResponse" />
+  </wsdl:message>
+  <wsdl:message name="cancel">
+    <wsdl:part name="parameters" element="tns:cancel" />
+  </wsdl:message>
+  <wsdl:message name="findAllPromotedResponse">
+    <wsdl:part name="parameters" element="tns:findAllPromotedResponse" />
+  </wsdl:message>
+  <wsdl:message name="listActiveToUserResponse">
+    <wsdl:part name="parameters" element="tns:listActiveToUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="findByIdandPromoterResponse">
+    <wsdl:part name="parameters" element="tns:findByIdandPromoterResponse" />
+  </wsdl:message>
+  <wsdl:message name="findTripById">
+    <wsdl:part name="parameters" element="tns:findTripById" />
+  </wsdl:message>
+  <wsdl:message name="findAllTrips">
+    <wsdl:part name="parameters" element="tns:findAllTrips" />
+  </wsdl:message>
+  <wsdl:message name="findByIdandPromoter">
+    <wsdl:part name="parameters" element="tns:findByIdandPromoter" />
+  </wsdl:message>
+  <wsdl:message name="EntityAlreadyExistsException">
+    <wsdl:part name="EntityAlreadyExistsException" element="tns:EntityAlreadyExistsException" />
+  </wsdl:message>
+  <wsdl:message name="findAllParticipatedResponse">
+    <wsdl:part name="parameters" element="tns:findAllParticipatedResponse" />
+  </wsdl:message>
+  <wsdl:message name="listActive">
+    <wsdl:part name="parameters" element="tns:listActive" />
+  </wsdl:message>
+  <wsdl:message name="listRelatedResponse">
+    <wsdl:part name="parameters" element="tns:listRelatedResponse" />
+  </wsdl:message>
+  <wsdl:message name="EntityNotFoundException">
+    <wsdl:part name="EntityNotFoundException" element="tns:EntityNotFoundException" />
+  </wsdl:message>
+  <wsdl:message name="updateTripsStatus">
+    <wsdl:part name="parameters" element="tns:updateTripsStatus" />
+  </wsdl:message>
+  <wsdl:portType name="TripsService">
+    <wsdl:operation name="findAllPromoted">
+      <wsdl:input name="findAllPromoted" message="tns:findAllPromoted" />
+      <wsdl:output name="findAllPromotedResponse" message="tns:findAllPromotedResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="findByIdandPromoter">
+      <wsdl:input name="findByIdandPromoter" message="tns:findByIdandPromoter" />
+      <wsdl:output name="findByIdandPromoterResponse" message="tns:findByIdandPromoterResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="listRelated">
+      <wsdl:input name="listRelated" message="tns:listRelated" />
+      <wsdl:output name="listRelatedResponse" message="tns:listRelatedResponse" />
+      <wsdl:fault name="Exception" message="tns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="listActiveToUser">
+      <wsdl:input name="listActiveToUser" message="tns:listActiveToUser" />
+      <wsdl:output name="listActiveToUserResponse" message="tns:listActiveToUserResponse" />
+      <wsdl:fault name="Exception" message="tns:Exception" />
+    </wsdl:operation>
+    <wsdl:operation name="findAllParticipated">
+      <wsdl:input name="findAllParticipated" message="tns:findAllParticipated" />
+      <wsdl:output name="findAllParticipatedResponse" message="tns:findAllParticipatedResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="updateTripsStatus">
+      <wsdl:input name="updateTripsStatus" message="tns:updateTripsStatus" />
+      <wsdl:output name="updateTripsStatusResponse" message="tns:updateTripsStatusResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="findAllPromotedAndActive">
+      <wsdl:input name="findAllPromotedAndActive" message="tns:findAllPromotedAndActive" />
+      <wsdl:output name="findAllPromotedAndActiveResponse" message="tns:findAllPromotedAndActiveResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="findAllTrips">
+      <wsdl:input name="findAllTrips" message="tns:findAllTrips" />
+      <wsdl:output name="findAllTripsResponse" message="tns:findAllTripsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="save">
+      <wsdl:input name="save" message="tns:save" />
+      <wsdl:output name="saveResponse" message="tns:saveResponse" />
+      <wsdl:fault name="EntityAlreadyExistsException" message="tns:EntityAlreadyExistsException" />
+    </wsdl:operation>
+    <wsdl:operation name="cancel">
+      <wsdl:input name="cancel" message="tns:cancel" />
+      <wsdl:output name="cancelResponse" message="tns:cancelResponse" />
+      <wsdl:fault name="EntityNotFoundException" message="tns:EntityNotFoundException" />
+      <wsdl:fault name="EntityAlreadyExistsException" message="tns:EntityAlreadyExistsException" />
+    </wsdl:operation>
+    <wsdl:operation name="update">
+      <wsdl:input name="update" message="tns:update" />
+      <wsdl:output name="updateResponse" message="tns:updateResponse" />
+      <wsdl:fault name="EntityNotFoundException" message="tns:EntityNotFoundException" />
+    </wsdl:operation>
+    <wsdl:operation name="listActive">
+      <wsdl:input name="listActive" message="tns:listActive" />
+      <wsdl:output name="listActiveResponse" message="tns:listActiveResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="findTripById">
+      <wsdl:input name="findTripById" message="tns:findTripById" />
+      <wsdl:output name="findTripByIdResponse" message="tns:findTripByIdResponse" />
+      <wsdl:fault name="EntityNotFoundException" message="tns:EntityNotFoundException" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="EJBTripsServiceServiceSoapBinding" type="tns:TripsService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="findAllPromoted">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="findAllPromoted">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="findAllPromotedResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="findByIdandPromoter">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="findByIdandPromoter">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="findByIdandPromoterResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="listActiveToUser">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="listActiveToUser">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="listActiveToUserResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="listRelated">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="listRelated">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="listRelatedResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault use="literal" name="Exception" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="findAllParticipated">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="findAllParticipated">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="findAllParticipatedResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateTripsStatus">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="updateTripsStatus">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="updateTripsStatusResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="findAllPromotedAndActive">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="findAllPromotedAndActive">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="findAllPromotedAndActiveResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="findAllTrips">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="findAllTrips">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="findAllTripsResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cancel">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="cancel">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="cancelResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="EntityNotFoundException">
+        <soap:fault use="literal" name="EntityNotFoundException" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="EntityAlreadyExistsException">
+        <soap:fault use="literal" name="EntityAlreadyExistsException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="save">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="save">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="saveResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="EntityAlreadyExistsException">
+        <soap:fault use="literal" name="EntityAlreadyExistsException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="update">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="update">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="updateResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="EntityNotFoundException">
+        <soap:fault use="literal" name="EntityNotFoundException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="listActive">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="listActive">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="listActiveResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="findTripById">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="findTripById">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="findTripByIdResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="EntityNotFoundException">
+        <soap:fault use="literal" name="EntityNotFoundException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="EJBTripsServiceService">
+    <wsdl:port name="TripsServicePort" binding="tns:EJBTripsServiceServiceSoapBinding">
+      <soap:address location="http://localhost:8180/sdi3-204.EJB/TripsService" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

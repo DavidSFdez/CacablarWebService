@@ -2,6 +2,9 @@ package uo.sdi.rest;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.core.Context;
+
 import uo.sdi.business.ApplicationService;
 import uo.sdi.business.SeatsService;
 import uo.sdi.business.TripsService;
@@ -9,6 +12,7 @@ import uo.sdi.business.exception.EntityAlreadyExistsException;
 import uo.sdi.business.exception.EntityNotFoundException;
 import uo.sdi.infrastructure.Factories;
 import uo.sdi.model.Trip;
+import uo.sdi.model.User;
 
 public class ServicesRESTImpl implements ServiceREST {
     
@@ -20,11 +24,20 @@ public class ServicesRESTImpl implements ServiceREST {
 	applicationService = Factories.services.createApplicationService();
 	seatsService = Factories.services.createSeatsService();
     }
+    
+    @Override
+    public boolean login(String usuario, String password, @Context HttpServletRequest req) {
+	
+	User user = null; // login(usuario,clave);
+	
+	req.getSession().setAttribute("userId", user.getId());
+	
+	return user==null;
+    }
 
     @Override
-    public List<Trip> listPromotedActiveTrips() {
-	long idUser=101L;
-//		= TODO sacar el ID user de donde sea porque se ha identificado ya
+    public List<Trip> listPromotedActiveTrips(@Context HttpServletRequest req) {
+	Long idUser=(Long) req.getSession().getAttribute("userId");
 	;
 	List<Trip> trips  = tripsService.findAllPromotedAndActive(idUser);// TODO que este metodo exista
 

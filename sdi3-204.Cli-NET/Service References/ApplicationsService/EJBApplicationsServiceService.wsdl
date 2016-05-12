@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://ejb.impl.business.sdi.uo/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="EJBApplicationsServiceService" targetNamespace="http://ejb.impl.business.sdi.uo/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://ejb.impl.business.sdi.uo/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="acceptApplication" type="tns:acceptApplication" />
+      <xs:element name="acceptApplicationResponse" type="tns:acceptApplicationResponse" />
+      <xs:element name="application" type="tns:application" />
+      <xs:element name="cancelApplication" type="tns:cancelApplication" />
+      <xs:element name="cancelApplicationResponse" type="tns:cancelApplicationResponse" />
+      <xs:element name="findApplication" type="tns:findApplication" />
+      <xs:element name="findApplicationResponse" type="tns:findApplicationResponse" />
+      <xs:element name="getToUpdate" type="tns:getToUpdate" />
+      <xs:element name="getToUpdateResponse" type="tns:getToUpdateResponse" />
+      <xs:element name="remove" type="tns:remove" />
+      <xs:element name="removeResponse" type="tns:removeResponse" />
+      <xs:complexType name="remove">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="xs:long" />
+          <xs:element minOccurs="0" name="arg1" type="xs:long" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="removeResponse">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="cancelApplication">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="tns:application" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="application">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="tripId" type="xs:long" />
+          <xs:element minOccurs="0" name="userId" type="xs:long" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="cancelApplicationResponse">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="acceptApplication">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="tns:application" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="acceptApplicationResponse">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="findApplication">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="xs:long" />
+          <xs:element minOccurs="0" name="arg1" type="xs:long" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="findApplicationResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:application" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getToUpdate">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="getToUpdateResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:application" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="EntityNotFoundException" type="tns:EntityNotFoundException" />
+      <xs:complexType name="EntityNotFoundException">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="message" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="EntityAlreadyExistsException" type="tns:EntityAlreadyExistsException" />
+      <xs:complexType name="EntityAlreadyExistsException">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="message" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="findApplicationResponse">
+    <wsdl:part name="parameters" element="tns:findApplicationResponse" />
+  </wsdl:message>
+  <wsdl:message name="acceptApplication">
+    <wsdl:part name="parameters" element="tns:acceptApplication" />
+  </wsdl:message>
+  <wsdl:message name="EntityAlreadyExistsException">
+    <wsdl:part name="EntityAlreadyExistsException" element="tns:EntityAlreadyExistsException" />
+  </wsdl:message>
+  <wsdl:message name="remove">
+    <wsdl:part name="parameters" element="tns:remove" />
+  </wsdl:message>
+  <wsdl:message name="findApplication">
+    <wsdl:part name="parameters" element="tns:findApplication" />
+  </wsdl:message>
+  <wsdl:message name="removeResponse">
+    <wsdl:part name="parameters" element="tns:removeResponse" />
+  </wsdl:message>
+  <wsdl:message name="cancelApplicationResponse">
+    <wsdl:part name="parameters" element="tns:cancelApplicationResponse" />
+  </wsdl:message>
+  <wsdl:message name="EntityNotFoundException">
+    <wsdl:part name="EntityNotFoundException" element="tns:EntityNotFoundException" />
+  </wsdl:message>
+  <wsdl:message name="acceptApplicationResponse">
+    <wsdl:part name="parameters" element="tns:acceptApplicationResponse" />
+  </wsdl:message>
+  <wsdl:message name="getToUpdateResponse">
+    <wsdl:part name="parameters" element="tns:getToUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="getToUpdate">
+    <wsdl:part name="parameters" element="tns:getToUpdate" />
+  </wsdl:message>
+  <wsdl:message name="cancelApplication">
+    <wsdl:part name="parameters" element="tns:cancelApplication" />
+  </wsdl:message>
+  <wsdl:portType name="ApplicationsService">
+    <wsdl:operation name="remove">
+      <wsdl:input name="remove" message="tns:remove" />
+      <wsdl:output name="removeResponse" message="tns:removeResponse" />
+      <wsdl:fault name="EntityNotFoundException" message="tns:EntityNotFoundException" />
+    </wsdl:operation>
+    <wsdl:operation name="cancelApplication">
+      <wsdl:input name="cancelApplication" message="tns:cancelApplication" />
+      <wsdl:output name="cancelApplicationResponse" message="tns:cancelApplicationResponse" />
+      <wsdl:fault name="EntityNotFoundException" message="tns:EntityNotFoundException" />
+      <wsdl:fault name="EntityAlreadyExistsException" message="tns:EntityAlreadyExistsException" />
+    </wsdl:operation>
+    <wsdl:operation name="acceptApplication">
+      <wsdl:input name="acceptApplication" message="tns:acceptApplication" />
+      <wsdl:output name="acceptApplicationResponse" message="tns:acceptApplicationResponse" />
+      <wsdl:fault name="EntityNotFoundException" message="tns:EntityNotFoundException" />
+      <wsdl:fault name="EntityAlreadyExistsException" message="tns:EntityAlreadyExistsException" />
+    </wsdl:operation>
+    <wsdl:operation name="findApplication">
+      <wsdl:input name="findApplication" message="tns:findApplication" />
+      <wsdl:output name="findApplicationResponse" message="tns:findApplicationResponse" />
+      <wsdl:fault name="EntityNotFoundException" message="tns:EntityNotFoundException" />
+    </wsdl:operation>
+    <wsdl:operation name="getToUpdate">
+      <wsdl:input name="getToUpdate" message="tns:getToUpdate" />
+      <wsdl:output name="getToUpdateResponse" message="tns:getToUpdateResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="EJBApplicationsServiceServiceSoapBinding" type="tns:ApplicationsService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="cancelApplication">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="cancelApplication">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="cancelApplicationResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="EntityNotFoundException">
+        <soap:fault use="literal" name="EntityNotFoundException" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="EntityAlreadyExistsException">
+        <soap:fault use="literal" name="EntityAlreadyExistsException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="remove">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="remove">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="removeResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="EntityNotFoundException">
+        <soap:fault use="literal" name="EntityNotFoundException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="acceptApplication">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="acceptApplication">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="acceptApplicationResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="EntityNotFoundException">
+        <soap:fault use="literal" name="EntityNotFoundException" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="EntityAlreadyExistsException">
+        <soap:fault use="literal" name="EntityAlreadyExistsException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="findApplication">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="findApplication">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="findApplicationResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="EntityNotFoundException">
+        <soap:fault use="literal" name="EntityNotFoundException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getToUpdate">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="getToUpdate">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getToUpdateResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="EJBApplicationsServiceService">
+    <wsdl:port name="ApplicationsServicePort" binding="tns:EJBApplicationsServiceServiceSoapBinding">
+      <soap:address location="http://localhost:8180/sdi3-204.EJB/ApplicationsService" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
