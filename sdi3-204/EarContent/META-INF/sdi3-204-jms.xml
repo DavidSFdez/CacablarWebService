@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<messaging-deployment xmlns="urn:jboss:messaging-deployment:1.0">
+	<hornetq-server>
+		<jms-destinations>
+			<!-- Cola para enviar mensajes de cliente a servidor -->
+			<jms-queue name="msgQueue">
+				<entry name="jms/queue/msg" />
+				<entry name="java:jboss/exported/jms/queue/msg" />
+			</jms-queue>
+			<!-- topic para reenviar del servidor a los otros clientes -->
+			<jms-topic name="msgTopic">
+				<entry name="jms/topic/msg" />
+				<entry name="java:jboss/exported/jms/topic/msg" />
+			</jms-topic>
+		</jms-destinations>
+	</hornetq-server>
+</messaging-deployment>  

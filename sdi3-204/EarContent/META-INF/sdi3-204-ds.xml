@@ -5,7 +5,6 @@
 		enabled="true" 
 		use-java-context="true" 
 		pool-name="SDIDS">
-		
 		<connection-url>jdbc:hsqldb:hsql://localhost/</connection-url>
 		<driver>hsqldb.jar</driver>
 		<pool></pool>
@@ -13,6 +12,5 @@
 			<user-name>sa</user-name>
 			<password></password>
 		</security>
-		
 	</datasource>
 </datasources>
