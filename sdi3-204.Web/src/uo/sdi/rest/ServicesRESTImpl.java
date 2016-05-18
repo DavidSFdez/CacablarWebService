@@ -28,18 +28,17 @@ public class ServicesRESTImpl implements ServiceREST {
     @Override
     public boolean login(String usuario, String password, @Context HttpServletRequest req) {
 	
-	User user = null; // login(usuario,clave);
-	
-	req.getSession().setAttribute("userId", user.getId());
-	
+	User user = null;
+	user = Factories.services.createLoginService().verify(usuario, password);
+	if(user !=null)
+	    req.getSession().setAttribute("userId", user.getId());
 	return user==null;
     }
 
     @Override
     public List<Trip> listPromotedActiveTrips(@Context HttpServletRequest req) {
 	Long idUser=(Long) req.getSession().getAttribute("userId");
-	;
-	List<Trip> trips  = tripsService.findAllPromotedAndActive(idUser);// TODO que este metodo exista
+	List<Trip> trips  = tripsService.findAllPromotedAndActive(idUser);
 
 	return trips;
     }
