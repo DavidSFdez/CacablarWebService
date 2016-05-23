@@ -8,6 +8,7 @@ import javax.ws.rs.core.Context;
 import uo.sdi.business.ApplicationService;
 import uo.sdi.business.SeatsService;
 import uo.sdi.business.TripsService;
+import uo.sdi.business.exception.BusinessException;
 import uo.sdi.business.exception.EntityAlreadyExistsException;
 import uo.sdi.business.exception.EntityNotFoundException;
 import uo.sdi.infrastructure.Factories;
@@ -15,7 +16,7 @@ import uo.sdi.model.Trip;
 import uo.sdi.model.User;
 
 public class ServicesRESTImpl implements ServiceREST {
-    
+
     private TripsService tripsService;
     private ApplicationService applicationService;
     private SeatsService seatsService;
@@ -24,21 +25,31 @@ public class ServicesRESTImpl implements ServiceREST {
 	applicationService = Factories.services.createApplicationService();
 	seatsService = Factories.services.createSeatsService();
     }
-    
+
     @Override
-    public boolean login(String usuario, String password, @Context HttpServletRequest req) {
-	
+    public boolean login(String usuario, String password,
+	    @Context HttpServletRequest req) {
+
 	User user = null;
-	user = Factories.services.createLoginService().verify(usuario, password);
-	if(user !=null)
+	user = Factories.services.createLoginService()
+		.verify(usuario, password);
+	if (user != null)
 	    req.getSession().setAttribute("userId", user.getId());
-	return user==null;
+	return user == null;
     }
 
     @Override
     public List<Trip> listPromotedActiveTrips(@Context HttpServletRequest req) {
-	Long idUser=(Long) req.getSession().getAttribute("userId");
-	List<Trip> trips  = tripsService.findAllPromotedAndActive(idUser);
+
+	Object id = req.getSession().getAttribute("userId");
+	List<Trip> trips = null;
+	
+	if (id != null) {
+	    Long idUser = (Long) id;
+	    trips = tripsService.findAllPromotedAndActive(idUser);
+	} else
+	    throw new BusinessException(
+		    "No se encuentra ningún usuario logueado");
 
 	return trips;
     }
