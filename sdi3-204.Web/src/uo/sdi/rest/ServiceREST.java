@@ -11,13 +11,14 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import uo.sdi.model.Trip;
+import uo.sdi.model.User;
 
 @Path("/cacablarRS")
 public interface ServiceREST {
 
     @GET
-    // Produce Trips en xml o json
-    @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+    @Path("/login")
+    @Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
     boolean login(String usuario, String password, HttpServletRequest req);
     
     @GET
@@ -36,7 +37,10 @@ public interface ServiceREST {
     @Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
     void acceptSeat(uo.sdi.model.Application application);
 
-   
+    @GET
+    @Path("/test")
+    @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+    Trip[] testREST();
 
     
 

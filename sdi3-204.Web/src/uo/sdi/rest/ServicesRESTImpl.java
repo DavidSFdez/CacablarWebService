@@ -12,6 +12,7 @@ import uo.sdi.business.exception.BusinessException;
 import uo.sdi.business.exception.EntityAlreadyExistsException;
 import uo.sdi.business.exception.EntityNotFoundException;
 import uo.sdi.infrastructure.Factories;
+import uo.sdi.model.Application;
 import uo.sdi.model.Trip;
 import uo.sdi.model.User;
 
@@ -71,6 +72,11 @@ public class ServicesRESTImpl implements ServiceREST {
 	    e.printStackTrace();
 	}
 
+    }
+
+    @Override
+    public Trip[] testREST() {
+	return Factories.services.createTripsService().findAllTrips().toArray(new Trip[0]);
     }
 
 }
