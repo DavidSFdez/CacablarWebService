@@ -7,6 +7,7 @@ import javax.jws.WebService;
 
 import uo.sdi.business.exception.EntityAlreadyExistsException;
 import uo.sdi.business.exception.EntityNotFoundException;
+import uo.sdi.business.impl.classes.user.UsersActiveOnTrip;
 import uo.sdi.business.impl.classes.user.UsersAlta;
 import uo.sdi.business.impl.classes.user.UsersBaja;
 import uo.sdi.business.impl.classes.user.UsersFindById;
@@ -14,6 +15,7 @@ import uo.sdi.business.impl.classes.user.UsersListAll;
 import uo.sdi.business.impl.classes.user.UsersUpdate;
 import uo.sdi.business.impl.local.LocalUsersService;
 import uo.sdi.business.impl.remote.RemoteUsersService;
+import uo.sdi.model.SeatStatus;
 import uo.sdi.model.User;
 
 @Stateless
@@ -48,5 +50,10 @@ public class EJBUsersService implements LocalUsersService, RemoteUsersService {
     @Override
     public List<User> findAllUsers() {
 	return new UsersListAll().listAll();
+    }
+
+    @Override
+    public List<User> findUsersOnTripByStatus(Long tripId, SeatStatus status) {
+	return new UsersActiveOnTrip().list(tripId, status);
     }
 }

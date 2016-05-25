@@ -15,7 +15,7 @@ import javax.xml.crypto.Data;
  * @author alb
  * 
  */
-@XmlRootElement(name = "trip")
+@XmlRootElement
 public class Trip implements Serializable {
 
     private static final long serialVersionUID = 1L;

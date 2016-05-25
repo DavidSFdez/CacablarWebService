@@ -4,6 +4,7 @@ import java.util.List;
 
 import uo.sdi.business.exception.EntityAlreadyExistsException;
 import uo.sdi.business.exception.EntityNotFoundException;
+import uo.sdi.model.SeatStatus;
 import uo.sdi.model.User;
 
 public interface UsersService {
@@ -19,5 +20,7 @@ public interface UsersService {
     void deleteUser(Long id) throws EntityNotFoundException;
 
     void cancelUser(Long id);
+    
+    List<User> findUsersOnTripByStatus(Long tripId, SeatStatus status);
 
 }

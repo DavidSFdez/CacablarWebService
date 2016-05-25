@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import uo.sdi.model.SeatStatus;
 import uo.sdi.model.User;
 import uo.sdi.model.UserStatus;
 import uo.sdi.persistence.UserDao;
@@ -75,6 +76,12 @@ public class UserDaoJdbcImpl implements UserDao {
     public User validateLogin(String login, String pass) {
 	return jdbcTemplate.queryForObject("USER_FIND_BY_LOGIN_PASSWORD",
 		new UserMapper(), login, pass);
+    }
+
+    @Override
+    public List<User> findUsersOnTripByStatus(Long tripId, SeatStatus status) {
+	return jdbcTemplate.queryForList("USER_FIND_BY_TRIP_AND_SEAT_STATUS",
+		new UserMapper(), tripId, status.ordinal());
     }
 
 }
