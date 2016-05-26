@@ -9,8 +9,8 @@
 			</jms-queue>
 			<!-- Cola para enviar mensajes erroneos -->
 			<jms-queue name="msgError">
-				<entry name="jms/queue/msgerror" />
-				<entry name="java:jboss/exported/jms/queue/msgerror" />
+				<entry name="jms/queue/msgAdmin" />
+				<entry name="java:jboss/exported/jms/queue/msgAdmin" />
 			</jms-queue>
 			<!-- topic para reenviar del servidor a los otros clientes -->
 			<jms-topic name="msgTopic">

@@ -35,6 +35,7 @@ public class MessageSender {
 	    throws JMSException {
 	init();
 	send(users, men);
+	close();
     }
 
     private void init() {
@@ -51,8 +52,8 @@ public class MessageSender {
 	String message = men.getString("message");
 
 	Map<String, Object> msg = new HashMap<String, Object>();
-	msg.put("mensaje", message);
-	msg.put("trip", tripId);
+	msg.put("message", message);
+	msg.put("tripId", tripId);
 	for (User user : users) {
 	    // id destinatario
 	    msg.put("user", user.getId());
@@ -69,16 +70,23 @@ public class MessageSender {
 	} catch (JMSException e) {
 	    e.printStackTrace();
 	}
-
     }
 
     private MapMessage createJmsMapMessage(Map<String, Object> map,
 	    TopicSession topicSession) throws JMSException {
 	MapMessage msg = session.createMapMessage();
-	msg.setString("mensaje", (String) map.get("mensaje"));
-	msg.setLong("userId", (Long) map.get("user"));
-	msg.setLong("tripId", (Long) map.get("trip"));
+	msg.setString("message", (String) map.get("message"));
+	msg.setLong("userId", (Long) map.get("userId"));
+	msg.setLong("tripId", (Long) map.get("tripId"));
 	return msg;
     }
 
+    private void close() {
+	try {
+	    session.close();
+	    con.close();
+	} catch (JMSException e) {
+	    e.printStackTrace();
+	}
+    }
 }

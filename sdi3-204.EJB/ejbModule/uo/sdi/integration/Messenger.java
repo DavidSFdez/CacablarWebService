@@ -34,6 +34,7 @@ public class Messenger implements MessageListener {
     private UsersService service;
     
     @EJB MessageSender messageSender;
+    @EJB MessagerAdmin messagerAdmin;
 
     @Override
     public void onMessage(Message msg) {
@@ -66,6 +67,7 @@ public class Messenger implements MessageListener {
 	    messageSender.sendMessage(pasajeros, mm);
 	} else {
 	    // Mandar a la cola de adminisracion
+	    messagerAdmin.sendMessage(mm);
 	}
     }
 
