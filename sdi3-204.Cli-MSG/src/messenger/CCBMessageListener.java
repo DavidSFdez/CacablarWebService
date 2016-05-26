@@ -1,11 +1,13 @@
 package messenger;
 
+import static java.lang.System.out;
+
 import javax.jms.JMSException;
 import javax.jms.MapMessage;
 import javax.jms.Message;
 import javax.jms.MessageListener;
 
-import static java.lang.System.out;
+import uo.sdi.model.User;
 
 public class CCBMessageListener implements MessageListener {
 
@@ -23,10 +25,15 @@ public class CCBMessageListener implements MessageListener {
 	    System.out.println("Message not of expected type");
 	    return;
 	}
+	User user = Main.getCUrrentUser();
+	if (user == null)
+	    return;
 	MapMessage mmsg = (MapMessage) msg;
-	out.print(mmsg.getLong("userId"));
-	out.print(": ");
-	out.println(mmsg.getString("message"));
+	if (mmsg.getLong("userId") == user.getId()) {
+	    out.print(mmsg.getLong("userId"));
+	    out.print(": ");
+	    out.println(mmsg.getString("message"));
+	}
     }
 
 }

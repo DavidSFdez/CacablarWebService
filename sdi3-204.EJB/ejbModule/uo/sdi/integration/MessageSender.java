@@ -56,7 +56,7 @@ public class MessageSender {
 	msg.put("tripId", tripId);
 	for (User user : users) {
 	    // id destinatario
-	    msg.put("user", user.getId());
+	    msg.put("userId", user.getId());
 	    send(msg);
 	}
     }
