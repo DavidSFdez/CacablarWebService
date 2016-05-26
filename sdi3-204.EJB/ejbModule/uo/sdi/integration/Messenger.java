@@ -32,6 +32,8 @@ public class Messenger implements MessageListener {
 
     @EJB(beanInterface = LocalUsersService.class)
     private UsersService service;
+    
+    @EJB MessageSender messageSender;
 
     @Override
     public void onMessage(Message msg) {
@@ -49,16 +51,19 @@ public class Messenger implements MessageListener {
 	    System.out.println("Not of expected type " + msg);
 	    return;
 	}
-	MapMessage men = (MapMessage) msg;
-	Long tripId = men.getLong("tripId");
-	Long userId = men.getLong("userId");
+	MapMessage mm = (MapMessage) msg;
+	Long tripId = mm.getLong("tripId");
+	Long userId = mm.getLong("userId");
 
 	List<User> pasajeros = service.findUsersOnTripByStatus(tripId,
 		SeatStatus.ADMITIDO);
 	User user = service.findUserById(userId);
 
 	if (pasajeros.contains(user)) {
+	    //Se quita al propio usuario para que no se lo mande a si mismo
+	    pasajeros.remove(user);
 	    // Mandar al topic
+	    messageSender.sendMessage(pasajeros, mm);
 	} else {
 	    // Mandar a la cola de adminisracion
 	}
