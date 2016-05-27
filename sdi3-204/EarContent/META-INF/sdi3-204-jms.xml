@@ -4,17 +4,17 @@
 		<jms-destinations>
 			<!-- Cola para enviar mensajes de cliente a servidor -->
 			<jms-queue name="msgQueue">
-				<entry name="jms/queue/msg" />
+				<entry name="queue/msg" />
 				<entry name="java:jboss/exported/jms/queue/msg" />
 			</jms-queue>
 			<!-- Cola para enviar mensajes erroneos -->
 			<jms-queue name="msgError">
-				<entry name="jms/queue/msgAdmin" />
+				<entry name="queue/msgAdmin" />
 				<entry name="java:jboss/exported/jms/queue/msgAdmin" />
 			</jms-queue>
 			<!-- topic para reenviar del servidor a los otros clientes -->
 			<jms-topic name="msgTopic">
-				<entry name="jms/topic/msg" />
+				<entry name="topic/msg" />
 				<entry name="java:jboss/exported/jms/topic/msg" />
 			</jms-topic>
 		</jms-destinations>

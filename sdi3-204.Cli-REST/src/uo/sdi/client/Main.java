@@ -10,7 +10,7 @@ import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 
 public class Main {
 
-    private static final String REST_SERVICE_URL = "http://localhost:8280/Notaneitor_v6.0Web/rest/UsersServiceRs";
+    private static final String REST_SERVICE_URL = "http://localhost:8180/sdi3-204.WEB/rest/";
 
     CacablarRestService client;
 
@@ -23,7 +23,7 @@ public class Main {
 	BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 
 	client = new ResteasyClientBuilder().build()
-		.register(new Authenticator("sdi", "password")).target("link")
+		.register(new Authenticator("sdi", "password")).target(REST_SERVICE_URL)
 		.proxy(CacablarRestService.class);
 	try {
 
