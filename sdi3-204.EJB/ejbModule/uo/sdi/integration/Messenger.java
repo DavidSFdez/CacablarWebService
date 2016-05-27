@@ -10,12 +10,15 @@ import javax.jms.MapMessage;
 import javax.jms.Message;
 import javax.jms.MessageListener;
 
+import uo.sdi.business.TripsService;
 import uo.sdi.business.UsersService;
 import uo.sdi.business.exception.BusinessException;
 import uo.sdi.business.exception.EntityAlreadyExistsException;
 import uo.sdi.business.exception.EntityNotFoundException;
+import uo.sdi.business.impl.local.LocalTripsService;
 import uo.sdi.business.impl.local.LocalUsersService;
 import uo.sdi.model.SeatStatus;
+import uo.sdi.model.Trip;
 import uo.sdi.model.User;
 
 /*
@@ -32,6 +35,9 @@ public class Messenger implements MessageListener {
 
     @EJB(beanInterface = LocalUsersService.class)
     private UsersService service;
+    
+    @EJB(beanInterface = LocalTripsService.class)
+    private TripsService tripService;
     
     @EJB MessageSender messageSender;
     @EJB MessagerAdmin messagerAdmin;
@@ -59,13 +65,19 @@ public class Messenger implements MessageListener {
 	List<User> pasajeros = service.findUsersOnTripByStatus(tripId,
 		SeatStatus.ADMITIDO);
 	User user = service.findUserById(userId);
+	Trip trip = tripService.findTripById(tripId);
+	if(trip == null)
+	    return;
 
 	if (pasajeros.contains(user)) {
 	    //Se quita al propio usuario para que no se lo mande a si mismo
 	    pasajeros.remove(user);
 	    // Mandar al topic
 	    messageSender.sendMessage(pasajeros, mm);
-	} else {
+	} else if(trip.getPromoterId().equals(userId)){
+	    messageSender.sendMessage(pasajeros, mm);
+	}
+	else{
 	    // Mandar a la cola de adminisracion
 	    messagerAdmin.sendMessage(mm);
 	}
