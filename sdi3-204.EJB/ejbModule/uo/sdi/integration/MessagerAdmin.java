@@ -44,7 +44,6 @@ public class MessagerAdmin {
 	try {
 	    sender = session.createProducer(queue);
 	    sender.send(mm);
-	    close();
 	} catch (JMSException e) {
 	    e.printStackTrace();
 	}
