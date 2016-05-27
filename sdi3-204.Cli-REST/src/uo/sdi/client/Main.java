@@ -27,10 +27,10 @@ public class Main {
 		.proxy(CacablarRestService.class);
 	try {
 
-	    System.out.println("Introduzca id del viaje: ");
+	    System.out.println("Nombre de usuario: ");
 	    String usuario = in.readLine().trim();
 
-	    System.out.println("Introduzca id del viaje: ");
+	    System.out.println("Contraseña: ");
 	    String password = in.readLine().trim();
 
 	    // login
