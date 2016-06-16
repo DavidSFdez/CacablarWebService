@@ -24,8 +24,7 @@ import uo.sdi.model.Seat;
 public class EJBSeatsService implements LocalSeatsService, RemoteSeatsService {
 
     @Override
-    public Seat findByUserAndTrip(Long idUser, Long idTrip)
-	    throws EntityNotFoundException {
+    public Seat findByUserAndTrip(Long idUser, Long idTrip) {
 	return new SeatsFindByUserAndTrip().find(idUser, idTrip);
     }
 
@@ -46,8 +45,7 @@ public class EJBSeatsService implements LocalSeatsService, RemoteSeatsService {
     }
 
     @Override
-    public Application findApplication(Long idUser, Long id)
-	    throws EntityNotFoundException {
+    public Application findApplication(Long idUser, Long id) {
 	ApplicationsFind action = new ApplicationsFind();
 	return action.find(idUser, id);
     }

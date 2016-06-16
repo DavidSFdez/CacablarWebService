@@ -51,7 +51,8 @@ public class UsersBaja {
 	}
 
 	// pongo al usuario como cancelado
-	//TODO debemos tmb cancelar los asientos y peticiones de los viajes que promociona?
+	// TODO debemos tmb cancelar los asientos y peticiones de los viajes que
+	// promociona?
 	user.setStatus(UserStatus.CANCELLED);
 	try {
 	    dao.update(user);

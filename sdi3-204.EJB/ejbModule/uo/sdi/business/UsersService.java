@@ -11,7 +11,7 @@ public interface UsersService {
 
     User findUserById(Long id);
 
-    User saveUser(User user) throws EntityAlreadyExistsException;
+    void saveUser(User user) throws EntityAlreadyExistsException;
 
     List<User> findAllUsers();
 
@@ -19,7 +19,7 @@ public interface UsersService {
 
     void deleteUser(Long id) throws EntityNotFoundException;
 
-    void cancelUser(Long id);
+    void cancelUser(Long id) throws EntityNotFoundException;
 
     List<User> findUsersOnTripByStatus(Long tripId, SeatStatus status);
 

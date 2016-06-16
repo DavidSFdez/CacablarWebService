@@ -68,10 +68,12 @@ public class ApplicationsAccept {
 
 	if (trip.getAvailablePax() == 0) {
 	    tripDao.updateTripsStatus();
-	    // TODO el metodo de abajo debe buscar solo las peticiones del viaje actual. 
-	    // TODO ponerle un nombre mejor a los metodos que se entienda lo que hace
+	    // TODO el metodo de abajo debe buscar solo las peticiones del viaje
+	    // actual.
+	    // TODO ponerle un nombre mejor a los metodos que se entienda lo que
+	    // hace
 	    List<Application> applications = applicationDao.findToUpdate();
-	    Factories.services.createSeatsService().seatsToUpdate(applications);
+	    Factories.services.getSeatsService().seatsToUpdate(applications);
 	}
 
     }

@@ -20,18 +20,18 @@ public interface ServiceREST {
     @Path("/login")
     @Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
     boolean login(String usuario, String password, HttpServletRequest req);
-    
+
     @GET
     // Produce Trips en xml o json
     @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
     List<Trip> listPromotedActiveTrips(HttpServletRequest req);
-    
+
     @GET
     @Path("{idTrip}")
     // Produce Applications en xml o json
     @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
     List<uo.sdi.model.Application> selectTrip(Long idTrip);
-    
+
     @POST
     // Consume Applications en xml o json
     @Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
@@ -41,7 +41,5 @@ public interface ServiceREST {
     @Path("/test")
     @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
     Trip[] testREST();
-
-    
 
 }

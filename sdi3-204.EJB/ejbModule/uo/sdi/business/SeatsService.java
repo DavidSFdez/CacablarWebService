@@ -10,8 +10,7 @@ import uo.sdi.model.Seat;
 public interface SeatsService {
 
     // Asientos
-    Seat findByUserAndTrip(Long idUser, Long idTrip)
-	    throws EntityNotFoundException;
+    Seat findByUserAndTrip(Long idUser, Long idTrip);
 
     List<Seat> findByTrip(Long id);
 
@@ -20,8 +19,7 @@ public interface SeatsService {
 
     List<Application> findApplicationByTrip(Long id);
 
-    Application findApplication(Long idUser, Long id)
-	    throws EntityNotFoundException;
+    Application findApplication(Long idUser, Long id);
 
     // Comun
     void cancelSeat(Seat seat) throws EntityNotFoundException;

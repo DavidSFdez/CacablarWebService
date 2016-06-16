@@ -51,7 +51,7 @@ public class UserBean implements Serializable {
     public String register() {
 	Log.trace("Iniciando registro de usuario.");
 	try {
-	    user = Factories.services.createUsersService().saveUser(user);
+	    user = Factories.services.getUsersService().saveUser(user);
 	    Log.debug("Usuario encontrado: " + user);
 	} catch (EntityAlreadyExistsException e) {
 	    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,

@@ -28,8 +28,8 @@ public class EJBUsersService implements LocalUsersService, RemoteUsersService {
     }
 
     @Override
-    public User saveUser(User user) throws EntityAlreadyExistsException {
-	return new UsersAlta().save(user);
+    public void saveUser(User user) throws EntityAlreadyExistsException {
+	new UsersAlta().save(user);
     }
 
     @Override
@@ -43,7 +43,7 @@ public class EJBUsersService implements LocalUsersService, RemoteUsersService {
     }
 
     @Override
-    public void cancelUser(Long id) {
+    public void cancelUser(Long id) throws EntityNotFoundException {
 	new UsersBaja().cancelUser(id);
     }
 

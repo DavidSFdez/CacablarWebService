@@ -23,7 +23,7 @@ import uo.sdi.model.Waypoint;
 public class TripWizardBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     private Trip trip = new Trip();
     private String addressD;
     private String cityD;
@@ -46,96 +46,104 @@ public class TripWizardBean implements Serializable {
 
     public TripWizardBean() {
     }
-    
-    public String accept(){
-	
+
+    public String accept() {
+
 	checkAllRight();
-	
+
 	return "exito";
-	
+
     }
 
     private boolean checkAllRight() {
 	if (addressA == null || addressD == null || cityA == null
 		|| cityD == null || stateA == null || stateD == null
 		|| countryA == null || countryD == null || zipCodeA == null
-		|| zipCodeD == null){
-	 
-	    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "ERROR","Rellena todos los campos gañan");
-	         
-	        addMessage(message);
+		|| zipCodeD == null) {
+
+	    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
+		    "ERROR", "Rellena todos los campos gañan");
+
+	    addMessage(message);
 	    return false;
 	}
-		
-	if(trip.getDepartureDate()==null || trip.getArrivalDate()==null || trip.getClosingDate()==null){
-	    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "ERROR","Rellena todas fechas gañan");
-	         
-	        addMessage(message);
+
+	if (trip.getDepartureDate() == null || trip.getArrivalDate() == null
+		|| trip.getClosingDate() == null) {
+	    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
+		    "ERROR", "Rellena todas fechas gañan");
+
+	    addMessage(message);
+	    return false;
+	} else if (trip.getDepartureDate().before(trip.getClosingDate())
+		|| trip.getArrivalDate().before(trip.getDepartureDate())) {
+	    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
+		    "ERROR", "Fechas introducidas no válidas gañan");
+
+	    addMessage(message);
 	    return false;
 	}
-	else if(trip.getDepartureDate().before(trip.getClosingDate()) || trip.getArrivalDate().before(trip.getDepartureDate())){
-	    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "ERROR","Fechas introducidas no válidas gañan");
-	         
-	        addMessage(message);
+
+	if (trip.getEstimatedCost() <= 0D) {
+	    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
+		    "ERROR", "Precio introducido no válido gañan");
+
+	    addMessage(message);
+	    return false;
+	} else if (trip.getMaxPax() <= 0) {
+	    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
+		    "ERROR", "Asientos disponibles no válido gañan");
+
+	    addMessage(message);
 	    return false;
 	}
-	
-	if(trip.getEstimatedCost()<=0D){
-	    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "ERROR","Precio introducido no válido gañan");
-	         
-	        addMessage(message);
-	    return false;
-	}else if(trip.getMaxPax()<=0)
-	{
-	    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "ERROR","Asientos disponibles no válido gañan");
-	         
-	        addMessage(message);
-	        return false;
-	}
-	
-	if(trip.getComments()==null){
-	    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "ERROR","No has introducido comentarios o descripción gañán");
-	         
-	        addMessage(message);
+
+	if (trip.getComments() == null) {
+	    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
+		    "ERROR",
+		    "No has introducido comentarios o descripción gañán");
+
+	    addMessage(message);
 	    return false;
 	}
-	    
+
 	return true;
 
     }
 
     private void addMessage(FacesMessage message) {
-        FacesContext.getCurrentInstance().addMessage(null, message);
+	FacesContext.getCurrentInstance().addMessage(null, message);
     }
+
     public Trip getTrip() {
 	return trip;
     }
 
     public void preloadTripData() {
-	
+
 	int random = new Random().nextInt();
 
-	this.addressD = "direccionSalida"+random;
-	this.cityD = "CiudadSalida"+random;
-	this.countryD = "PaísSalida"+random;
+	this.addressD = "direccionSalida" + random;
+	this.cityD = "CiudadSalida" + random;
+	this.countryD = "PaísSalida" + random;
 	this.latD = 0D;
 	this.lonD = 0D;
-	this.stateD = "ProvinciaSalida"+random;
-	this.zipCodeD = "CodigoPostalSalida"+random;
+	this.stateD = "ProvinciaSalida" + random;
+	this.zipCodeD = "CodigoPostalSalida" + random;
 
-	this.addressA = "direccionLlegada"+random;
-	this.cityA = "CiudadLlegada"+random;
-	this.countryA = "PaísLlegada"+random;
+	this.addressA = "direccionLlegada" + random;
+	this.cityA = "CiudadLlegada" + random;
+	this.countryA = "PaísLlegada" + random;
 	this.latA = 0D;
 	this.lonA = 0D;
-	this.stateA = "ProvinciaLlegada"+random;
-	this.zipCodeA = "CodigoPostalLlegada"+random;
+	this.stateA = "ProvinciaLlegada" + random;
+	this.zipCodeA = "CodigoPostalLlegada" + random;
 
 	trip.setArrivalDate(new Date());
 	trip.setDepartureDate(new Date());
 	trip.setClosingDate(new Date());
 	trip.setEstimatedCost(10D);
-	trip.setComments("Descripción o comentarios"+random);
+	trip.setComments("Descripción o comentarios" + random);
 	trip.setAvailablePax(1);
 	trip.setMaxPax(1);
 
@@ -146,8 +154,8 @@ public class TripWizardBean implements Serializable {
 
 	if (id != null) {
 	    try {
-		this.trip = Factories.services.createTripsService().findTripById(
-			Long.parseLong(id));
+		this.trip = Factories.services.createTripsService()
+			.findTripById(Long.parseLong(id));
 	    } catch (NumberFormatException | EntityNotFoundException e) {
 
 	    }
@@ -176,8 +184,8 @@ public class TripWizardBean implements Serializable {
     public String modifyTrip(Long idUser) {
 
 	try {
-	    
-	    if(checkAllRight()==false)
+
+	    if (checkAllRight() == false)
 		return "fracaso";
 
 	    AddressPoint departure = new AddressPoint(addressD, cityD, stateD,
@@ -200,20 +208,19 @@ public class TripWizardBean implements Serializable {
 
     public String save(Long idUser) {
 	try {
-	
-	    if(!checkAllRight())
+
+	    if (!checkAllRight())
 		return "fracaso";
 
-	AddressPoint departure = new AddressPoint(addressD, cityD, stateD,
-		countryD, zipCodeD, new Waypoint(latD, lonD));
-	AddressPoint destination = new AddressPoint(addressA, cityA, stateA,
-		countryA, zipCodeA, new Waypoint(latA, lonA));
+	    AddressPoint departure = new AddressPoint(addressD, cityD, stateD,
+		    countryD, zipCodeD, new Waypoint(latD, lonD));
+	    AddressPoint destination = new AddressPoint(addressA, cityA,
+		    stateA, countryA, zipCodeA, new Waypoint(latA, lonA));
 
-	trip.setAvailablePax(trip.getMaxPax());
-	trip.setDeparture(departure);
-	trip.setDestination(destination);
+	    trip.setAvailablePax(trip.getMaxPax());
+	    trip.setDeparture(departure);
+	    trip.setDestination(destination);
 
-	
 	    Factories.services.createTripsService().save(trip, idUser);
 	} catch (EntityAlreadyExistsException e) {
 

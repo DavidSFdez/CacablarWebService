@@ -34,12 +34,12 @@ public class EJBTripsService implements LocalTripsService, RemoteTripsService {
     }
 
     @Override
-    public List<Trip> listRelated(Long idUser) throws Exception {
+    public List<Trip> listRelated(Long idUser) {
 	return new TripsListRelated().list(idUser);
     }
 
     @Override
-    public List<Trip> listActiveToUser(Long idUser) throws Exception {
+    public List<Trip> listActiveToUser(Long idUser) {
 	return new TripsListActiveToUser().list(idUser);
     }
 
@@ -94,7 +94,6 @@ public class EJBTripsService implements LocalTripsService, RemoteTripsService {
 
     @Override
     public List<Trip> findAllPromotedAndActive(long idUser) {
-
 	return new TripsFindAllPromotedAndActive().find(idUser);
     }
 

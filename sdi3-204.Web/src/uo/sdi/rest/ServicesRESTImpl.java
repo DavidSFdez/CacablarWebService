@@ -44,7 +44,7 @@ public class ServicesRESTImpl implements ServiceREST {
 
 	Object id = req.getSession().getAttribute("userId");
 	List<Trip> trips = null;
-	
+
 	if (id != null) {
 	    Long idUser = (Long) id;
 	    trips = tripsService.findAllPromotedAndActive(idUser);
@@ -76,7 +76,8 @@ public class ServicesRESTImpl implements ServiceREST {
 
     @Override
     public Trip[] testREST() {
-	return Factories.services.createTripsService().findAllTrips().toArray(new Trip[0]);
+	return Factories.services.createTripsService().findAllTrips()
+		.toArray(new Trip[0]);
     }
 
 }

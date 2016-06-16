@@ -14,7 +14,7 @@ import uo.sdi.persistence.exception.AlreadyPersistedException;
  * Elimina las peticiones y las añade como asientos sin plaza.
  * 
  */
-//TODO nombre mas adecuado
+// TODO nombre mas adecuado
 public class SeatsToUpdate {
 
     public void update(List<Application> applications)

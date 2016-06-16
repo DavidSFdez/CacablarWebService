@@ -10,7 +10,7 @@ public class TripsSave {
 
     public void save(Trip trip, Long idUser)
 	    throws EntityAlreadyExistsException {
-	//TODO estas tareas que hay a continuacion:
+	// TODO estas tareas que hay a continuacion:
 	// Comprobar fechas
 	// Numero de asientos válido (los disponibles < totales)
 	// Que el coste no sea negativo

@@ -11,6 +11,4 @@ public interface SeatDao extends GenericDao<Seat, Long[]> {
 
     List<Seat> findByTrip(Long id);
 
-    void request(Seat seat);
-
 }

@@ -14,7 +14,7 @@ public class UsersUpdate {
 	try {
 	    ud.update(user);
 	} catch (NotPersistedException e) {
-	   throw new EntityNotFoundException("No existe el usuario.", e);
+	    throw new EntityNotFoundException("No existe el usuario.", e);
 	}
 
     }

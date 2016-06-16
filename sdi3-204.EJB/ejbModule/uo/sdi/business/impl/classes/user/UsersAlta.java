@@ -16,7 +16,8 @@ public class UsersAlta {
 	    user.setStatus(UserStatus.ACTIVE);
 	    dao.save(user);
 	} catch (AlreadyPersistedException e) {
-	    throw new EntityAlreadyExistsException("Usuario ya existe " + user, e);
+	    throw new EntityAlreadyExistsException("Usuario ya existe " + user,
+		    e);
 	}
     }
 }

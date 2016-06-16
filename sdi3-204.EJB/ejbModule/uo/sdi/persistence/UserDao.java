@@ -3,7 +3,6 @@ package uo.sdi.persistence;
 import java.util.List;
 
 import uo.sdi.model.SeatStatus;
-import uo.sdi.model.TripStatus;
 import uo.sdi.model.User;
 import uo.sdi.persistence.util.GenericDao;
 

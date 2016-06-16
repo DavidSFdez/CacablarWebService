@@ -22,7 +22,7 @@ public class EJBApplicationsService implements LocalApplicationsService,
 	RemoteApplicationsService {
 
     @Override
-    public Application findApplication(Long idTrip, Long idUser){
+    public Application findApplication(Long idTrip, Long idUser) {
 	return new ApplicationsFind().find(idTrip, idUser);
     }
 
@@ -33,21 +33,20 @@ public class EJBApplicationsService implements LocalApplicationsService,
     }
 
     @Override
+    // TODO este se llama desde el echelider y mejor nombre si se puede
     public List<Application> getToUpdate() {
 	return new ApplicationsGetToUpdate().find();
     }
 
     @Override
     public void acceptApplication(Application application)
-	    throws EntityAlreadyExistsException, EntityNotFoundException {
-
+	    throws EntityNotFoundException, EntityAlreadyExistsException {
 	new ApplicationsAccept().execute(application);
-
     }
 
     @Override
     public void cancelApplication(Application application)
-	    throws EntityAlreadyExistsException, EntityNotFoundException {
+	    throws EntityNotFoundException, EntityAlreadyExistsException {
 	new ApplicationCancel().execute(application);
     }
 }

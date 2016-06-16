@@ -13,7 +13,7 @@ public interface ServicesFactory {
     ApplicationService getApplicationService();
 
     RattingsService getRattingsService();
-    
+
     ClientService getClientService();
 
 }

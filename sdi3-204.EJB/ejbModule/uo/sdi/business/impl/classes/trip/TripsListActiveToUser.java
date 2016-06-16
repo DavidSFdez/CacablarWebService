@@ -7,7 +7,7 @@ import uo.sdi.model.Trip;
 
 public class TripsListActiveToUser {
 
-    public List<Trip> list(Long idUser) throws Exception {
+    public List<Trip> list(Long idUser) {
 
 	List<Trip> trips = null;
 

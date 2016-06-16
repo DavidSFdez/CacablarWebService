@@ -61,11 +61,11 @@ public class TripBean implements Serializable {
 	}
 
 	Log.trace("Actualizando asientos.");
-	Factories.services.createTripsService().updateTripsStatus();
+	Factories.services.getTripsService().updateTripsStatus();
 	List<Application> applications = Factories.services
-		.createApplicationService().getToUpdate();
+		.getApplicationService().getToUpdate();
 	try {
-	    Factories.services.createSeatsService().seatsToUpdate(applications);
+	    Factories.services.getSeatsService().seatsToUpdate(applications);
 	} catch (EntityAlreadyExistsException e) {
 	    Log.trace("Se ha intentado actualizar un asiento ya actuaizado.");
 	}
@@ -73,22 +73,21 @@ public class TripBean implements Serializable {
     }
 
     public boolean isPromoter(Long idUser) {
-	return Factories.services.createTripsService().findByIdandPromoter(
+	return Factories.services.getTripsService().findByIdandPromoter(
 		trip.getId(), idUser) == null ? false : true;
     }
 
     public boolean isInApplications(Long idUser) {
-	
-	Application application =
-		Factories.services.createApplicationService().findApplication(trip.getId(),
-			idUser);
+
+	Application application = Factories.services.getApplicationService()
+		.findApplication(trip.getId(), idUser);
 	return application != null;
-	
+
     }
 
     public boolean isInSeats(Long idUser) {
 	try {
-	    Factories.services.createSeatsService().findByUserAndTrip(idUser,
+	    Factories.services.getSeatsService().findByUserAndTrip(idUser,
 		    trip.getId());
 
 	} catch (EntityNotFoundException e) {
@@ -101,8 +100,8 @@ public class TripBean implements Serializable {
     public boolean isSitting(Long idUser) {
 
 	try {
-	    Seat seat = Factories.services.createSeatsService()
-		    .findByUserAndTrip(idUser, trip.getId());
+	    Seat seat = Factories.services.getSeatsService().findByUserAndTrip(
+		    idUser, trip.getId());
 	    if (!seat.getStatus().equals(SeatStatus.ADMITIDO))
 		return false;
 	} catch (EntityNotFoundException e) {
@@ -116,7 +115,7 @@ public class TripBean implements Serializable {
     public List<Seat> getSeats() {
 	List<Seat> seats = new LinkedList<Seat>();
 	if (trip.getId() != null)
-	    seats = Factories.services.createSeatsService().findByTrip(
+	    seats = Factories.services.getSeatsService().findByTrip(
 		    trip.getId());
 	return seats;
     }
@@ -124,25 +123,21 @@ public class TripBean implements Serializable {
     public List<Application> getApplications() {
 	List<Application> applications = new LinkedList<>();
 	if (trip.getId() != null)
-	    applications = Factories.services.createSeatsService()
+	    applications = Factories.services.getSeatsService()
 		    .findApplicationByTrip(trip.getId());
 	return applications;
     }
 
     public Application getApplicationUser(Long idUser) {
-	try {
-	    if (trip.getId() != null)
-		return Factories.services.createApplicationService().findApplication(
-			trip.getId(), idUser);
-	} catch (EntityNotFoundException e) {
-	    return null;
-	}
+	if (trip.getId() != null)
+	    return Factories.services.getApplicationService().findApplication(
+		    trip.getId(), idUser);
 	return null;
     }
 
     public String updateTrip(Long idUser) {
 	try {
-	    Factories.services.createTripsService().update(trip, idUser);
+	    Factories.services.getTripsService().update(trip, idUser);
 	} catch (EntityNotFoundException e) {
 	    return "fracaso";
 	}
@@ -153,7 +148,7 @@ public class TripBean implements Serializable {
     public String cancelTrip(Long idUser) {
 	Log.trace("Iniciando cancelación de viaje.");
 	try {
-	    Factories.services.createTripsService().cancel(trip, idUser);
+	    Factories.services.getTripsService().cancel(trip, idUser);
 	} catch (EntityNotFoundException e) {
 	    Log.error("No se ha encontrado el viaje.", e);
 	    return "fracaso";
@@ -167,9 +162,9 @@ public class TripBean implements Serializable {
 
     public String saveTrip(Long idUser) {
 	Log.trace("Iniciando salva de viaje.");
-	Log.debug("Viaje: "+trip);
+	Log.debug("Viaje: " + trip);
 	try {
-	    Factories.services.createTripsService().save(trip, idUser);
+	    Factories.services.getTripsService().save(trip, idUser);
 	} catch (EntityAlreadyExistsException e) {
 	    Log.error("Ya existe el viaje.", e);
 	    return "fracaso";
@@ -180,9 +175,9 @@ public class TripBean implements Serializable {
 
     public String view(Long idTrip) {
 	try {
-	    trip = Factories.services.createTripsService().findTripById(idTrip);
+	    trip = Factories.services.getTripsService().findTripById(idTrip);
 	} catch (EntityNotFoundException e) {
-	    Log.error("Fracaso view trip",e);
+	    Log.error("Fracaso view trip", e);
 	    return "fracaso";
 	}
 	return "exito";
@@ -214,23 +209,20 @@ public class TripBean implements Serializable {
 
     public boolean isUserInSeats(Long idUser) {
 	try {
-	    Factories.services.createSeatsService().findByUserAndTrip(idUser,
+	    Factories.services.getSeatsService().findByUserAndTrip(idUser,
 		    trip.getId());
-
 	} catch (EntityNotFoundException e) {
-	    return false;
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
 	}
+
 	return true;
 
     }
 
     public boolean isUserInApplications(Long idUser) {
-	try {
-	    Factories.services.createApplicationService().findApplication(trip.getId(),
-		    idUser);
-	} catch (EntityNotFoundException e1) {
-	    return false;
-	}
+	Factories.services.getApplicationService().findApplication(
+		trip.getId(), idUser);
 	return true;
     }
 
@@ -254,7 +246,7 @@ public class TripBean implements Serializable {
     public String acceptApplication(Application application) {
 
 	try {
-	    Factories.services.createApplicationService().acceptApplication(
+	    Factories.services.getApplicationService().acceptApplication(
 		    application);
 	    actualizarTrip();
 	} catch (EntityAlreadyExistsException | EntityNotFoundException e) {
@@ -265,13 +257,13 @@ public class TripBean implements Serializable {
     }
 
     private void actualizarTrip() throws EntityNotFoundException {
-	trip = Factories.services.createTripsService().findTripById(
+	trip = Factories.services.getTripsService().findTripById(
 		Long.parseLong(id));
     }
 
     public String cancelApplication(Application application) {
 	try {
-	    Factories.services.createApplicationService().cancelApplication(
+	    Factories.services.getApplicationService().cancelApplication(
 		    application);
 	} catch (EntityAlreadyExistsException | EntityNotFoundException e) {
 	    return "fracaso";
@@ -282,7 +274,7 @@ public class TripBean implements Serializable {
 
     public String cancelSeat(Seat seat) {
 	try {
-	    Factories.services.createSeatsService().cancelSeat(seat);
+	    Factories.services.getSeatsService().cancelSeat(seat);
 	    actualizarTrip();
 	} catch (EntityNotFoundException e) {
 	    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
@@ -305,8 +297,8 @@ public class TripBean implements Serializable {
     public boolean isActive() {
 	return trip.getStatus().isOpen();
     }
-    
+
     private void addMessage(FacesMessage message) {
-   	FacesContext.getCurrentInstance().addMessage(null, message);
-       }
+	FacesContext.getCurrentInstance().addMessage(null, message);
+    }
 }

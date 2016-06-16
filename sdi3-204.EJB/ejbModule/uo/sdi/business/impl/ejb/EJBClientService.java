@@ -9,13 +9,13 @@ import uo.sdi.business.RattingsService;
 import uo.sdi.business.SeatsService;
 import uo.sdi.business.TripsService;
 import uo.sdi.business.UsersService;
+import uo.sdi.business.exception.EntityNotFoundException;
 import uo.sdi.business.impl.local.LocalClientService;
 import uo.sdi.business.impl.local.LocalRattingsService;
 import uo.sdi.business.impl.local.LocalSeatsService;
 import uo.sdi.business.impl.local.LocalTripsService;
 import uo.sdi.business.impl.local.LocalUsersService;
 import uo.sdi.business.impl.remote.RemoteClientService;
-import uo.sdi.model.Application;
 import uo.sdi.model.Rating;
 import uo.sdi.model.Seat;
 import uo.sdi.model.Trip;
@@ -33,10 +33,10 @@ public class EJBClientService implements LocalClientService,
 
     @EJB(beanInterface = LocalSeatsService.class)
     private SeatsService seatsService;
-    
+
     @EJB(beanInterface = LocalRattingsService.class)
     private RattingsService ratingsService;
-    
+
     @Override
     public List<User> listAllUsers() {
 	return usersService.findAllUsers();
@@ -48,7 +48,7 @@ public class EJBClientService implements LocalClientService,
     }
 
     @Override
-    public void cancelUsuario(Long userId) {
+    public void cancelUsuario(Long userId) throws EntityNotFoundException {
 	usersService.cancelUser(userId);
     }
 
@@ -68,10 +68,9 @@ public class EJBClientService implements LocalClientService,
     }
 
     @Override
-    public Trip findTripById(Long tripId) {
+    public Trip findTripById(Long tripId) throws EntityNotFoundException {
 	return tripsService.findTripById(tripId);
     }
-
 
     @Override
     public List<Seat> listAllSeatsFromTrip(Long tripId) {
@@ -79,20 +78,19 @@ public class EJBClientService implements LocalClientService,
     }
 
     @Override
-    public Seat findSeatByUserAndTrip(Long userId, Long tripId) {
+    public Seat findSeatByUserAndTrip(Long userId, Long tripId)
+	    throws EntityNotFoundException {
 	return seatsService.findByUserAndTrip(userId, tripId);
     }
 
-    //Arreglar método para que devuelva lista
     @Override
     public List<Rating> listAllRatingsAboutTrip(Long tripId) {
 	return ratingsService.listByTrip(tripId);
     }
 
     @Override
-    public void cancelRating(Long ratingId) {
+    public void cancelRating(Long ratingId) throws EntityNotFoundException {
 	ratingsService.delete(ratingId);
-	
     }
 
     @Override

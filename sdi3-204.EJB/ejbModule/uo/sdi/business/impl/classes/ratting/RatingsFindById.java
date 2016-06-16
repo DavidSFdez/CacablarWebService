@@ -7,7 +7,7 @@ import uo.sdi.persistence.RatingDao;
 public class RatingsFindById {
 
     RatingDao rd = Factories.persistence.createRattingDao();
-    
+
     public Rating find(Long ratingId) {
 	return rd.findById(ratingId);
     }

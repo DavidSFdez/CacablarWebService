@@ -77,8 +77,8 @@ public class RatingDaoJdbcImpl implements RatingDao {
     }
 
     @Override
-    public Rating findByTrip(Long idTrip) {
-	return jdbcTemplate.queryForObject("RATING_FIND_BY_TRIP",
+    public List<Rating> findByTrip(Long idTrip) {
+	return jdbcTemplate.queryForList("RATING_FIND_BY_TRIP",
 		new RatingMapper(), idTrip);
     }
 

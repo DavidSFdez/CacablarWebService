@@ -61,11 +61,12 @@ public class TripsBean implements Serializable {
 
     public String cancelTrips(long idUser) {
 	Log.trace("Iniciando cancelación del viaje.");
-	Log.debug("Id de usuario cancenando: [" + idUser+"].");
+	Log.debug("Id de usuario cancenando: [" + idUser + "].");
 	try {
 	    if (tripsToCancel != null && tripsToCancel.size() != 0)
 		for (Trip trip : tripsToCancel)
-		    Factories.services.createTripsService().cancel(trip, idUser);
+		    Factories.services.createTripsService()
+			    .cancel(trip, idUser);
 	    tripsToCancel = new LinkedList<>();
 	} catch (EntityNotFoundException e) {
 	    Log.error("No se han contrado los viajes a cancelar.");
@@ -83,7 +84,7 @@ public class TripsBean implements Serializable {
 	List<Trip> trips = null;
 	trips = Factories.services.createTripsService().listActive();
 	this.trips = trips;
-	Log.debug("Viajes: "+this.trips);
+	Log.debug("Viajes: " + this.trips);
 	return trips;
     }
 
@@ -96,7 +97,7 @@ public class TripsBean implements Serializable {
 	    Log.error("ha ocurrido un error.", e);
 	}
 	this.trips = trips;
-	Log.debug("Viajes: "+this.trips);
+	Log.debug("Viajes: " + this.trips);
 	return trips;
     }
 
@@ -115,7 +116,7 @@ public class TripsBean implements Serializable {
 	}
 
 	this.trips = trips;
-	Log.debug("Viajes: "+this.trips);
+	Log.debug("Viajes: " + this.trips);
 	return trips;
     }
 

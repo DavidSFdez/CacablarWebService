@@ -12,7 +12,8 @@ public class RattingsDelete {
 	try {
 	    rd.delete(id);
 	} catch (NotPersistedException e) {
-	   throw new EntityNotFoundException("No existe la valoración a borrar.", e);
+	    throw new EntityNotFoundException(
+		    "No existe la valoración a borrar.", e);
 	}
     }
 
