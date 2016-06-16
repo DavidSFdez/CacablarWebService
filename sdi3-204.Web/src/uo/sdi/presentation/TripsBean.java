@@ -65,7 +65,7 @@ public class TripsBean implements Serializable {
 	try {
 	    if (tripsToCancel != null && tripsToCancel.size() != 0)
 		for (Trip trip : tripsToCancel)
-		    Factories.services.getTripsService()
+		    Factories.services.createTripsService()
 			    .cancel(trip, idUser);
 	    tripsToCancel = new LinkedList<>();
 	} catch (EntityNotFoundException e) {
@@ -82,7 +82,7 @@ public class TripsBean implements Serializable {
     public List<Trip> getListActive() {
 	Log.info("Buscando viajes activos.");
 	List<Trip> trips = null;
-	trips = Factories.services.getTripsService().listActive();
+	trips = Factories.services.createTripsService().listActive();
 	this.trips = trips;
 	Log.debug("Viajes: " + this.trips);
 	return trips;
@@ -92,7 +92,7 @@ public class TripsBean implements Serializable {
 	Log.info("Buscando viajes relacionados.");
 	List<Trip> trips = new LinkedList<Trip>();
 	try {
-	    trips = Factories.services.getTripsService().listRelated(idUser);
+	    trips = Factories.services.createTripsService().listRelated(idUser);
 	} catch (Exception e) {
 	    Log.error("ha ocurrido un error.", e);
 	}
@@ -109,7 +109,7 @@ public class TripsBean implements Serializable {
 	    return getListActive();
 	}
 	try {
-	    trips = Factories.services.getTripsService().listActiveToUser(
+	    trips = Factories.services.createTripsService().listActiveToUser(
 		    idUser);
 	} catch (Exception e) {
 	    Log.error("ha ocurrido un error.", e);

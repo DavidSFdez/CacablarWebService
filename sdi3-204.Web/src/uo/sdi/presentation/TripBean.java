@@ -78,23 +78,35 @@ public class TripBean implements Serializable {
     }
 
     public boolean isInApplications(Long idUser) {
-	return Factories.services.getApplicationService().
-		findApplication(trip.getId(), idUser) != null;
+
+	Application application = Factories.services.getApplicationService()
+		.findApplication(trip.getId(), idUser);
+	return application != null;
 
     }
 
     public boolean isInSeats(Long idUser) {
-	return Factories.services.getSeatsService().findByUserAndTrip(idUser,
-		trip.getId()) != null;
+	try {
+	    Factories.services.getSeatsService().findByUserAndTrip(idUser,
+		    trip.getId());
+
+	} catch (EntityNotFoundException e) {
+	    return false;
+	}
+	return true;
+
     }
 
     public boolean isSitting(Long idUser) {
-	Seat seat = Factories.services.getSeatsService().findByUserAndTrip(
-		idUser, trip.getId());
-	if (seat == null)
+
+	try {
+	    Seat seat = Factories.services.getSeatsService().findByUserAndTrip(
+		    idUser, trip.getId());
+	    if (!seat.getStatus().equals(SeatStatus.ADMITIDO))
+		return false;
+	} catch (EntityNotFoundException e) {
 	    return false;
-	if (!seat.getStatus().equals(SeatStatus.ADMITIDO))
-	    return false;
+	}
 
 	return true;
 
@@ -196,8 +208,16 @@ public class TripBean implements Serializable {
     }
 
     public boolean isUserInSeats(Long idUser) {
-	    return Factories.services.getSeatsService().findByUserAndTrip(idUser,
-		    trip.getId()) != null;
+	try {
+	    Factories.services.getSeatsService().findByUserAndTrip(idUser,
+		    trip.getId());
+	} catch (EntityNotFoundException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	}
+
+	return true;
+
     }
 
     public boolean isUserInApplications(Long idUser) {
