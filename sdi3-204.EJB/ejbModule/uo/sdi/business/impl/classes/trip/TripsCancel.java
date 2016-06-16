@@ -13,7 +13,6 @@ import uo.sdi.model.Trip;
 import uo.sdi.model.TripStatus;
 import uo.sdi.persistence.ApplicationDao;
 import uo.sdi.persistence.SeatDao;
-import uo.sdi.persistence.Transaction;
 import uo.sdi.persistence.exception.AlreadyPersistedException;
 import uo.sdi.persistence.exception.NotPersistedException;
 
@@ -24,11 +23,10 @@ public class TripsCancel {
 	// TODO Comprobar todas las condiciones para que se pueda cancelar,
 	// fechas, que sea promotor blabalbla
 	// TODO poner a excluidos a toda la peña que tenga asientos solicitados
-	Transaction transaction = Factories.persistence.createTransaction();
+
 	ApplicationDao ad = Factories.persistence.createApplicationDao();
 	SeatDao sd = Factories.persistence.createSeatDao();
 
-	transaction.begin();
 	try {
 	    if (trip.getClosingDate().after(new Date())
 		    && trip.getPromoterId() == idUser) {
@@ -59,17 +57,16 @@ public class TripsCancel {
 		}
 
 		Factories.persistence.createTripDao().update(trip);
-		transaction.commit();
 
 	    }
 	    Factories.persistence.createTripDao().update(trip);
 	} catch (NotPersistedException ex) {
-	    transaction.rollback();
+
 	    throw new EntityNotFoundException("Viaje no eliminado "
 		    + trip.getId(), ex);
 
 	} catch (AlreadyPersistedException e) {
-	    transaction.rollback();
+
 	    throw new EntityAlreadyExistsException("El asiento ya existe");
 	}
     }

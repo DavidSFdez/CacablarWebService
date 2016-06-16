@@ -6,6 +6,8 @@ import uo.sdi.infrastructure.Factories;
 import uo.sdi.model.Application;
 import uo.sdi.persistence.ApplicationDao;
 
+//TODO Las actualizaciones se hacen en el scheluder
+@Deprecated
 public class ApplicationsGetToUpdate {
 
     public List<Application> find() {

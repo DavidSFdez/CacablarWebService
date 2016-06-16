@@ -12,7 +12,6 @@ import uo.sdi.model.SeatStatus;
 import uo.sdi.model.Trip;
 import uo.sdi.persistence.ApplicationDao;
 import uo.sdi.persistence.SeatDao;
-import uo.sdi.persistence.Transaction;
 import uo.sdi.persistence.TripDao;
 import uo.sdi.persistence.exception.AlreadyPersistedException;
 import uo.sdi.persistence.exception.NotPersistedException;
@@ -20,7 +19,7 @@ import uo.sdi.persistence.exception.NotPersistedException;
 public class ApplicationsAccept {
 
     public void execute(Application application)
-	    throws EntityAlreadyExistsException, EntityNotFoundException {
+	    throws EntityNotFoundException, EntityAlreadyExistsException {
 	Long[] ids = { application.getUserId(), application.getTripId() };
 	// ids[0] = userId
 	// ids[1] = tripId
@@ -36,7 +35,6 @@ public class ApplicationsAccept {
 
 	// No quedan plazas
 	if (trip.getAvailablePax() == 0) {
-
 	    String errorMessage = "No hay plazas libres en el viaje.";
 	    throw new BusinessException(errorMessage);
 	}
@@ -46,30 +44,34 @@ public class ApplicationsAccept {
 	ApplicationDao applicationDao = Factories.persistence
 		.createApplicationDao();
 	SeatDao seatDao = Factories.persistence.createSeatDao();
-	Transaction transaction = Factories.persistence.createTransaction();
 
 	// Reducir en uno las plazas disponibles para tal viaje
 	trip.setAvailablePax(trip.getAvailablePax() - 1);
 
-	transaction.begin();
 	try {
 	    tripDao.update(trip);
-	    applicationDao.delete(ids);
-	    seatDao.save(seat);
-	    if (trip.getAvailablePax() == 0) {
-		tripDao.updateTripsStatus();
-		List<Application> applications = applicationDao.findToUpdate();
-		Factories.services.createSeatsService().seatsToUpdate(
-			applications);
-	    }
-
-	    transaction.commit();
 	} catch (NotPersistedException e) {
-	    transaction.rollback();
-	    throw new EntityNotFoundException(e);
+	    throw new EntityNotFoundException("No se enuentra el viaje.", e);
+	}
+
+	try {
+	    applicationDao.delete(ids);
+	} catch (NotPersistedException e) {
+	    throw new EntityNotFoundException("No se enuentra la petición..", e);
+	}
+
+	try {
+	    seatDao.save(seat);
 	} catch (AlreadyPersistedException e) {
-	    transaction.rollback();
-	    throw new EntityAlreadyExistsException(e);
+	    throw new EntityAlreadyExistsException("ya existe el asiento.", e);
+	}
+
+	if (trip.getAvailablePax() == 0) {
+	    tripDao.updateTripsStatus();
+	    // TODO el metodo de abajo debe buscar solo las peticiones del viaje actual. 
+	    // TODO ponerle un nombre mejor a los metodos que se entienda lo que hace
+	    List<Application> applications = applicationDao.findToUpdate();
+	    Factories.services.createSeatsService().seatsToUpdate(applications);
 	}
 
     }

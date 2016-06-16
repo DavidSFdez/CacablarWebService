@@ -78,13 +78,12 @@ public class TripBean implements Serializable {
     }
 
     public boolean isInApplications(Long idUser) {
-	try {
-	    Factories.services.createApplicationService().findApplication(trip.getId(),
-		    idUser);
-	} catch (EntityNotFoundException e1) {
-	    return false;
-	}
-	return true;
+	
+	Application application =
+		Factories.services.createApplicationService().findApplication(trip.getId(),
+			idUser);
+	return application != null;
+	
     }
 
     public boolean isInSeats(Long idUser) {

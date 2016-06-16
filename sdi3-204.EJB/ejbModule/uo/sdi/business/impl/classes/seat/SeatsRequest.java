@@ -4,6 +4,7 @@ import uo.sdi.business.exception.EntityAlreadyExistsException;
 import uo.sdi.infrastructure.Factories;
 import uo.sdi.model.Seat;
 import uo.sdi.persistence.SeatDao;
+import uo.sdi.persistence.exception.AlreadyPersistedException;
 
 public class SeatsRequest {
 
@@ -19,7 +20,11 @@ public class SeatsRequest {
 	seat.setTripId(idTrip);
 	seat.setUserId(idUser);
 
-	sd.request(seat);
+	try {
+	    sd.save(seat);
+	} catch (AlreadyPersistedException e) {
+	    throw new EntityAlreadyExistsException("ya existe el viaje.", e);
+	}
 
     }
 

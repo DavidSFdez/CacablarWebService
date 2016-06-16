@@ -8,7 +8,6 @@ import uo.sdi.model.Seat;
 import uo.sdi.model.SeatStatus;
 import uo.sdi.persistence.ApplicationDao;
 import uo.sdi.persistence.SeatDao;
-import uo.sdi.persistence.Transaction;
 import uo.sdi.persistence.exception.AlreadyPersistedException;
 import uo.sdi.persistence.exception.NotPersistedException;
 
@@ -30,19 +29,19 @@ public class ApplicationCancel {
 	ApplicationDao applicationDao = Factories.persistence
 		.createApplicationDao();
 	SeatDao seatDao = Factories.persistence.createSeatDao();
-	Transaction transaction = Factories.persistence.createTransaction();
 
-	transaction.begin();
 	try {
 	    applicationDao.delete(ids);
-	    seatDao.save(seat);
-	    transaction.commit();
 	} catch (NotPersistedException e) {
-	    transaction.rollback();
-	    throw new EntityNotFoundException(e);
+	    throw new EntityNotFoundException(
+		    "No existe la peticion que quiere borrar.", e);
+	}
+
+	try {
+	    seatDao.save(seat);
 	} catch (AlreadyPersistedException e) {
-	    transaction.rollback();
-	    throw new EntityAlreadyExistsException(e);
+	    throw new EntityAlreadyExistsException(
+		    "No existe la peticion que quiere borrar.", e);
 	}
 
     }

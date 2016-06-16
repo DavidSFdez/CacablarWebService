@@ -10,6 +10,11 @@ import uo.sdi.model.SeatStatus;
 import uo.sdi.persistence.SeatDao;
 import uo.sdi.persistence.exception.AlreadyPersistedException;
 
+/**
+ * Elimina las peticiones y las añade como asientos sin plaza.
+ * 
+ */
+//TODO nombre mas adecuado
 public class SeatsToUpdate {
 
     public void update(List<Application> applications)
@@ -17,22 +22,18 @@ public class SeatsToUpdate {
 
 	SeatDao sd = Factories.persistence.createSeatDao();
 
-	try {
-	    for (Application a : applications) {
-		Seat seatToUpdate = new Seat();
-		seatToUpdate.setComment("Sin Plaza");
-		seatToUpdate.setStatus(SeatStatus.SIN_PLAZA);
-		seatToUpdate.setTripId(a.getTripId());
-		seatToUpdate.setUserId(a.getUserId());
-
-		if (sd.findByUserAndTrip(seatToUpdate.getUserId(),
-			seatToUpdate.getTripId()) == null) {
-		    sd.save(seatToUpdate);
-		}
+	for (Application a : applications) {
+	    Seat seat = new Seat();
+	    seat.setComment("Sin Plaza");
+	    seat.setStatus(SeatStatus.SIN_PLAZA);
+	    seat.setTripId(a.getTripId());
+	    seat.setUserId(a.getUserId());
+	    try {
+		sd.save(seat);
+	    } catch (AlreadyPersistedException e) {
+		throw new EntityAlreadyExistsException(
+			"La plaza que se intenta añadir ya existe");
 	    }
-	} catch (AlreadyPersistedException e) {
-	    throw new EntityAlreadyExistsException(
-		    "La plaza que se intenta añadir ya existe");
 	}
 
     }

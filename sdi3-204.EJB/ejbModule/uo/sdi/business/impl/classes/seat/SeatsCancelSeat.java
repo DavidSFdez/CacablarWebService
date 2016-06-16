@@ -10,7 +10,6 @@ import uo.sdi.model.SeatStatus;
 import uo.sdi.model.Trip;
 import uo.sdi.model.TripStatus;
 import uo.sdi.persistence.SeatDao;
-import uo.sdi.persistence.Transaction;
 import uo.sdi.persistence.TripDao;
 import uo.sdi.persistence.exception.NotPersistedException;
 
@@ -18,10 +17,9 @@ public class SeatsCancelSeat {
 
     public void cancel(Seat seatAux) throws EntityNotFoundException {
 
-	// Daos y transacción
+	// Daos
 	SeatDao sd = Factories.persistence.createSeatDao();
 	TripDao td = Factories.persistence.createTripDao();
-	Transaction transaction = Factories.persistence.createTransaction();
 
 	// Ids
 	Long[] ids = { seatAux.getUserId(), seatAux.getTripId() };
@@ -52,15 +50,15 @@ public class SeatsCancelSeat {
 	} else
 	    throw new BusinessException("El viaje ya pasó");
 
-	transaction.begin();
 	try {
 	    sd.update(seat);
-	    td.update(trip);
-	    transaction.commit();
 	} catch (NotPersistedException e) {
-	    transaction.rollback();
-	    throw new EntityNotFoundException(
-		    "Se ha producido un error cancelando la plaza");
+	    throw new EntityNotFoundException("No existe el asiento.", e);
+	}
+	try {
+	    td.update(trip);
+	} catch (NotPersistedException e) {
+	    throw new EntityNotFoundException("No existe el viaje.", e);
 	}
 
     }

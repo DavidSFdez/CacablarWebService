@@ -78,10 +78,6 @@ public class ApplicationDaoJdbcImpl implements ApplicationDao {
 
     }
 
-    @Override
-    public void acceptApplication(Long[] ids) {
-	// TODO Toda la actualización del application a seat
-
-    }
+ 
 
 }

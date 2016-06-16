@@ -1,18 +1,19 @@
 package uo.sdi.business.impl.classes.application;
 
+import uo.sdi.business.exception.EntityNotFoundException;
 import uo.sdi.infrastructure.Factories;
 import uo.sdi.persistence.exception.NotPersistedException;
 
 public class ApplicationsRemove {
 
-    public void remove(Long idUser, Long idTrip) {
+    public void remove(Long idUser, Long idTrip) throws EntityNotFoundException {
 	Long[] ids = { idUser, idTrip };
 
 	try {
 	    Factories.persistence.createApplicationDao().delete(ids);
 	} catch (NotPersistedException e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
+	    throw new EntityNotFoundException(
+		    "No existe la peticion que quiere borrar.", e);
 	}
 
     }

@@ -72,11 +72,4 @@ public class SeatDaoJdbcImpl implements SeatDao {
 		new SeatMapper(), id);
     }
 
-    @Override
-    public void request(Seat seat) {
-	jdbcTemplate.execute("APPLICATION_INSERT", seat.getUserId(),
-		seat.getTripId());
-
-    }
-
 }
