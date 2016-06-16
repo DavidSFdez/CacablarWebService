@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.jws.WebService;
 
 import uo.sdi.business.RattingsService;
 import uo.sdi.business.SeatsService;
@@ -22,6 +23,7 @@ import uo.sdi.model.Trip;
 import uo.sdi.model.User;
 
 @Stateless
+@WebService(name = "ClientService")
 public class EJBClientService implements LocalClientService,
 	RemoteClientService {
 
