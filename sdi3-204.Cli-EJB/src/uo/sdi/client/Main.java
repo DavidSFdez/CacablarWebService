@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import uo.sdi.business.ClientService;
 import uo.sdi.business.RattingsService;
 import uo.sdi.business.TripsService;
 import uo.sdi.business.UsersService;
@@ -38,41 +39,8 @@ public class Main {
     }
 
 
-    private static void metodocutre() throws EntityNotFoundException {
-	RemoteEJBServiceLocator ejbl = new RemoteEJBServiceLocator();
-	
-	System.out.println(ejbl.createUsersService());
-	System.out.println(ejbl.createTripsService());
-	System.out.println(ejbl.createRattingsService());
-	System.out.println(ejbl.createSeatsService());
-	System.out.println(ejbl.createApplicationService());
-	System.out.println(ejbl.createLoginService());
-	
-	UsersService us = new RemoteEJBServiceLocator().createUsersService();
-	
-	System.out.println("Usuarios del sistema");
-	List<User> users = us.findAllUsers();
-	for(User u : users)
-	    System.out.println(u);
-	
-	System.out.println("Viajes del sistema");
-	List<Trip> trips = ejbl.createTripsService().findAllTrips();
-	for(Trip t : trips)
-	    System.out.println(t);
-    }
-
     private static void listarUsuariosSistema() throws Exception {
-	UsersService us = new RemoteEJBServiceLocator().createUsersService();
-	TripsService ts = new RemoteEJBServiceLocator().createTripsService();	
-	List<User> users = us.findAllUsers();
-	System.out.println("-----------------------------");
-	for(User u : users){
-	    List<Trip> promotedTrips = ts.findAllPromoted(u.getId());
-	    List<Trip> participateTrips = ts.findAllParticipated(u.getId());    
-	    imprimirDatosUsuarioViajes(u, promotedTrips.size(),
-			participateTrips.size());
-	    System.out.println("-------");
-	}	
+	ClientService cs = 
     }
 
     private static void imprimirDatosUsuarioViajes(User user,
@@ -89,45 +57,12 @@ public class Main {
 
     private static void deshabilitarUsuario() throws Exception {
 
-	User user;
-
-	UsersService us = new RemoteEJBServiceLocator().createUsersService();
-	user = us.findUserById(101L);
-
-	if (user != null)
-	    us.cancelUser(user.getId());
+	
     }
 
     private static void listarComentariosYPuntuaciones() {
 	
-	RattingsService rs = new RemoteEJBServiceLocator().createRattingsService();
 	
-	try {
-	    
-		List<Trip> trips = new RemoteEJBServiceLocator()
-			.createTripsService().findAllTrips();
-
-		List<Trip> tripsLastMonth = new LinkedList<>();
-		Date actual = new Date();
-		Date unMesAntes = getNewDateMonth(actual,-1);
-		
-		for(Trip t : trips){
-		    if(t.getArrivalDate().after(unMesAntes) && t.getArrivalDate().before(actual)){
-			tripsLastMonth.add(t);
-		    }
-		}
-
-		List<Rating> rattings = new LinkedList<>();
-		for(Trip t : tripsLastMonth){
-		    rattings.add(rs.listByTrip(t.getId()));
-		}
-		
-		imprimeRattings(rattings);
-	    
-	} catch (Exception e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
-	}
 
     }
 
@@ -144,11 +79,6 @@ public class Main {
     }
     
     private static void eliminarRatting() {
-	RattingsService rs = new RemoteEJBServiceLocator().createRattingsService();
-	
-	Rating r = new Rating();
-	
-	rs.delete(r.getId());
 	
     }
 

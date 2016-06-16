@@ -3,6 +3,7 @@ package uo.sdi.business.impl.ejb;
 import javax.ejb.Stateless;
 import javax.jws.WebService;
 
+import uo.sdi.business.impl.classes.ratting.RatingsFindById;
 import uo.sdi.business.impl.classes.ratting.RattingsFindByTrip;
 import uo.sdi.business.impl.classes.ratting.RattingsDelete;
 import uo.sdi.business.impl.local.LocalRattingsService;
@@ -23,6 +24,11 @@ public class EJBRattingsService implements LocalRattingsService,
     public void delete(Long id) {
 	new RattingsDelete().delete(id);
 
+    }
+
+    @Override
+    public Rating findRatingById(Long ratingId) {
+	return new RatingsFindById().find(ratingId);
     }
 
 }

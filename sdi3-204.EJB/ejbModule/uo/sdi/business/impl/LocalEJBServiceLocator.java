@@ -5,6 +5,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 import uo.sdi.business.ApplicationService;
+import uo.sdi.business.ClientService;
 import uo.sdi.business.LoginService;
 import uo.sdi.business.RattingsService;
 import uo.sdi.business.SeatsService;
@@ -39,7 +40,7 @@ public class LocalEJBServiceLocator implements ServicesFactory {
 	    + "uo.sdi.business.impl.local.LocalApplicationsService";
 
     @Override
-    public UsersService createUsersService() {
+    public UsersService getUsersService() {
 	try {
 	    Context ctx = new InitialContext();
 	    return (UsersService) ctx.lookup(USERS_SERVICE_JNDI_KEY);
@@ -49,7 +50,7 @@ public class LocalEJBServiceLocator implements ServicesFactory {
     }
 
     @Override
-    public LoginService createLoginService() {
+    public LoginService getLoginService() {
 	try {
 	    Context ctx = new InitialContext();
 	    return (LoginService) ctx.lookup(LOGGIN_SERVICE_JNDI_KEY);
@@ -59,7 +60,7 @@ public class LocalEJBServiceLocator implements ServicesFactory {
     }
 
     @Override
-    public TripsService createTripsService() {
+    public TripsService getTripsService() {
 	try {
 	    Context ctx = new InitialContext();
 	    return (TripsService) ctx.lookup(TRIPS_SERVICE_JNDI_KEY);
@@ -69,7 +70,7 @@ public class LocalEJBServiceLocator implements ServicesFactory {
     }
 
     @Override
-    public SeatsService createSeatsService() {
+    public SeatsService getSeatsService() {
 	try {
 	    Context ctx = new InitialContext();
 	    return (SeatsService) ctx.lookup(SEATS_SERVICE_JNDI_KEY);
@@ -79,7 +80,7 @@ public class LocalEJBServiceLocator implements ServicesFactory {
     }
 
     @Override
-    public ApplicationService createApplicationService() {
+    public ApplicationService getApplicationService() {
 	try {
 	    Context ctx = new InitialContext();
 	    return (ApplicationService) ctx
@@ -90,13 +91,19 @@ public class LocalEJBServiceLocator implements ServicesFactory {
     }
 
     @Override
-    public RattingsService createRattingsService() {
+    public RattingsService getRattingsService() {
 	try {
 	    Context ctx = new InitialContext();
 	    return (RattingsService) ctx.lookup(RATTINGS_SERVICE_JNDI_KEY);
 	} catch (NamingException e) {
 	    throw new RuntimeException("JNDI problem", e);
 	}
+    }
+
+    @Override
+    public ClientService getClientService() {
+	// TODO Auto-generated method stub
+	return null;
     }
 
 }

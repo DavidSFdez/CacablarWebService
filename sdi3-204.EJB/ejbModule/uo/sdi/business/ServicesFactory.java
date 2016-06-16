@@ -2,16 +2,18 @@ package uo.sdi.business;
 
 public interface ServicesFactory {
 
-    UsersService createUsersService();
+    UsersService getUsersService();
 
-    LoginService createLoginService();
+    LoginService getLoginService();
 
-    TripsService createTripsService();
+    TripsService getTripsService();
 
-    SeatsService createSeatsService();
+    SeatsService getSeatsService();
 
-    ApplicationService createApplicationService();
+    ApplicationService getApplicationService();
 
-    RattingsService createRattingsService();
+    RattingsService getRattingsService();
+    
+    ClientService getClientService();
 
 }
