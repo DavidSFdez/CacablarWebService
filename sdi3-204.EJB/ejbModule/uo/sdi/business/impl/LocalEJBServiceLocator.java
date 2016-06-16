@@ -38,6 +38,10 @@ public class LocalEJBServiceLocator implements ServicesFactory {
     private static final String APPLICATIONS_SERVICE_JNDI_KEY = "java:global/"
 	    + "sdi3-204/" + "sdi3-204.EJB/" + "EJBApplicationsService!"
 	    + "uo.sdi.business.impl.local.LocalApplicationsService";
+    
+    private static final String CLIENT_SERVICE_JNDI_KEY = "java:global/"
+	    + "sdi3-204/" + "sdi3-204.EJB/" + "EJBClientService!"
+	    + "uo.sdi.business.impl.local.LocalClientService";
 
     @Override
     public UsersService getUsersService() {
@@ -102,8 +106,12 @@ public class LocalEJBServiceLocator implements ServicesFactory {
 
     @Override
     public ClientService getClientService() {
-	// TODO Auto-generated method stub
-	return null;
+	try {
+	    Context ctx = new InitialContext();
+	    return (ClientService) ctx.lookup(CLIENT_SERVICE_JNDI_KEY);
+	} catch (NamingException e) {
+	    throw new RuntimeException("JNDI problem", e);
+	}
     }
 
 }

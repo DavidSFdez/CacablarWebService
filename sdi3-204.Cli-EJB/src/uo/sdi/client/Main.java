@@ -4,46 +4,67 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Scanner;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
 
 import uo.sdi.business.ClientService;
 import uo.sdi.business.RattingsService;
+import uo.sdi.business.ServicesFactory;
 import uo.sdi.business.TripsService;
 import uo.sdi.business.UsersService;
 import uo.sdi.business.exception.EntityNotFoundException;
 import uo.sdi.business.impl.RemoteEJBServiceLocator;
+import uo.sdi.business.impl.ejb.EJBUsersService;
+import uo.sdi.infrastructure.Factories;
 import uo.sdi.model.Rating;
 import uo.sdi.model.Trip;
 import uo.sdi.model.User;
 
 public class Main {
 
+    
+    ClientService cs = new RemoteEJBServiceLocator().getClientService();
+    
     public static void main(String[] args) throws Exception {
-	run();
+	new Main().run();
 
     }
 
-    private static void run() throws Exception {
+    private void run() throws Exception {
 //	metodocutre();
 
 	System.out.println("###listarUsuariosSistema();");
 	listarUsuariosSistema();
 
-	System.out.println("###deshabilitarUsuario();");
-	deshabilitarUsuario();
+//	System.out.println("###deshabilitarUsuario();");
+//	deshabilitarUsuario();
+//
+//	System.out.println("###listarComentariosYPuntuaciones();");
+//	listarComentariosYPuntuaciones();
+//	
+//	System.out.println("###eliminarRatting();");
+//	eliminarRatting();
+    }
 
-	System.out.println("###listarComentariosYPuntuaciones();");
-	listarComentariosYPuntuaciones();
+
+    private void listarUsuariosSistema() throws Exception {
 	
-	System.out.println("###eliminarRatting();");
-	eliminarRatting();
+	Scanner in = new Scanner(System.in);
+	System.out.println("Introduce Id de usuario");
+	Long userId = in.nextLong();
+	
+	User user = cs.findUserById(userId);
+	
+	List<Trip> promotedTrips = cs.ListAllTripsPromotedByUser(userId);
+	List<Trip> participatedTrips = cs.ListAllTripsWhereUserParticipated(userId);
+	
+	imprimirDatosUsuarioViajes(user, promotedTrips.size(), participatedTrips.size());
+	
     }
 
-
-    private static void listarUsuariosSistema() throws Exception {
-	ClientService cs = 
-    }
-
-    private static void imprimirDatosUsuarioViajes(User user,
+    private void imprimirDatosUsuarioViajes(User user,
 	    int numberPromoted, int numberParticipated) {
 	
 	System.out.println("\nId: " + user.getId() + "\nUsuario: "
@@ -55,12 +76,18 @@ public class Main {
 	
     }
 
-    private static void deshabilitarUsuario() throws Exception {
-
+    private void deshabilitarUsuario() {
+	Scanner in = new Scanner(System.in);
+	System.out.println("Introduce Id de usuario");
+	Long userId = in.nextLong();
+	
+	cs.cancelUsuario(userId);
+	
 	
     }
 
-    private static void listarComentariosYPuntuaciones() {
+    private void listarComentariosYPuntuaciones() {
+	
 	
 	
 
