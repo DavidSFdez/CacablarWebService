@@ -22,9 +22,9 @@ public class ServicesRESTImpl implements ServiceREST {
     private ApplicationService applicationService;
     private SeatsService seatsService;
     {
-	tripsService = Factories.services.createTripsService();
-	applicationService = Factories.services.createApplicationService();
-	seatsService = Factories.services.createSeatsService();
+	tripsService = Factories.services.getTripsService();
+	applicationService = Factories.services.getApplicationService();
+	seatsService = Factories.services.getSeatsService();
     }
 
     @Override
@@ -32,7 +32,7 @@ public class ServicesRESTImpl implements ServiceREST {
 	    @Context HttpServletRequest req) {
 
 	User user = null;
-	user = Factories.services.createLoginService()
+	user = Factories.services.getLoginService()
 		.verify(usuario, password);
 	if (user != null)
 	    req.getSession().setAttribute("userId", user.getId());
@@ -76,7 +76,7 @@ public class ServicesRESTImpl implements ServiceREST {
 
     @Override
     public Trip[] testREST() {
-	return Factories.services.createTripsService().findAllTrips()
+	return Factories.services.getTripsService().findAllTrips()
 		.toArray(new Trip[0]);
     }
 
