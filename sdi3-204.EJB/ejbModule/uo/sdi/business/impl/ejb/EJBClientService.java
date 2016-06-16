@@ -97,7 +97,7 @@ public class EJBClientService implements LocalClientService,
 
     @Override
     public Rating findRatingById(Long ratingId) {
-	return ratingsService.findRatingById(ratingId)
+	return ratingsService.findRatingById(ratingId);
     }
 
 }
