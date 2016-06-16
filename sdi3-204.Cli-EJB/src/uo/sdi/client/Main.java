@@ -1,13 +1,23 @@
 package uo.sdi.client;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+
 import uo.sdi.business.ClientService;
+import uo.sdi.business.RattingsService;
+import uo.sdi.business.ServicesFactory;
+import uo.sdi.business.TripsService;
+import uo.sdi.business.UsersService;
+import uo.sdi.business.exception.EntityNotFoundException;
 import uo.sdi.business.impl.RemoteEJBServiceLocator;
+import uo.sdi.business.impl.ejb.EJBUsersService;
+import uo.sdi.infrastructure.Factories;
 import uo.sdi.model.Rating;
 import uo.sdi.model.Trip;
 import uo.sdi.model.User;
@@ -77,29 +87,13 @@ public class Main {
     }
 
     private void listarComentariosYPuntuaciones() {
-	Scanner in = new Scanner(System.in);
-	System.out.println("Introduce Id de usuario");
-	Long userId = in.nextLong();
-	
-	List<Trip> participatedTrips = cs.ListAllTripsWhereUserParticipated(userId);
-	
-	Date actual = new Date();
-	Date date = getNewDateMonth(actual, -1);
-	
-	List<Trip> trips = new ArrayList<>();
-	
-	for(Trip t : participatedTrips)
-	    if(t.getArrivalDate().after(date) && t.getArrivalDate().before(actual))
-		trips.add(t);
 	
 	
 	
+
     }
 
-    //Le pasas una fecha y el tiempo y te devuelve esa fecha
-    //Por ejemplo, fecha actual y -1 mes, te devuelve un date con la fecha
-    //Del mes pasado
-    private Date getNewDateMonth(Date actual, int months) {
+    private static Date getNewDateMonth(Date actual, int months) {
 	    Calendar cal = Calendar.getInstance();
 	    cal.setTime(actual);
 	    cal.add(Calendar.MONTH, months); 
