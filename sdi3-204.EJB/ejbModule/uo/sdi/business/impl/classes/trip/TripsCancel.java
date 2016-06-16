@@ -3,6 +3,7 @@ package uo.sdi.business.impl.classes.trip;
 import java.util.Date;
 import java.util.List;
 
+import uo.sdi.business.exception.BusinessException;
 import uo.sdi.business.exception.EntityAlreadyExistsException;
 import uo.sdi.business.exception.EntityNotFoundException;
 import uo.sdi.infrastructure.Factories;
@@ -20,55 +21,61 @@ public class TripsCancel {
 
     public void cancel(Trip trip, Long idUser) throws EntityNotFoundException,
 	    EntityAlreadyExistsException {
-	// TODO Comprobar todas las condiciones para que se pueda cancelar,
-	// fechas, que sea promotor blabalbla
-	// TODO poner a excluidos a toda la peña que tenga asientos solicitados
 
 	ApplicationDao ad = Factories.persistence.createApplicationDao();
 	SeatDao sd = Factories.persistence.createSeatDao();
 
-	try {
-	    if (trip.getClosingDate().after(new Date())
-		    && trip.getPromoterId() == idUser) {
+	if (trip.getClosingDate().after(new Date()))
+	    throw new BusinessException("El viaje ha pasado.");
+	if(trip.getPromoterId() == idUser)
+	    throw new BusinessException("El usuario que cancela el viaje no es su promotor.");
 
-		List<Application> applications = ad.findByTripId(trip.getId());
-		List<Seat> seats = sd.findByTrip(trip.getId());
+	    List<Application> applications = ad.findByTripId(trip.getId());
+	    List<Seat> seats = sd.findByTrip(trip.getId());
 
-		// pongo el estado a cancelado
-		trip.setStatus(TripStatus.CANCELLED);
-		// paso a sin plaza los aceptados
-		for (Seat s : seats) {
-		    if (s.getStatus().equals(SeatStatus.ADMITIDO)) {
-			s.setStatus(SeatStatus.SIN_PLAZA);
+	    // pongo el estado a cancelado
+	    trip.setStatus(TripStatus.CANCELLED);
+	    // paso a sin plaza los aceptados
+	    for (Seat s : seats) {
+		if (s.getStatus().equals(SeatStatus.ADMITIDO)) {
+		    s.setStatus(SeatStatus.SIN_PLAZA);
+		    try {
 			sd.update(s);
+		    } catch (NotPersistedException e) {
+			throw new EntityNotFoundException(
+				"No existe el asiento.", e);
 		    }
 		}
-		// paso a sin plaza los pendientes
-		for (Application a : applications) {
-		    Seat s = new Seat();
-		    s.setComment("Viaje cancelado");
-		    s.setStatus(SeatStatus.SIN_PLAZA);
-		    s.setTripId(trip.getId());
-		    s.setUserId(a.getUserId());
-		    sd.save(s);
-		    // borro las application
-		    Long[] ids = { a.getUserId(), a.getTripId() };
-		    ad.delete(ids);
-		}
-
-		Factories.persistence.createTripDao().update(trip);
-
 	    }
-	    Factories.persistence.createTripDao().update(trip);
-	} catch (NotPersistedException ex) {
+	    // paso a sin plaza los pendientes
+	    for (Application a : applications) {
+		Seat s = new Seat();
+		s.setComment("Viaje cancelado");
+		s.setStatus(SeatStatus.SIN_PLAZA);
+		s.setTripId(trip.getId());
+		s.setUserId(a.getUserId());
+		try {
+		    sd.save(s);
+		} catch (AlreadyPersistedException e) {
+		    throw new EntityAlreadyExistsException(
+			    "Ya existe el asiento.", e);
+		}
+		// borro las application
+		Long[] ids = { a.getUserId(), a.getTripId() };
+		try {
+		    ad.delete(ids);
+		} catch (NotPersistedException e) {
+		    throw new EntityNotFoundException("No existe la petición.",
+			    e);
+		}
+	    }
 
-	    throw new EntityNotFoundException("Viaje no eliminado "
-		    + trip.getId(), ex);
+	    try {
+		Factories.persistence.createTripDao().update(trip);
+	    } catch (NotPersistedException e) {
+		throw new EntityNotFoundException("No existe en viaje.", e);
+	    }
 
-	} catch (AlreadyPersistedException e) {
-
-	    throw new EntityAlreadyExistsException("El asiento ya existe");
-	}
     }
 
 }

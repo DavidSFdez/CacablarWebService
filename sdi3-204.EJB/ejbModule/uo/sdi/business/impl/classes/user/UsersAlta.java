@@ -9,19 +9,14 @@ import uo.sdi.persistence.exception.AlreadyPersistedException;
 
 public class UsersAlta {
 
-    @SuppressWarnings("finally")
-    public User save(User user) throws EntityAlreadyExistsException {
+    public void save(User user) throws EntityAlreadyExistsException {
 	UserDao dao = Factories.persistence.createUserDao();
 
 	try {
 	    user.setStatus(UserStatus.ACTIVE);
 	    dao.save(user);
 	} catch (AlreadyPersistedException e) {
-	    throw new EntityAlreadyExistsException("Usuario ya existe " + user,
-		    e);
-
-	} finally {
-	    return dao.findByLogin(user.getLogin());
+	    throw new EntityAlreadyExistsException("Usuario ya existe " + user, e);
 	}
     }
 }

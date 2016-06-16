@@ -2,7 +2,6 @@ package uo.sdi.business;
 
 import java.util.List;
 
-import uo.sdi.model.Application;
 import uo.sdi.model.Rating;
 import uo.sdi.model.Seat;
 import uo.sdi.model.Trip;

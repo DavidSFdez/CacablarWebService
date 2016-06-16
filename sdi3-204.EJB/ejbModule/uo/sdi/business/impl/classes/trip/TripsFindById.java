@@ -10,9 +10,6 @@ public class TripsFindById {
 
 	Trip trip = Factories.persistence.createTripDao().findById(idTrip);
 
-	if (trip == null)
-	    throw new EntityNotFoundException("No existe viaje " + idTrip);
-
 	return trip;
 
     }
