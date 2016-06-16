@@ -8,4 +8,6 @@ public interface RattingsService {
 
     void delete(Long long1);
 
+    Rating findRatingById(Long ratingId);
+
 }
