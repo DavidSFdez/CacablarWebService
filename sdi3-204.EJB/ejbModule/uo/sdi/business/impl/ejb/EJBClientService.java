@@ -98,4 +98,9 @@ public class EJBClientService implements LocalClientService,
 	return ratingsService.findRatingById(ratingId);
     }
 
+    @Override
+    public List<Rating> findRatingsAboutTrip(Long id) {
+	return ratingsService.listByTrip(id);
+    }
+
 }

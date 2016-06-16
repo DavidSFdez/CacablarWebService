@@ -34,4 +34,6 @@ public interface ClientService {
     Rating findRatingById(Long ratingId);
 
     void cancelRating(Long idRating) throws EntityNotFoundException;
+
+    List<Rating> findRatingsAboutTrip(Long id);
 }
