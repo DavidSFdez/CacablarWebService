@@ -5,6 +5,6 @@ import javax.ejb.Remote;
 import uo.sdi.business.UsersService;
 
 @Remote
-public interface RemoteUsersService extends UsersService{
+public interface RemoteUsersService extends UsersService {
 
 }

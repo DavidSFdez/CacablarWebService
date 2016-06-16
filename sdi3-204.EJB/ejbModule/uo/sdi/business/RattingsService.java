@@ -4,7 +4,6 @@ import uo.sdi.model.Rating;
 
 public interface RattingsService {
 
-
     Rating listByTrip(Long idTrip);
 
     void delete(Long long1);

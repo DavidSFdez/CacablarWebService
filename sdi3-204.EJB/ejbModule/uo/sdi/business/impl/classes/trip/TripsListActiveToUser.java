@@ -7,15 +7,15 @@ import uo.sdi.model.Trip;
 
 public class TripsListActiveToUser {
 
-    
-public List<Trip> list(Long idUser) throws Exception{
-	
+    public List<Trip> list(Long idUser) throws Exception {
+
 	List<Trip> trips = null;
-	
-	trips = Factories.persistence.createTripDao().findAllActiveToUser(idUser);
-	
+
+	trips = Factories.persistence.createTripDao().findAllActiveToUser(
+		idUser);
+
 	return trips;
-	
+
     }
 
 }

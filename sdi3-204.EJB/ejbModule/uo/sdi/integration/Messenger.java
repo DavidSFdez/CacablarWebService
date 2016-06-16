@@ -25,22 +25,19 @@ import uo.sdi.model.User;
  * Los mensajes se envian a aquí y se mandan al canal adecuado
  *
  */
-@MessageDriven(
-	activationConfig = {
-		@ActivationConfigProperty(
-			propertyName = "destination", 
-			propertyValue = "queue/msg") 
-		})
+@MessageDriven(activationConfig = { @ActivationConfigProperty(propertyName = "destination", propertyValue = "queue/msg") })
 public class Messenger implements MessageListener {
 
     @EJB(beanInterface = LocalUsersService.class)
     private UsersService service;
-    
+
     @EJB(beanInterface = LocalTripsService.class)
     private TripsService tripService;
-    
-    @EJB MessageSender messageSender;
-    @EJB MessagerAdmin messagerAdmin;
+
+    @EJB
+    MessageSender messageSender;
+    @EJB
+    MessagerAdmin messagerAdmin;
 
     @Override
     public void onMessage(Message msg) {
@@ -66,18 +63,17 @@ public class Messenger implements MessageListener {
 		SeatStatus.ADMITIDO);
 	User user = service.findUserById(userId);
 	Trip trip = tripService.findTripById(tripId);
-	if(trip == null)
+	if (trip == null)
 	    return;
 
 	if (pasajeros.contains(user)) {
-	    //Se quita al propio usuario para que no se lo mande a si mismo
+	    // Se quita al propio usuario para que no se lo mande a si mismo
 	    pasajeros.remove(user);
 	    // Mandar al topic
 	    messageSender.sendMessage(pasajeros, mm);
-	} else if(trip.getPromoterId().equals(userId)){
+	} else if (trip.getPromoterId().equals(userId)) {
 	    messageSender.sendMessage(pasajeros, mm);
-	}
-	else{
+	} else {
 	    // Mandar a la cola de adminisracion
 	    messagerAdmin.sendMessage(mm);
 	}

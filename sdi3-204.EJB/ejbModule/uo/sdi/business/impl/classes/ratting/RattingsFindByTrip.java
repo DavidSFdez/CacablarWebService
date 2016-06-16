@@ -9,7 +9,7 @@ public class RattingsFindByTrip {
     public Rating find(Long idTrip) {
 
 	RatingDao rd = Factories.persistence.createRattingDao();
-	
+
 	return rd.findByTrip(idTrip);
     }
 

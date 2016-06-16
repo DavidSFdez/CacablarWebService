@@ -10,9 +10,9 @@ import uo.sdi.business.impl.remote.RemoteRattingsService;
 import uo.sdi.model.Rating;
 
 @Stateless
-
-@WebService (name="RattingsService")
-public class EJBRattingsService implements LocalRattingsService,RemoteRattingsService {
+@WebService(name = "RattingsService")
+public class EJBRattingsService implements LocalRattingsService,
+	RemoteRattingsService {
 
     @Override
     public Rating listByTrip(Long idTrip) {
@@ -22,7 +22,7 @@ public class EJBRattingsService implements LocalRattingsService,RemoteRattingsSe
     @Override
     public void delete(Long id) {
 	new RattingsDelete().delete(id);
-	
+
     }
- 
+
 }

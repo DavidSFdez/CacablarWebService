@@ -8,9 +8,9 @@ import uo.sdi.persistence.exception.NotPersistedException;
 public class RattingsDelete {
 
     public void delete(Long id) {
-	
+
 	RatingDao rd = Factories.persistence.createRattingDao();
-	
+
 	try {
 	    rd.delete(id);
 	} catch (NotPersistedException e) {

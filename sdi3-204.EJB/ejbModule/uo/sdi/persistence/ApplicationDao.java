@@ -16,5 +16,5 @@ public interface ApplicationDao extends GenericDao<Application, Long[]> {
     int deleteToUpdate();
 
     void acceptApplication(Long[] ids);
-    
+
 }

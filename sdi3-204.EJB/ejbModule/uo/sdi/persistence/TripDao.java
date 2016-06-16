@@ -26,5 +26,4 @@ public interface TripDao extends GenericDao<Trip, Long> {
 
     List<Trip> findAllPromotedAndActive(long idUser);
 
-
 }

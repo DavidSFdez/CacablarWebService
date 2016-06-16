@@ -23,9 +23,10 @@ import uo.sdi.business.impl.classes.trip.TripsUpdateTripsStatus;
 import uo.sdi.business.impl.local.LocalTripsService;
 import uo.sdi.business.impl.remote.RemoteTripsService;
 import uo.sdi.model.Trip;
+
 @Stateless
-@WebService (name="TripsService")
-public class EJBTripsService implements LocalTripsService, RemoteTripsService{
+@WebService(name = "TripsService")
+public class EJBTripsService implements LocalTripsService, RemoteTripsService {
 
     @Override
     public List<Trip> listActive() {
@@ -41,26 +42,28 @@ public class EJBTripsService implements LocalTripsService, RemoteTripsService{
     public List<Trip> listActiveToUser(Long idUser) throws Exception {
 	return new TripsListActiveToUser().list(idUser);
     }
-    
+
     @Override
-    public void update(Trip trip,Long idUser) throws EntityNotFoundException{
-	new TripsUpdate().update(trip,idUser);
+    public void update(Trip trip, Long idUser) throws EntityNotFoundException {
+	new TripsUpdate().update(trip, idUser);
     }
 
     @Override
-    public void cancel(Trip trip,Long idUser) throws EntityNotFoundException, EntityAlreadyExistsException {
-	new TripsCancel().cancel(trip,idUser);
+    public void cancel(Trip trip, Long idUser) throws EntityNotFoundException,
+	    EntityAlreadyExistsException {
+	new TripsCancel().cancel(trip, idUser);
     }
 
     @Override
-    public void save(Trip trip,Long idUser) throws EntityAlreadyExistsException {
-	new TripsSave().save(trip,idUser);
-	
+    public void save(Trip trip, Long idUser)
+	    throws EntityAlreadyExistsException {
+	new TripsSave().save(trip, idUser);
+
     }
 
     @Override
-    public Trip findByIdandPromoter(Long idTrip, Long idUser){
-	return new TripsFindByIdAndPromoter().find(idTrip,idUser);
+    public Trip findByIdandPromoter(Long idTrip, Long idUser) {
+	return new TripsFindByIdAndPromoter().find(idTrip, idUser);
     }
 
     @Override
@@ -71,7 +74,7 @@ public class EJBTripsService implements LocalTripsService, RemoteTripsService{
     @Override
     public void updateTripsStatus() {
 	new TripsUpdateTripsStatus().update();
-	
+
     }
 
     @Override
@@ -91,7 +94,7 @@ public class EJBTripsService implements LocalTripsService, RemoteTripsService{
 
     @Override
     public List<Trip> findAllPromotedAndActive(long idUser) {
-	
+
 	return new TripsFindAllPromotedAndActive().find(idUser);
     }
 

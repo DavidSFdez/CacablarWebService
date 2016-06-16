@@ -7,7 +7,7 @@ public class TripsUpdateTripsStatus {
     public void update() {
 
 	Factories.persistence.createTripDao().updateTripsStatus();
-	
+
     }
 
 }

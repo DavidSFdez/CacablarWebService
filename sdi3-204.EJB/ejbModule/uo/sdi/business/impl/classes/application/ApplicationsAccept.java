@@ -36,18 +36,19 @@ public class ApplicationsAccept {
 
 	// No quedan plazas
 	if (trip.getAvailablePax() == 0) {
-	    
+
 	    String errorMessage = "No hay plazas libres en el viaje.";
 	    throw new BusinessException(errorMessage);
 	}
 
 	// Acciones
 	TripDao tripDao = Factories.persistence.createTripDao();
-	ApplicationDao applicationDao = Factories.persistence.createApplicationDao();
+	ApplicationDao applicationDao = Factories.persistence
+		.createApplicationDao();
 	SeatDao seatDao = Factories.persistence.createSeatDao();
 	Transaction transaction = Factories.persistence.createTransaction();
 
-	//Reducir en uno las plazas disponibles para tal viaje
+	// Reducir en uno las plazas disponibles para tal viaje
 	trip.setAvailablePax(trip.getAvailablePax() - 1);
 
 	transaction.begin();
@@ -55,12 +56,13 @@ public class ApplicationsAccept {
 	    tripDao.update(trip);
 	    applicationDao.delete(ids);
 	    seatDao.save(seat);
-	    if(trip.getAvailablePax()==0){
+	    if (trip.getAvailablePax() == 0) {
 		tripDao.updateTripsStatus();
 		List<Application> applications = applicationDao.findToUpdate();
-		Factories.services.createSeatsService().seatsToUpdate(applications);
+		Factories.services.createSeatsService().seatsToUpdate(
+			applications);
 	    }
-	    
+
 	    transaction.commit();
 	} catch (NotPersistedException e) {
 	    transaction.rollback();

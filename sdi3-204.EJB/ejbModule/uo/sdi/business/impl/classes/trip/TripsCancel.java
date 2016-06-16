@@ -53,7 +53,7 @@ public class TripsCancel {
 		    s.setTripId(trip.getId());
 		    s.setUserId(a.getUserId());
 		    sd.save(s);
-		    //borro las application
+		    // borro las application
 		    Long[] ids = { a.getUserId(), a.getTripId() };
 		    ad.delete(ids);
 		}

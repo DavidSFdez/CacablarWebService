@@ -8,14 +8,17 @@ import uo.sdi.model.Application;
 
 public interface ApplicationService {
 
-    Application findApplication(Long idTrip, Long idUser) throws EntityNotFoundException;
+    Application findApplication(Long idTrip, Long idUser)
+	    throws EntityNotFoundException;
 
     void remove(Long idUser, Long idTrip) throws EntityNotFoundException;
 
     List<Application> getToUpdate();
 
-    void acceptApplication(Application application) throws EntityAlreadyExistsException, EntityNotFoundException;
+    void acceptApplication(Application application)
+	    throws EntityAlreadyExistsException, EntityNotFoundException;
 
-    void cancelApplication(Application application) throws EntityAlreadyExistsException, EntityNotFoundException;
+    void cancelApplication(Application application)
+	    throws EntityAlreadyExistsException, EntityNotFoundException;
 
 }

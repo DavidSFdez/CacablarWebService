@@ -10,87 +10,82 @@ import javax.xml.crypto.Data;
  * 
  * @see Data Transfer Object pattern
  * @author alb
- *
+ * 
  */
-public class User implements Serializable{
-    
+public class User implements Serializable {
+
     private static final long serialVersionUID = 1L;
 
-	private Long id;
-	private String login;
-	private String password;
-	private String name;
-	private String surname;
-	private String email;
-	
-	private UserStatus status;
+    private Long id;
+    private String login;
+    private String password;
+    private String name;
+    private String surname;
+    private String email;
 
-	public String getEmail() {
-		return email;
-	}
+    private UserStatus status;
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public String getEmail() {
+	return email;
+    }
 
-	public UserStatus getStatus() {
-		return status;
-	}
+    public void setEmail(String email) {
+	this.email = email;
+    }
 
-	public void setStatus(UserStatus status) {
-		this.status = status;
-	}
+    public UserStatus getStatus() {
+	return status;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public void setStatus(UserStatus status) {
+	this.status = status;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public Long getId() {
+	return id;
+    }
 
-	public String getLogin() {
-		return login;
-	}
+    public void setId(Long id) {
+	this.id = id;
+    }
 
-	public void setLogin(String login) {
-		this.login = login;
-	}
+    public String getLogin() {
+	return login;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public void setLogin(String login) {
+	this.login = login;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public String getPassword() {
+	return password;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public void setPassword(String password) {
+	this.password = password;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public String getName() {
+	return name;
+    }
 
-	public String getSurname() {
-		return surname;
-	}
+    public void setName(String name) {
+	this.name = name;
+    }
 
-	public void setSurname(String surname) {
-		this.surname = surname;
-	}
+    public String getSurname() {
+	return surname;
+    }
 
-	@Override
-	public String toString() {
-		return "User [id=" + id 
-				+ ", login=" + login 
-				+ ", password=" + password 
-				+ ", name=" + name 
-				+ ", surname=" + surname 
-				+ ", status=" + status 
-				+ ", email=" + email
-			+ "]";
-	}
+    public void setSurname(String surname) {
+	this.surname = surname;
+    }
+
+    @Override
+    public String toString() {
+	return "User [id=" + id + ", login=" + login + ", password=" + password
+		+ ", name=" + name + ", surname=" + surname + ", status="
+		+ status + ", email=" + email + "]";
+    }
 
 }

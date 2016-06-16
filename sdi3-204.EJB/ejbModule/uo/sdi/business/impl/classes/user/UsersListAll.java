@@ -7,12 +7,12 @@ import uo.sdi.model.User;
 import uo.sdi.persistence.UserDao;
 
 public class UsersListAll {
-    
-    public List<User> listAll(){
+
+    public List<User> listAll() {
 	UserDao dao = Factories.persistence.createUserDao();
-	
+
 	List<User> users = dao.findAll();
-	
+
 	return users;
     }
 

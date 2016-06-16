@@ -5,6 +5,6 @@ import javax.ejb.Local;
 import uo.sdi.business.LoginService;
 
 @Local
-public interface LocalLoginService extends LoginService{
+public interface LocalLoginService extends LoginService {
 
 }

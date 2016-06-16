@@ -19,11 +19,11 @@ import uo.sdi.model.SeatStatus;
 import uo.sdi.model.User;
 
 @Stateless
-@WebService (name="UsersService")
+@WebService(name = "UsersService")
 public class EJBUsersService implements LocalUsersService, RemoteUsersService {
 
     @Override
-    public User findUserById(Long id) throws EntityNotFoundException {
+    public User findUserById(Long id) {
 	return new UsersFindById().find(id);
     }
 

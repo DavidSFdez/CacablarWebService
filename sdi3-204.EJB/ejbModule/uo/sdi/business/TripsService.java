@@ -9,19 +9,30 @@ import uo.sdi.model.Trip;
 public interface TripsService {
 
     List<Trip> listActive();
+
     List<Trip> listRelated(Long idUser) throws Exception;
+
     List<Trip> listActiveToUser(Long idUser) throws Exception;
+
     void update(Trip trip, Long idUser) throws EntityNotFoundException;
-    void cancel(Trip trip,Long idUser) throws EntityNotFoundException, EntityAlreadyExistsException;
-    void save(Trip trip,Long idUser) throws EntityAlreadyExistsException;
+
+    void cancel(Trip trip, Long idUser) throws EntityNotFoundException,
+	    EntityAlreadyExistsException;
+
+    void save(Trip trip, Long idUser) throws EntityAlreadyExistsException;
+
     Trip findByIdandPromoter(Long idTrip, Long idUser);
+
     Trip findTripById(Long idTrip) throws EntityNotFoundException;
+
     void updateTripsStatus();
+
     List<Trip> findAllPromoted(Long id);
+
     List<Trip> findAllParticipated(Long id);
+
     List<Trip> findAllTrips();
+
     List<Trip> findAllPromotedAndActive(long idUser);
- 
-    
-   
+
 }

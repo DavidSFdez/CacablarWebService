@@ -14,22 +14,22 @@ package uo.sdi.persistence.exception;
  *   
  */
 public class PersistenceException extends RuntimeException {
-	
-	public PersistenceException() {
-		super();
-	}
 
-	public PersistenceException(String message, Throwable cause) {
-		super(message, cause);
-	}
+    public PersistenceException() {
+	super();
+    }
 
-	public PersistenceException(String message) {
-		super(message);
-	}
+    public PersistenceException(String message, Throwable cause) {
+	super(message, cause);
+    }
 
-	public PersistenceException(Throwable cause) {
-		super(cause);
-	}
+    public PersistenceException(String message) {
+	super(message);
+    }
 
-	private static final long serialVersionUID = -2093817605790994448L;
+    public PersistenceException(Throwable cause) {
+	super(cause);
+    }
+
+    private static final long serialVersionUID = -2093817605790994448L;
 }

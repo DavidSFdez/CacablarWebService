@@ -20,17 +20,19 @@ import uo.sdi.model.Application;
 import uo.sdi.model.Seat;
 
 @Stateless
-@WebService (name="SeatsService")
-public class EJBSeatsService implements LocalSeatsService,RemoteSeatsService{
+@WebService(name = "SeatsService")
+public class EJBSeatsService implements LocalSeatsService, RemoteSeatsService {
 
     @Override
-    public Seat findByUserAndTrip(Long idUser, Long idTrip) throws EntityNotFoundException {
+    public Seat findByUserAndTrip(Long idUser, Long idTrip)
+	    throws EntityNotFoundException {
 	return new SeatsFindByUserAndTrip().find(idUser, idTrip);
     }
 
     @Override
-    public void request(Long idTrip, Long idUser) throws EntityAlreadyExistsException {
-	new SeatsRequest().request(idTrip,idUser);
+    public void request(Long idTrip, Long idUser)
+	    throws EntityAlreadyExistsException {
+	new SeatsRequest().request(idTrip, idUser);
     }
 
     @Override
@@ -44,7 +46,8 @@ public class EJBSeatsService implements LocalSeatsService,RemoteSeatsService{
     }
 
     @Override
-    public Application findApplication(Long idUser, Long id) throws EntityNotFoundException {
+    public Application findApplication(Long idUser, Long id)
+	    throws EntityNotFoundException {
 	ApplicationsFind action = new ApplicationsFind();
 	return action.find(idUser, id);
     }
@@ -56,10 +59,10 @@ public class EJBSeatsService implements LocalSeatsService,RemoteSeatsService{
     }
 
     @Override
-    public void seatsToUpdate(List<Application> applications) throws EntityAlreadyExistsException {
+    public void seatsToUpdate(List<Application> applications)
+	    throws EntityAlreadyExistsException {
 	new SeatsToUpdate().update(applications);
-	
-    }
 
+    }
 
 }

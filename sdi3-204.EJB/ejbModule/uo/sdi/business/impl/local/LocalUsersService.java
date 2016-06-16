@@ -5,6 +5,6 @@ import javax.ejb.Local;
 import uo.sdi.business.UsersService;
 
 @Local
-public interface LocalUsersService extends UsersService{
+public interface LocalUsersService extends UsersService {
 
 }

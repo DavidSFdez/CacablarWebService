@@ -8,7 +8,7 @@ import uo.sdi.model.Seat;
 public class SeatsFindByTrip {
 
     public List<Seat> find(Long idTrip) {
-	
+
 	return Factories.persistence.createSeatDao().findByTrip(idTrip);
     }
 

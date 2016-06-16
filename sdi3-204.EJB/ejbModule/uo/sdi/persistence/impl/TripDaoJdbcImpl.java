@@ -183,7 +183,8 @@ public class TripDaoJdbcImpl implements TripDao {
 
     @Override
     public List<Trip> findAllPromotedAndActive(long idUser) {
-	return jdbcTemplate.queryForList("TRIP_FIND_ALL_PROMOTED_AND_ACTIVE", new TripMapper(),idUser);
+	return jdbcTemplate.queryForList("TRIP_FIND_ALL_PROMOTED_AND_ACTIVE",
+		new TripMapper(), idUser);
     }
 
 }

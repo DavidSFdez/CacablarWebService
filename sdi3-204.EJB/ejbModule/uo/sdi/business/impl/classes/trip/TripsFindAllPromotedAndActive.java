@@ -8,8 +8,9 @@ import uo.sdi.model.Trip;
 public class TripsFindAllPromotedAndActive {
 
     public List<Trip> find(long idUser) {
-	
-	return Factories.persistence.createTripDao().findAllPromotedAndActive(idUser);
+
+	return Factories.persistence.createTripDao().findAllPromotedAndActive(
+		idUser);
     }
 
 }

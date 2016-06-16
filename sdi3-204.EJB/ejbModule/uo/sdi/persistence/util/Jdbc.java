@@ -22,9 +22,9 @@ public class Jdbc {
     private static final String DATABASE_PROPERTIES_FILE = "database.properties";
     private static final String QUERIES_PROPERTIES_FILE = "sql_queries.properties";
 
-    private static final String DATABASE_URL;
-    private static final String DATABASE_USER;
-    private static final String DATABASE_PASSWORD;
+    // private static final String DATABASE_URL;
+    // private static final String DATABASE_USER;
+    // private static final String DATABASE_PASSWORD;
     private static final String JNDI_DATASOURCE;
 
     private static Properties sqlQueries;
@@ -33,9 +33,9 @@ public class Jdbc {
 	Properties dbConfig = loadProperties(DATABASE_PROPERTIES_FILE);
 	sqlQueries = loadProperties(QUERIES_PROPERTIES_FILE);
 
-	DATABASE_URL = dbConfig.getProperty("DATABASE_URL");
-	DATABASE_USER = dbConfig.getProperty("DATABASE_USER");
-	DATABASE_PASSWORD = dbConfig.getProperty("DATABASE_PASSWORD");
+	// DATABASE_URL = dbConfig.getProperty("DATABASE_URL");
+	// DATABASE_USER = dbConfig.getProperty("DATABASE_USER");
+	// DATABASE_PASSWORD = dbConfig.getProperty("DATABASE_PASSWORD");
 	JNDI_DATASOURCE = dbConfig.getProperty("JNDI_DATASOURCE");
 
 	try {

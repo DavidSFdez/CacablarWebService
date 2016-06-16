@@ -27,22 +27,23 @@ public class UsersBaja {
 
 		List<Trip> trips = td.findAllParticipated(id);
 
-		//pongo como excluido todos los viajes en los que va a participar
+		// pongo como excluido todos los viajes en los que va a
+		// participar
 		for (Trip t : trips) {
 		    Seat s = sd.findByUserAndTrip(user.getId(), t.getId());
 		    s.setStatus(SeatStatus.EXCLUIDO);
 		    sd.update(s);
 		}
-		
+
 		trips = td.findAllPromoted(id);
-		
-		//pongo como cancelados todos los viajes que promociona
-		for(Trip t : trips){
+
+		// pongo como cancelados todos los viajes que promociona
+		for (Trip t : trips) {
 		    t.setStatus(TripStatus.CANCELLED);
 		    td.update(t);
 		}
-		
-		//pongo al usuario como cancelado
+
+		// pongo al usuario como cancelado
 		user.setStatus(UserStatus.CANCELLED);
 		dao.update(user);
 

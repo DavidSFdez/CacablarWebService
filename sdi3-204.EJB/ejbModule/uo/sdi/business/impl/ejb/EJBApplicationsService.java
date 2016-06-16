@@ -17,7 +17,7 @@ import uo.sdi.business.impl.remote.RemoteApplicationsService;
 import uo.sdi.model.Application;
 
 @Stateless
-@WebService (name="ApplicationsService")
+@WebService(name = "ApplicationsService")
 public class EJBApplicationsService implements LocalApplicationsService,
 	RemoteApplicationsService {
 

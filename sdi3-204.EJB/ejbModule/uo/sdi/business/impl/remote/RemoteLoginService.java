@@ -5,6 +5,6 @@ import javax.ejb.Remote;
 import uo.sdi.business.LoginService;
 
 @Remote
-public interface RemoteLoginService extends LoginService{
+public interface RemoteLoginService extends LoginService {
 
 }

@@ -9,14 +9,14 @@ public class UsersUpdate {
 
     public void update(User user) {
 	UserDao ud = Factories.persistence.createUserDao();
-	
+
 	try {
 	    ud.update(user);
 	} catch (NotPersistedException e) {
 	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	}
-	
+
     }
 
 }

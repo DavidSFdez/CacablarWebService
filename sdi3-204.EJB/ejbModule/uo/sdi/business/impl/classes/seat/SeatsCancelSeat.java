@@ -33,8 +33,8 @@ public class SeatsCancelSeat {
 		    "Se ha producido un error: No existe el viaje asociado a la plaza");
 
 	// Existe el asiento
-	Seat seat =  sd.findById(ids);
-	
+	Seat seat = sd.findById(ids);
+
 	if (null == seat)
 	    throw new EntityNotFoundException(
 		    "No existe el sitio que se intenta cancelar");

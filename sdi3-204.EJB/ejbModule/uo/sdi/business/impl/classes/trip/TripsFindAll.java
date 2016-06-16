@@ -9,9 +9,9 @@ import uo.sdi.persistence.TripDao;
 public class TripsFindAll {
 
     public List<Trip> find() {
-	
+
 	TripDao td = Factories.persistence.createTripDao();
-	
+
 	return td.findAll();
     }
 

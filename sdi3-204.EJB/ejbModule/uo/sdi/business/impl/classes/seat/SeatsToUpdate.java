@@ -12,7 +12,8 @@ import uo.sdi.persistence.exception.AlreadyPersistedException;
 
 public class SeatsToUpdate {
 
-    public void update(List<Application> applications) throws EntityAlreadyExistsException {
+    public void update(List<Application> applications)
+	    throws EntityAlreadyExistsException {
 
 	SeatDao sd = Factories.persistence.createSeatDao();
 
@@ -24,7 +25,8 @@ public class SeatsToUpdate {
 		seatToUpdate.setTripId(a.getTripId());
 		seatToUpdate.setUserId(a.getUserId());
 
-		if (sd.findByUserAndTrip(seatToUpdate.getUserId(), seatToUpdate.getTripId()) == null) {
+		if (sd.findByUserAndTrip(seatToUpdate.getUserId(),
+			seatToUpdate.getTripId()) == null) {
 		    sd.save(seatToUpdate);
 		}
 	    }

@@ -10,60 +10,58 @@ import javax.xml.crypto.Data;
  * 
  * @see Data Transfer Object pattern
  * @author alb
- *
+ * 
  */
-public class Seat implements Serializable{
-    
+public class Seat implements Serializable {
+
     private static final long serialVersionUID = 1L;
 
-	private Long userId;
-	private Long tripId;
+    private Long userId;
+    private Long tripId;
 
-	private String comment;
-	private SeatStatus status;
+    private String comment;
+    private SeatStatus status;
 
+    public Long[] makeKey() {
+	return new Long[] { userId, tripId };
+    }
 
-	public Long[] makeKey() {
-		return new Long[]{ userId, tripId };
-	}
+    public Long getUserId() {
+	return userId;
+    }
 
-	public Long getUserId() {
-		return userId;
-	}
+    public void setUserId(Long userId) {
+	this.userId = userId;
+    }
 
-	public void setUserId(Long userId) {
-		this.userId = userId;
-	}
+    public Long getTripId() {
+	return tripId;
+    }
 
-	public Long getTripId() {
-		return tripId;
-	}
+    public void setTripId(Long tripId) {
+	this.tripId = tripId;
+    }
 
-	public void setTripId(Long tripId) {
-		this.tripId = tripId;
-	}
+    public String getComment() {
+	return comment;
+    }
 
-	public String getComment() {
-		return comment;
-	}
+    public void setComment(String comment) {
+	this.comment = comment;
+    }
 
-	public void setComment(String comment) {
-		this.comment = comment;
-	}
+    public SeatStatus getStatus() {
+	return status;
+    }
 
-	public SeatStatus getStatus() {
-		return status;
-	}
+    public void setStatus(SeatStatus status) {
+	this.status = status;
+    }
 
-	public void setStatus(SeatStatus status) {
-		this.status = status;
-	}
-
-	@Override
-	public String toString() {
-		return "Seat [userId=" + userId + ", tripId=" 
-				+ tripId + ", comment=" + comment 
-				+ ", status=" + status + "]";
-	}
+    @Override
+    public String toString() {
+	return "Seat [userId=" + userId + ", tripId=" + tripId + ", comment="
+		+ comment + ", status=" + status + "]";
+    }
 
 }

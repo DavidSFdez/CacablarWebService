@@ -7,14 +7,13 @@ import uo.sdi.model.Trip;
 
 public class TripsListActive {
 
-    
     public List<Trip> list() {
-	
+
 	List<Trip> trips = null;
-	
+
 	trips = Factories.persistence.createTripDao().findAllActive();
-	
+
 	return trips;
-	
+
     }
 }

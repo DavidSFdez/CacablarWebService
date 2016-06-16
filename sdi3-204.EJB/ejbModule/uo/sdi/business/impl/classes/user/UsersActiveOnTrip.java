@@ -11,12 +11,10 @@ public class UsersActiveOnTrip {
 
     public List<User> list(Long tripId, SeatStatus status) {
 	UserDao dao = Factories.persistence.createUserDao();
-	
+
 	List<User> users = dao.findUsersOnTripByStatus(tripId, status);
-	
+
 	return users;
     }
-    
-    
 
 }

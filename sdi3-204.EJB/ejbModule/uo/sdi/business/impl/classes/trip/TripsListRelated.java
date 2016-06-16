@@ -7,14 +7,14 @@ import uo.sdi.model.Trip;
 
 public class TripsListRelated {
 
-    
-public List<Trip> list(Long idUser) throws Exception{
-	
+    public List<Trip> list(Long idUser) throws Exception {
+
 	List<Trip> trips = null;
-	
-	trips = Factories.persistence.createTripDao().findWhenParticipated(idUser);
-	
+
+	trips = Factories.persistence.createTripDao().findWhenParticipated(
+		idUser);
+
 	return trips;
-	
+
     }
 }

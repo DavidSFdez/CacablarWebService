@@ -9,13 +9,13 @@ import uo.sdi.persistence.ApplicationDao;
 public class ApplicationsGetToUpdate {
 
     public List<Application> find() {
-	
+
 	ApplicationDao ad = Factories.persistence.createApplicationDao();
-	
+
 	List<Application> applications = ad.findToUpdate();
 
 	ad.deleteToUpdate();
-	
+
 	return applications;
     }
 

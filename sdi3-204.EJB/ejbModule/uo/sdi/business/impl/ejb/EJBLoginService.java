@@ -10,8 +10,8 @@ import uo.sdi.model.User;
 import uo.sdi.persistence.UserDao;
 
 @Stateless
-@WebService (name="LoginService")
-public class EJBLoginService implements LocalLoginService, RemoteLoginService{
+@WebService(name = "LoginService")
+public class EJBLoginService implements LocalLoginService, RemoteLoginService {
 
     @Override
     public User verify(String login, String password) {
