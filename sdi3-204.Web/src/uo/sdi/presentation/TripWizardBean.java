@@ -154,7 +154,7 @@ public class TripWizardBean implements Serializable {
 
 	if (id != null) {
 	    try {
-		this.trip = Factories.services.createTripsService()
+		this.trip = Factories.services.getTripsService()
 			.findTripById(Long.parseLong(id));
 	    } catch (NumberFormatException | EntityNotFoundException e) {
 
@@ -196,7 +196,7 @@ public class TripWizardBean implements Serializable {
 	    trip.setDeparture(departure);
 	    trip.setDestination(destination);
 
-	    Factories.services.createTripsService().update(trip, idUser);
+	    Factories.services.getTripsService().update(trip, idUser);
 	    this.isUpdate = false;
 
 	} catch (EntityNotFoundException e) {
@@ -221,7 +221,7 @@ public class TripWizardBean implements Serializable {
 	    trip.setDeparture(departure);
 	    trip.setDestination(destination);
 
-	    Factories.services.createTripsService().save(trip, idUser);
+	    Factories.services.getTripsService().save(trip, idUser);
 	} catch (EntityAlreadyExistsException e) {
 
 	    return "fracaso";
