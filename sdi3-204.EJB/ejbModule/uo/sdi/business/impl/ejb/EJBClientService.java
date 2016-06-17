@@ -1,10 +1,15 @@
 package uo.sdi.business.impl.ejb;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.jws.WebService;
+
+
 
 import uo.sdi.business.RattingsService;
 import uo.sdi.business.SeatsService;
@@ -18,9 +23,13 @@ import uo.sdi.business.impl.local.LocalTripsService;
 import uo.sdi.business.impl.local.LocalUsersService;
 import uo.sdi.business.impl.remote.RemoteClientService;
 import uo.sdi.model.Rating;
-import uo.sdi.model.Seat;
 import uo.sdi.model.Trip;
 import uo.sdi.model.User;
+import uo.sdi.model.DTO.RatingInfo;
+import uo.sdi.model.DTO.UserInfo;
+
+import com.wagnerandade.coollection.Coollection;
+import com.wagnerandade.coollection.query.order.Order;
 
 @Stateless
 @WebService(name = "ClientService")
@@ -40,69 +49,86 @@ public class EJBClientService implements LocalClientService,
     private RattingsService ratingsService;
 
     @Override
-    public List<User> listAllUsers() {
-	return usersService.findAllUsers();
+    public List<UserInfo> listUsersInfo() {
+	List<User> users = usersService.findAllUsers();
+	List<UserInfo> usersInfo = new ArrayList<>();
+	UserInfo ui = null;
+
+	for (User u : users) {
+	    ui = new UserInfo();
+	    List<Trip> promotedTrips = tripsService.findAllPromoted(u.getId());
+	    List<Trip> participatedTrips = tripsService.findAllParticipated(u
+		    .getId());
+	    ui.setUser(u);
+	    ui.setNumPromoted(promotedTrips.size());
+	    ui.setNumParticipated(participatedTrips.size());
+	    usersInfo.add(ui);
+	}
+	return usersInfo;
     }
 
     @Override
-    public User findUserById(Long userId) {
-	return usersService.findUserById(userId);
+    public void disableUser(Long userId) {
+	try {
+	    usersService.cancelUser(userId);
+	} catch (EntityNotFoundException e) {
+	   System.out.println(e.getMessage());
+	}
+
+    }
+//TODO DAVID : Crear el hacedor de DTOs (no tengo ganas de hacerlo ahora)
+    @Override
+    public List<RatingInfo> listRatings(int numMonths) {
+	
+	List<Trip> allTrips = tripsService.findAllTrips();
+	Date actual = new Date();
+	Date ant = getNewDateMonth(actual, numMonths);
+	List<Trip> trips = new ArrayList<>();
+	
+	for (Trip t : allTrips)
+	    if (t.getArrivalDate().after(ant)
+		    && t.getArrivalDate().before(actual))
+		trips.add(t);
+	List<Rating> ratings = null;
+	List<RatingInfo> ri = new ArrayList<>();
+
+	for (Trip t : trips) {
+	    ratings = ratingsService.listByTrip(t.getId());
+	    for (Rating r : ratings){
+		RatingInfo rat = new RatingInfo();
+		rat.setRating(r);
+		rat.setDestino(t.getDestination().getCity());
+		rat.setArrivalDate(t.getArrivalDate());
+		ri.add(rat);
+	    }
+	}
+
+	Coollection cool = new Coollection();
+
+	ri = cool.from(ri).orderBy("fecha", Order.DESC).all();
+
+	return ri;
+    }
+    
+    // Le pasas una fecha y el tiempo y te devuelve esa fecha
+    // Por ejemplo, fecha actual y -1 mes, te devuelve un date con la fecha
+    // Del mes pasado
+    private Date getNewDateMonth(Date actual, int months) {
+	Calendar cal = Calendar.getInstance();
+	cal.setTime(actual);
+	cal.add(Calendar.MONTH, months);
+	return cal.getTime();
     }
 
+    
+    //TODO JORGE el try/catch
     @Override
-    public void cancelUsuario(Long userId) throws EntityNotFoundException {
-	usersService.cancelUser(userId);
-    }
-
-    @Override
-    public List<Trip> listAllTrips() {
-	return tripsService.findAllTrips();
-    }
-
-    @Override
-    public List<Trip> ListAllTripsPromotedByUser(Long userId) {
-	return tripsService.findAllPromoted(userId);
-    }
-
-    @Override
-    public List<Trip> ListAllTripsWhereUserParticipated(Long userId) {
-	return tripsService.findAllParticipated(userId);
-    }
-
-    @Override
-    public Trip findTripById(Long tripId) throws EntityNotFoundException {
-	return tripsService.findTripById(tripId);
-    }
-
-    @Override
-    public List<Seat> listAllSeatsFromTrip(Long tripId) {
-	return seatsService.findByTrip(tripId);
-    }
-
-    @Override
-    public Seat findSeatByUserAndTrip(Long userId, Long tripId)
-	    throws EntityNotFoundException {
-	return seatsService.findByUserAndTrip(userId, tripId);
-    }
-
-    @Override
-    public List<Rating> listAllRatingsAboutTrip(Long tripId) {
-	return ratingsService.listByTrip(tripId);
-    }
-
-    @Override
-    public void cancelRating(Long ratingId) throws EntityNotFoundException {
-	ratingsService.delete(ratingId);
-    }
-
-    @Override
-    public Rating findRatingById(Long ratingId) {
-	return ratingsService.findRatingById(ratingId);
-    }
-
-    @Override
-    public List<Rating> findRatingsAboutTrip(Long id) {
-	return ratingsService.listByTrip(id);
+    public void removeRating(Long ratingId) {
+	try {
+	    ratingsService.delete(ratingId);
+	} catch (EntityNotFoundException e) {
+	   System.out.println(e.getMessage());
+	}
     }
 
 }
