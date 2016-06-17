@@ -43,7 +43,7 @@ public class EJBUsersService implements LocalUsersService, RemoteUsersService {
     }
 
     @Override
-    public void cancelUser(Long id) throws EntityNotFoundException {
+    public void cancelUser(Long id) {
 	new UsersBaja().cancelUser(id);
     }
 

@@ -9,13 +9,10 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.jws.WebService;
 
-
-
 import uo.sdi.business.RattingsService;
 import uo.sdi.business.SeatsService;
 import uo.sdi.business.TripsService;
 import uo.sdi.business.UsersService;
-import uo.sdi.business.exception.EntityNotFoundException;
 import uo.sdi.business.impl.local.LocalClientService;
 import uo.sdi.business.impl.local.LocalRattingsService;
 import uo.sdi.business.impl.local.LocalSeatsService;
@@ -69,22 +66,19 @@ public class EJBClientService implements LocalClientService,
 
     @Override
     public void disableUser(Long userId) {
-	try {
-	    usersService.cancelUser(userId);
-	} catch (EntityNotFoundException e) {
-	   System.out.println(e.getMessage());
-	}
+	usersService.cancelUser(userId);
 
     }
-//TODO DAVID : Crear el hacedor de DTOs (no tengo ganas de hacerlo ahora)
+
+    // TODO DAVID : Crear el hacedor de DTOs (no tengo ganas de hacerlo ahora)
     @Override
     public List<RatingInfo> listRatings(int numMonths) {
-	
+
 	List<Trip> allTrips = tripsService.findAllTrips();
 	Date actual = new Date();
 	Date ant = getNewDateMonth(actual, numMonths);
 	List<Trip> trips = new ArrayList<>();
-	
+
 	for (Trip t : allTrips)
 	    if (t.getArrivalDate().after(ant)
 		    && t.getArrivalDate().before(actual))
@@ -94,7 +88,7 @@ public class EJBClientService implements LocalClientService,
 
 	for (Trip t : trips) {
 	    ratings = ratingsService.listByTrip(t.getId());
-	    for (Rating r : ratings){
+	    for (Rating r : ratings) {
 		RatingInfo rat = new RatingInfo();
 		rat.setRating(r);
 		rat.setDestino(t.getDestination().getCity());
@@ -103,13 +97,11 @@ public class EJBClientService implements LocalClientService,
 	    }
 	}
 
-	Coollection cool = new Coollection();
-
-	ri = cool.from(ri).orderBy("fecha", Order.DESC).all();
+	ri = Coollection.from(ri).orderBy("fecha", Order.DESC).all();
 
 	return ri;
     }
-    
+
     // Le pasas una fecha y el tiempo y te devuelve esa fecha
     // Por ejemplo, fecha actual y -1 mes, te devuelve un date con la fecha
     // Del mes pasado
@@ -120,15 +112,10 @@ public class EJBClientService implements LocalClientService,
 	return cal.getTime();
     }
 
-    
-    //TODO JORGE el try/catch
     @Override
     public void removeRating(Long ratingId) {
-	try {
-	    ratingsService.delete(ratingId);
-	} catch (EntityNotFoundException e) {
-	   System.out.println(e.getMessage());
-	}
+	ratingsService.delete(ratingId);
+
     }
 
 }

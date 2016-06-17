@@ -1,4 +1,4 @@
-package uo.sdi.business.schedule;
+package uo.sdi.business.maintenance;
 
 import javax.ejb.Schedule;
 import javax.ejb.Singleton;

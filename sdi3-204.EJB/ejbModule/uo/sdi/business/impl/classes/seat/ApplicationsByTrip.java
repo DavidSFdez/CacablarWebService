@@ -1,4 +1,4 @@
-package uo.sdi.business.impl.classes.application;
+package uo.sdi.business.impl.classes.seat;
 
 import java.util.List;
 

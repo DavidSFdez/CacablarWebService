@@ -48,7 +48,7 @@ public class Main {
 
     @SuppressWarnings("static-access")
     private void run() throws Exception {
-	LoginService ls = new RemoteEJBServiceLocator().createLoginService();
+	LoginService ls = new RemoteEJBServiceLocator().getLoginService();
 	@SuppressWarnings("resource")
 	Scanner in = new Scanner(System.in);
 	System.out.println("Nombre de usuario:");
@@ -62,7 +62,7 @@ public class Main {
 	    List<Trip> trips;
 	    System.out.println("Selecciona el viaje");
 	    try {
-		trips = new RemoteEJBServiceLocator().createTripsService()
+		trips = new RemoteEJBServiceLocator().getTripsService()
 			.listRelated(userId);
 	    } catch (Exception e) {
 		throw new Exception();

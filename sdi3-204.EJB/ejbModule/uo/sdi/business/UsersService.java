@@ -19,7 +19,7 @@ public interface UsersService {
 
     void deleteUser(Long id) throws EntityNotFoundException;
 
-    void cancelUser(Long id) throws EntityNotFoundException;
+    void cancelUser(Long id);
 
     List<User> findUsersOnTripByStatus(Long tripId, SeatStatus status);
 

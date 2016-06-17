@@ -5,10 +5,9 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.jws.WebService;
 
-import uo.sdi.business.exception.EntityNotFoundException;
 import uo.sdi.business.impl.classes.ratting.RatingsFindById;
-import uo.sdi.business.impl.classes.ratting.RattingsFindByTrip;
 import uo.sdi.business.impl.classes.ratting.RattingsDelete;
+import uo.sdi.business.impl.classes.ratting.RattingsFindByTrip;
 import uo.sdi.business.impl.local.LocalRattingsService;
 import uo.sdi.business.impl.remote.RemoteRattingsService;
 import uo.sdi.model.Rating;
@@ -24,7 +23,7 @@ public class EJBRattingsService implements LocalRattingsService,
     }
 
     @Override
-    public void delete(Long id) throws EntityNotFoundException {
+    public void delete(Long id) {
 	new RattingsDelete().delete(id);
 
     }

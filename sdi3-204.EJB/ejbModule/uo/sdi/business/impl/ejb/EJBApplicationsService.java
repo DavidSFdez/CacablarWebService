@@ -7,11 +7,11 @@ import javax.jws.WebService;
 
 import uo.sdi.business.exception.EntityAlreadyExistsException;
 import uo.sdi.business.exception.EntityNotFoundException;
-import uo.sdi.business.impl.classes.application.ApplicationCancel;
-import uo.sdi.business.impl.classes.application.ApplicationsAccept;
-import uo.sdi.business.impl.classes.application.ApplicationsFind;
-import uo.sdi.business.impl.classes.application.ApplicationsGetToUpdate;
-import uo.sdi.business.impl.classes.application.ApplicationsRemove;
+import uo.sdi.business.impl.classes.maintenance.ApplicationsGetToUpdate;
+import uo.sdi.business.impl.classes.seat.ApplicationCancel;
+import uo.sdi.business.impl.classes.seat.ApplicationsAccept;
+import uo.sdi.business.impl.classes.seat.ApplicationsFind;
+import uo.sdi.business.impl.classes.seat.ApplicationsRemove;
 import uo.sdi.business.impl.local.LocalApplicationsService;
 import uo.sdi.business.impl.remote.RemoteApplicationsService;
 import uo.sdi.model.Application;
@@ -33,7 +33,7 @@ public class EJBApplicationsService implements LocalApplicationsService,
     }
 
     @Override
-    // TODO este se llama desde el echelider y mejor nombre si se puede
+    // TODO este se llama desde el scheduler y mejor nombre si se puede
     public List<Application> getToUpdate() {
 	return new ApplicationsGetToUpdate().find();
     }

@@ -1,4 +1,4 @@
-package uo.sdi.business.impl.classes.application;
+package uo.sdi.business.impl.classes.maintenance;
 
 import java.util.List;
 
@@ -6,6 +6,7 @@ import uo.sdi.infrastructure.Factories;
 import uo.sdi.model.Application;
 import uo.sdi.persistence.ApplicationDao;
 
+//TODO cambiar nombre
 public class ApplicationsGetToUpdate {
 
     public List<Application> find() {

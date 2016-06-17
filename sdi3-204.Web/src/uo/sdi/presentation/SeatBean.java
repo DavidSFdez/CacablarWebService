@@ -27,9 +27,8 @@ public class SeatBean implements Serializable {
     }
 
     public String request(Long idUser, Long idTrip) {
-
 	try {
-	    Factories.services.getSeatsService().request(idTrip, idUser);
+	    Factories.services.getSeatsService().requestSeat(idTrip, idUser);
 	} catch (EntityAlreadyExistsException e) {
 	    return "fracaso";
 	}

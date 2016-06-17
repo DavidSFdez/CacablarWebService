@@ -84,12 +84,12 @@ public class TripBean implements Serializable {
     }
 
     public boolean isInSeats(Long idUser) {
-	return Factories.services.getSeatsService().findByUserAndTrip(idUser,
+	return Factories.services.getSeatsService().findSeatByUserAndTrip(idUser,
 		trip.getId()) != null;
     }
 
     public boolean isSitting(Long idUser) {
-	Seat seat = Factories.services.getSeatsService().findByUserAndTrip(
+	Seat seat = Factories.services.getSeatsService().findSeatByUserAndTrip(
 		idUser, trip.getId());
 	if (seat == null)
 	    return false;
@@ -196,7 +196,7 @@ public class TripBean implements Serializable {
     }
 
     public boolean isUserInSeats(Long idUser) {
-	    return Factories.services.getSeatsService().findByUserAndTrip(idUser,
+	    return Factories.services.getSeatsService().findSeatByUserAndTrip(idUser,
 		    trip.getId()) != null;
     }
 

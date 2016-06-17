@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/sdi3-204/sdi3-204.iml" filepath="$PROJECT_DIR$/sdi3-204/sdi3-204.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sdi3-204.Cli-EJB/sdi3-204.Cli-EJB.iml" filepath="$PROJECT_DIR$/sdi3-204.Cli-EJB/sdi3-204.Cli-EJB.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sdi3-204.Cli-MSG/sdi3-204.Cli-MSG.iml" filepath="$PROJECT_DIR$/sdi3-204.Cli-MSG/sdi3-204.Cli-MSG.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sdi3-204.Cli-REST/sdi3-204.Cli-REST.iml" filepath="$PROJECT_DIR$/sdi3-204.Cli-REST/sdi3-204.Cli-REST.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sdi3-204.Cli-SOAP/sdi3-204.Cli-SOAP.iml" filepath="$PROJECT_DIR$/sdi3-204.Cli-SOAP/sdi3-204.Cli-SOAP.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Data/sdi3-204.Data.iml" filepath="$PROJECT_DIR$/Data/sdi3-204.Data.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sdi3-204.EJB/sdi3-204.EJB.iml" filepath="$PROJECT_DIR$/sdi3-204.EJB/sdi3-204.EJB.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sdi3-204.Web/sdi3-204.Web.iml" filepath="$PROJECT_DIR$/sdi3-204.Web/sdi3-204.Web.iml" />
+    </modules>
+  </component>
+</project>

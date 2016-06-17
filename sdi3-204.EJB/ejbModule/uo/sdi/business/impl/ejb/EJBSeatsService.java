@@ -7,8 +7,12 @@ import javax.jws.WebService;
 
 import uo.sdi.business.exception.EntityAlreadyExistsException;
 import uo.sdi.business.exception.EntityNotFoundException;
-import uo.sdi.business.impl.classes.application.ApplicationsByTrip;
-import uo.sdi.business.impl.classes.application.ApplicationsFind;
+import uo.sdi.business.impl.classes.maintenance.ApplicationsGetToUpdate;
+import uo.sdi.business.impl.classes.seat.ApplicationCancel;
+import uo.sdi.business.impl.classes.seat.ApplicationsAccept;
+import uo.sdi.business.impl.classes.seat.ApplicationsByTrip;
+import uo.sdi.business.impl.classes.seat.ApplicationsFind;
+import uo.sdi.business.impl.classes.seat.ApplicationsRemove;
 import uo.sdi.business.impl.classes.seat.SeatsCancelSeat;
 import uo.sdi.business.impl.classes.seat.SeatsFindByTrip;
 import uo.sdi.business.impl.classes.seat.SeatsFindByUserAndTrip;
@@ -24,12 +28,12 @@ import uo.sdi.model.Seat;
 public class EJBSeatsService implements LocalSeatsService, RemoteSeatsService {
 
     @Override
-    public Seat findByUserAndTrip(Long idUser, Long idTrip) {
+    public Seat findSeatByUserAndTrip(Long idUser, Long idTrip) {
 	return new SeatsFindByUserAndTrip().find(idUser, idTrip);
     }
 
     @Override
-    public void request(Long idTrip, Long idUser)
+    public void requestSeat(Long idTrip, Long idUser)
 	    throws EntityAlreadyExistsException {
 	new SeatsRequest().request(idTrip, idUser);
     }
@@ -44,11 +48,6 @@ public class EJBSeatsService implements LocalSeatsService, RemoteSeatsService {
 	return new SeatsFindByTrip().find(idTrip);
     }
 
-    @Override
-    public Application findApplication(Long idUser, Long id) {
-	ApplicationsFind action = new ApplicationsFind();
-	return action.find(idUser, id);
-    }
 
     @Override
     public List<Application> findApplicationByTrip(Long id) {
@@ -62,5 +61,35 @@ public class EJBSeatsService implements LocalSeatsService, RemoteSeatsService {
 	new SeatsToUpdate().update(applications);
 
     }
+    
+    @Override
+    public Application findApplication(Long idTrip, Long idUser) {
+	return new ApplicationsFind().find(idTrip, idUser);
+    }
+
+    @Override
+    public void removeApplication(Long idUser, Long idTrip) throws EntityNotFoundException {
+	new ApplicationsRemove().remove(idUser, idTrip);
+
+    }
+
+    @Override
+    // TODO este se llama desde el scheduler y mejor nombre si se puede
+    public List<Application> getToUpdate() {
+	return new ApplicationsGetToUpdate().find();
+    }
+
+    @Override
+    public void acceptApplication(Application application)
+	    throws EntityNotFoundException, EntityAlreadyExistsException {
+	new ApplicationsAccept().execute(application);
+    }
+
+    @Override
+    public void cancelApplication(Application application)
+	    throws EntityNotFoundException, EntityAlreadyExistsException {
+	new ApplicationCancel().execute(application);
+    }
+
 
 }
