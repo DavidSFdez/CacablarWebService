@@ -120,7 +120,7 @@ public class Main {
 	    imprimeRattings(rattings);
 
 	} catch (Exception e) {
-	    // TODO Auto-generated catch block
+	    
 	    e.printStackTrace();
 	}
 
@@ -134,7 +134,7 @@ public class Main {
     }
 
     private static void imprimeRattings(List<Rating> rattings) {
-	// TODO Auto-generated method stub
+	
 
     }
 

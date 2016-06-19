@@ -1,5 +1,6 @@
 package uo.sdi.business.impl.classes.seat;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import uo.sdi.business.exception.BusinessException;
@@ -10,6 +11,7 @@ import uo.sdi.model.Application;
 import uo.sdi.model.Seat;
 import uo.sdi.model.SeatStatus;
 import uo.sdi.model.Trip;
+import uo.sdi.model.TripStatus;
 import uo.sdi.persistence.ApplicationDao;
 import uo.sdi.persistence.SeatDao;
 import uo.sdi.persistence.TripDao;
@@ -48,6 +50,36 @@ public class ApplicationsAccept {
 	// Reducir en uno las plazas disponibles para tal viaje
 	trip.setAvailablePax(trip.getAvailablePax() - 1);
 
+	// Si el número de plazas disponibles es 0, actualiza el estado del
+	// viaje a cerrado, y todas las solicitudes pendientes las pone como
+	// Seats con el estado SIN_PLAZA
+	if (trip.getAvailablePax() == 0) {
+	    trip.setStatus(TripStatus.CLOSED);
+
+	    List<Application> applications = applicationDao.findByTripId(trip
+		    .getId());
+
+	    for (Application a : applications) {
+		Seat seatAux = new Seat();
+		seatAux.setStatus(SeatStatus.SIN_PLAZA);
+		seatAux.setTripId(a.getTripId());
+		seatAux.setUserId(a.getUserId());
+		Long[] aux = { a.getUserId(), a.getTripId() };
+		try {
+		    applicationDao.delete(aux);
+		    seatDao.save(seatAux);
+		} catch (NotPersistedException e) {
+		    // TODO JORGE
+		    e.printStackTrace();
+		} catch (AlreadyPersistedException e) {
+		    // TODO JORGE
+		    e.printStackTrace();
+		}
+
+	    }
+
+	}
+
 	try {
 	    tripDao.update(trip);
 	} catch (NotPersistedException e) {
@@ -64,16 +96,6 @@ public class ApplicationsAccept {
 	    seatDao.save(seat);
 	} catch (AlreadyPersistedException e) {
 	    throw new EntityAlreadyExistsException("ya existe el asiento.", e);
-	}
-
-	if (trip.getAvailablePax() == 0) {
-	    tripDao.updateTripsStatus();
-	    // TODO el metodo de abajo debe buscar solo las peticiones del viaje
-	    // actual.
-	    // TODO ponerle un nombre mejor a los metodos que se entienda lo que
-	    // hace
-	    List<Application> applications = applicationDao.findToUpdate();
-	    Factories.services.getSeatsService().seatsToUpdate(applications);
 	}
 
     }

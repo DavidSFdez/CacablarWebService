@@ -163,7 +163,7 @@ public class TripDaoJdbcImpl implements TripDao {
     }
 
     @Override
-    public Long updateTripsStatus() {
+    public Long updateTripsStatusToClose() {
 	jdbcTemplate.execute("TRIP_UPDATE_STATUS");
 	return jdbcTemplate.getGeneratedKey();
     }

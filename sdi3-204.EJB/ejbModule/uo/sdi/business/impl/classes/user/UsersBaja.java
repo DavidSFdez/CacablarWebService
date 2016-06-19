@@ -59,7 +59,7 @@ public class UsersBaja {
 		ad.delete(ids);
 	    } catch (NotPersistedException e) {
 		// throw new BusinessException(e.getMessage());
-		Log.warn("No existe la peticion que se pretende modificar.");
+		Log.warn("No existe la peticion que se pretende borrar.");
 	    }
 	}
 

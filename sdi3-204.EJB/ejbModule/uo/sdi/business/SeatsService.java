@@ -54,14 +54,6 @@ public interface SeatsService {
 
     Application findApplication(Long idUser, Long id);
 
-    // TODO estos son los que parece que no estan en su sitio.
-    // Se esta llamando desde:
-    // * TripBean.java :: Factories.services.getSeatsService().seatsToUpdate(applications);
-    // * ApplicationsAccept.java :: Factories.services.getSeatsService().seatsToUpdate(applications);
-    void seatsToUpdate(List<Application> applications)
-	    throws EntityAlreadyExistsException;
-
-    // Nunca se usa
-    List<Application> getToUpdate();
+    void actualizarAsientosAutomaticamente();
 
 }

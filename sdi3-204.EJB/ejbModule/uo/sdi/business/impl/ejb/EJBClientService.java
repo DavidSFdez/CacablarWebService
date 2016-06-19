@@ -70,7 +70,6 @@ public class EJBClientService implements LocalClientService,
 
     }
 
-    // TODO DAVID : Crear el hacedor de DTOs (no tengo ganas de hacerlo ahora)
     @Override
     public List<RatingInfo> listRatings(int numMonths) {
 

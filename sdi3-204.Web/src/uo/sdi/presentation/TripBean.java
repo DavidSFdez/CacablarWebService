@@ -60,16 +60,6 @@ public class TripBean implements Serializable {
 	    }
 	}
 
-	Log.trace("Actualizando asientos.");
-	Factories.services.getTripsService().updateTripsStatus();
-	List<Application> applications = Factories.services
-		.getApplicationService().getToUpdate();
-	try {
-	    Factories.services.getSeatsService().seatsToUpdate(applications);
-	} catch (EntityAlreadyExistsException e) {
-	    Log.trace("Se ha intentado actualizar un asiento ya actuaizado.");
-	}
-
     }
 
     public boolean isPromoter(Long idUser) {
@@ -78,14 +68,14 @@ public class TripBean implements Serializable {
     }
 
     public boolean isInApplications(Long idUser) {
-	return Factories.services.getApplicationService().
-		findApplication(trip.getId(), idUser) != null;
+	return Factories.services.getApplicationService().findApplication(
+		trip.getId(), idUser) != null;
 
     }
 
     public boolean isInSeats(Long idUser) {
-	return Factories.services.getSeatsService().findSeatByUserAndTrip(idUser,
-		trip.getId()) != null;
+	return Factories.services.getSeatsService().findSeatByUserAndTrip(
+		idUser, trip.getId()) != null;
     }
 
     public boolean isSitting(Long idUser) {
@@ -196,8 +186,8 @@ public class TripBean implements Serializable {
     }
 
     public boolean isUserInSeats(Long idUser) {
-	    return Factories.services.getSeatsService().findSeatByUserAndTrip(idUser,
-		    trip.getId()) != null;
+	return Factories.services.getSeatsService().findSeatByUserAndTrip(
+		idUser, trip.getId()) != null;
     }
 
     public boolean isUserInApplications(Long idUser) {

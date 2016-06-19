@@ -29,11 +29,10 @@ public interface ApplicationService {
     void remove(Long idUser, Long idTrip) throws EntityNotFoundException;
 
     /**
-     * TODO esto puede que tampoco esté aqui luego
      * @deprecated Usar {@link uo.sdi.business.SeatsService} 
      * @see {@link uo.sdi.business.SeatsService} 
      */
-    List<Application> getToUpdate();
+    List<Application> getApplicationsWithTripClosedToUpdate();
 
     /**
      * 

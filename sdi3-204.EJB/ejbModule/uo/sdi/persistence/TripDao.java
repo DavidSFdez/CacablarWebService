@@ -18,7 +18,7 @@ public interface TripDao extends GenericDao<Trip, Long> {
 
     Trip findByIdAndPromoter(Long idTrip, Long idUser);
 
-    Long updateTripsStatus();
+    Long updateTripsStatusToClose();
 
     List<Trip> findAllPromoted(Long id);
 

@@ -7,7 +7,7 @@ import javax.jws.WebService;
 
 import uo.sdi.business.exception.EntityAlreadyExistsException;
 import uo.sdi.business.exception.EntityNotFoundException;
-import uo.sdi.business.impl.classes.maintenance.ApplicationsGetToUpdate;
+import uo.sdi.business.impl.classes.maintenance.ApplicationsYSeatsActualizarAutomaticamente;
 import uo.sdi.business.impl.classes.seat.ApplicationCancel;
 import uo.sdi.business.impl.classes.seat.ApplicationsAccept;
 import uo.sdi.business.impl.classes.seat.ApplicationsFind;
@@ -31,11 +31,23 @@ public class EJBApplicationsService implements LocalApplicationsService,
 	new ApplicationsRemove().remove(idUser, idTrip);
 
     }
+    
 
+    /**
+     *  @deprecated
+     * Devuelve todas las Applications que pertenecen a viajes que NO 
+     * se encuentran en estado 0 (OPEN)
+     * 
+     * Aparte de devolver estas solicitudes, LAS BORRA
+     * 
+     * La razón de hacer esto es que el enunciado dice que cuando se cierre 
+     * un viaje las solicitudes pendientes han de ponerse en seats con el estado
+     * 4 (SIN_PLAZA)
+     * 
+     */
     @Override
-    // TODO este se llama desde el scheduler y mejor nombre si se puede
-    public List<Application> getToUpdate() {
-	return new ApplicationsGetToUpdate().find();
+    public List<Application> getApplicationsWithTripClosedToUpdate() {
+	return new ApplicationsYSeatsActualizarAutomaticamente().find();
     }
 
     @Override

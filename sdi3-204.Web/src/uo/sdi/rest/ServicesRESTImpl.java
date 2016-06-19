@@ -65,10 +65,10 @@ public class ServicesRESTImpl implements ServiceREST {
 	try {
 	    applicationService.acceptApplication(application);
 	} catch (EntityAlreadyExistsException e) {
-	    // TODO Auto-generated catch block
+	  
 	    e.printStackTrace();
 	} catch (EntityNotFoundException e) {
-	    // TODO Auto-generated catch block
+	  
 	    e.printStackTrace();
 	}
 

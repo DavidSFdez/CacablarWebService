@@ -19,7 +19,7 @@ import uo.sdi.business.impl.classes.trip.TripsListActiveToUser;
 import uo.sdi.business.impl.classes.trip.TripsListRelated;
 import uo.sdi.business.impl.classes.trip.TripsSave;
 import uo.sdi.business.impl.classes.trip.TripsUpdate;
-import uo.sdi.business.impl.classes.trip.TripsUpdateTripsStatus;
+import uo.sdi.business.impl.classes.trip.TripsUpdateStatusToClose;
 import uo.sdi.business.impl.local.LocalTripsService;
 import uo.sdi.business.impl.remote.RemoteTripsService;
 import uo.sdi.model.Trip;
@@ -71,9 +71,14 @@ public class EJBTripsService implements LocalTripsService, RemoteTripsService {
 	return new TripsFindById().find(idTrip);
     }
 
+    /**
+     * Todos los viajes que se hayan acabado sus plazas disponibles
+     * o que haya pasado la fecha de cierre
+     * cambia su estado a 1 (CLOSED) 
+     */
     @Override
     public void updateTripsStatus() {
-	new TripsUpdateTripsStatus().update();
+	new TripsUpdateStatusToClose().update();
 
     }
 

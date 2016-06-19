@@ -7,7 +7,7 @@ import javax.jws.WebService;
 
 import uo.sdi.business.exception.EntityAlreadyExistsException;
 import uo.sdi.business.exception.EntityNotFoundException;
-import uo.sdi.business.impl.classes.maintenance.ApplicationsGetToUpdate;
+import uo.sdi.business.impl.classes.maintenance.ApplicationsYSeatsActualizarAutomaticamente;
 import uo.sdi.business.impl.classes.seat.ApplicationCancel;
 import uo.sdi.business.impl.classes.seat.ApplicationsAccept;
 import uo.sdi.business.impl.classes.seat.ApplicationsByTrip;
@@ -17,7 +17,6 @@ import uo.sdi.business.impl.classes.seat.SeatsCancelSeat;
 import uo.sdi.business.impl.classes.seat.SeatsFindByTrip;
 import uo.sdi.business.impl.classes.seat.SeatsFindByUserAndTrip;
 import uo.sdi.business.impl.classes.seat.SeatsRequest;
-import uo.sdi.business.impl.classes.seat.SeatsToUpdate;
 import uo.sdi.business.impl.local.LocalSeatsService;
 import uo.sdi.business.impl.remote.RemoteSeatsService;
 import uo.sdi.model.Application;
@@ -56,13 +55,6 @@ public class EJBSeatsService implements LocalSeatsService, RemoteSeatsService {
     }
 
     @Override
-    public void seatsToUpdate(List<Application> applications)
-	    throws EntityAlreadyExistsException {
-	new SeatsToUpdate().update(applications);
-
-    }
-    
-    @Override
     public Application findApplication(Long idTrip, Long idUser) {
 	return new ApplicationsFind().find(idTrip, idUser);
     }
@@ -71,12 +63,6 @@ public class EJBSeatsService implements LocalSeatsService, RemoteSeatsService {
     public void removeApplication(Long idUser, Long idTrip) throws EntityNotFoundException {
 	new ApplicationsRemove().remove(idUser, idTrip);
 
-    }
-
-    @Override
-    // TODO este se llama desde el scheduler y mejor nombre si se puede
-    public List<Application> getToUpdate() {
-	return new ApplicationsGetToUpdate().find();
     }
 
     @Override
@@ -89,6 +75,13 @@ public class EJBSeatsService implements LocalSeatsService, RemoteSeatsService {
     public void cancelApplication(Application application)
 	    throws EntityNotFoundException, EntityAlreadyExistsException {
 	new ApplicationCancel().execute(application);
+    }
+
+
+    @Override
+    public void actualizarAsientosAutomaticamente() {
+	new ApplicationsYSeatsActualizarAutomaticamente().actualizar();
+	
     }
 
 
