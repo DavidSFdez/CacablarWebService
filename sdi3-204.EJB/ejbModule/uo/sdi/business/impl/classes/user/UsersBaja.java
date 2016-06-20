@@ -26,19 +26,6 @@ public class UsersBaja {
 	ApplicationDao ad = Factories.persistence.createApplicationDao();
 
 	User user = dao.findById(id);
-	// TODO   REVISIÓN
-	// El método ya no lanza excepciones. Si no encuentra alguna de las
-	// cosas que pretendia cambiar/quitar simplemente avisa y sigue
-	// Dudo sobre el úmtimo caso ( dao.update(user); ), porque si falla el
-	// cancelar usuario, no  deberia cancelar la cancelacion del usuario?
-	// Puede ocurrir porque el usuario se modifique/quite mientras se llama
-	// al meotod (no deberia pasar) o porque no exista; Si no eixste
-	// simplemente pasa por todos lados imprimiendo warnings y no hace nada,
-	// quizá en efecto si es la opcion adecuada
-	//
-	// JORGE revisa todas las excepciones, no tiene que devolverlas si
-	// el viaje no existe
-	// y el mensaje que he puesto para cada una
 	List<Trip> trips = td.findAllParticipated(id);
 
 	// pongo como excluido todos los viajes en los que va a

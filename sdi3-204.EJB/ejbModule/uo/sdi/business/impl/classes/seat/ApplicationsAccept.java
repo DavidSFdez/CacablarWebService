@@ -1,11 +1,8 @@
 package uo.sdi.business.impl.classes.seat;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import uo.sdi.business.exception.BusinessException;
-import uo.sdi.business.exception.EntityAlreadyExistsException;
-import uo.sdi.business.exception.EntityNotFoundException;
 import uo.sdi.infrastructure.Factories;
 import uo.sdi.model.Application;
 import uo.sdi.model.Seat;
@@ -17,11 +14,11 @@ import uo.sdi.persistence.SeatDao;
 import uo.sdi.persistence.TripDao;
 import uo.sdi.persistence.exception.AlreadyPersistedException;
 import uo.sdi.persistence.exception.NotPersistedException;
+import alb.util.log.Log;
 
 public class ApplicationsAccept {
 
-    public void execute(Application application)
-	    throws EntityNotFoundException, EntityAlreadyExistsException {
+    public void execute(Application application) {
 	Long[] ids = { application.getUserId(), application.getTripId() };
 	// ids[0] = userId
 	// ids[1] = tripId
@@ -34,6 +31,9 @@ public class ApplicationsAccept {
 	// seat.setComment(comment);
 
 	Trip trip = Factories.persistence.createTripDao().findById(ids[1]);
+	if (trip == null)
+	    throw new BusinessException("No se enuentra el viaje [" + ids[1]
+		    + "].");
 
 	// No quedan plazas
 	if (trip.getAvailablePax() == 0) {
@@ -69,11 +69,9 @@ public class ApplicationsAccept {
 		    applicationDao.delete(aux);
 		    seatDao.save(seatAux);
 		} catch (NotPersistedException e) {
-		    // TODO JORGE
-		    e.printStackTrace();
+		    Log.warn("No existe la peticion");
 		} catch (AlreadyPersistedException e) {
-		    // TODO JORGE
-		    e.printStackTrace();
+		    Log.warn("Ya existe el asiento");
 		}
 
 	    }
@@ -83,19 +81,20 @@ public class ApplicationsAccept {
 	try {
 	    tripDao.update(trip);
 	} catch (NotPersistedException e) {
-	    throw new EntityNotFoundException("No se enuentra el viaje.", e);
+	    throw new BusinessException("No se enuentra el viaje ["
+		    + trip.getId() + "].", e);
 	}
 
 	try {
 	    applicationDao.delete(ids);
 	} catch (NotPersistedException e) {
-	    throw new EntityNotFoundException("No se enuentra la petición..", e);
+	    Log.warn("No se enuentra la petición.");
 	}
 
 	try {
 	    seatDao.save(seat);
 	} catch (AlreadyPersistedException e) {
-	    throw new EntityAlreadyExistsException("ya existe el asiento.", e);
+	    Log.warn("Ya existe el asiento.");
 	}
 
     }
