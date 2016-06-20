@@ -1,0 +1,17 @@
+<jboss-app xmlns="http://www.jboss.com/xml/ns/javaee"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.jboss.com/xml/ns/javaee
+                            http://www.jboss.org/j2ee/schema/jboss-app_6_0.xsd"
+             version="6.0">
+     <security-domain name="secureDomain" cache-type="default">
+                    <authentication>
+                        <login-module code="Database" flag="required">
+                            <module-option name="dsJndiName" value="java:jboss/datasources/UserDS"/>
+                            <module-option name="principalsQuery" value="select password from tusers where login=?"/>
+                            <module-option name="rolesQuery" value="SELECT 'ROLE_USER' FROM tusers LIMIT 1"/>
+                            <module-option name="hashAlgorithm" value="SHA-256"/>
+                            <module-option name="hashEncoding" value="base64"/>
+                        </login-module>
+                    </authentication>
+                </security-domain>
+</jboss-app>

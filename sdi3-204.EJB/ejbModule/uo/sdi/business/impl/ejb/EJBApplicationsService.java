@@ -47,7 +47,8 @@ public class EJBApplicationsService implements LocalApplicationsService,
      */
     @Override
     public List<Application> getApplicationsWithTripClosedToUpdate() {
-	return new ApplicationsYSeatsActualizarAutomaticamente().find();
+	new ApplicationsYSeatsActualizarAutomaticamente().actualizar();
+	return null;
     }
 
     @Override
