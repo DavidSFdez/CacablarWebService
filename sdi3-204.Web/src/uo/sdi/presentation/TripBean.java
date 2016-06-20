@@ -68,7 +68,7 @@ public class TripBean implements Serializable {
     }
 
     public boolean isInApplications(Long idUser) {
-	return Factories.services.getApplicationService().findApplication(
+	return Factories.services.getSeatsService().findApplication(
 		trip.getId(), idUser) != null;
 
     }
@@ -108,7 +108,7 @@ public class TripBean implements Serializable {
 
     public Application getApplicationUser(Long idUser) {
 	if (trip.getId() != null)
-	    return Factories.services.getApplicationService().findApplication(
+	    return Factories.services.getSeatsService().findApplication(
 		    trip.getId(), idUser);
 	return null;
     }
@@ -191,8 +191,8 @@ public class TripBean implements Serializable {
     }
 
     public boolean isUserInApplications(Long idUser) {
-	Factories.services.getApplicationService().findApplication(
-		trip.getId(), idUser);
+	Factories.services.getSeatsService().findApplication(trip.getId(),
+		idUser);
 	return true;
     }
 
@@ -216,8 +216,7 @@ public class TripBean implements Serializable {
     public String acceptApplication(Application application) {
 
 	try {
-	    Factories.services.getApplicationService().acceptApplication(
-		    application);
+	    Factories.services.getSeatsService().acceptApplication(application);
 	    actualizarTrip();
 	} catch (EntityAlreadyExistsException | EntityNotFoundException e) {
 	    return "fracaso";
@@ -232,13 +231,7 @@ public class TripBean implements Serializable {
     }
 
     public String cancelApplication(Application application) {
-	try {
-	    Factories.services.getApplicationService().cancelApplication(
-		    application);
-	} catch (EntityAlreadyExistsException | EntityNotFoundException e) {
-	    return "fracaso";
-	}
-
+	Factories.services.getSeatsService().cancelApplication(application);
 	return "exito";
     }
 

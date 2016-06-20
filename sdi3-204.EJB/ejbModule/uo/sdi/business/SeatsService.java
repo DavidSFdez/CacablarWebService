@@ -27,8 +27,7 @@ public interface SeatsService {
      * @param idTrip
      * @throws EntityNotFoundException
      */
-    void removeApplication(Long idUser, Long idTrip)
-	    throws EntityNotFoundException;
+    void removeApplication(Long idUser, Long idTrip);
 
     /**
      * Pasa la peticion a asiento cancelado.
@@ -37,8 +36,7 @@ public interface SeatsService {
      * @throws EntityNotFoundException
      * @throws EntityAlreadyExistsException
      */
-    void cancelApplication(Application application)
-	    throws EntityNotFoundException, EntityAlreadyExistsException;
+    void cancelApplication(Application application);
 
     /**
      * Pasa la peticion a asiento aceptado.

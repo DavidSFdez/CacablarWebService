@@ -60,7 +60,7 @@ public class EJBSeatsService implements LocalSeatsService, RemoteSeatsService {
     }
 
     @Override
-    public void removeApplication(Long idUser, Long idTrip) throws EntityNotFoundException {
+    public void removeApplication(Long idUser, Long idTrip) {
 	new ApplicationsRemove().remove(idUser, idTrip);
 
     }
@@ -72,8 +72,7 @@ public class EJBSeatsService implements LocalSeatsService, RemoteSeatsService {
     }
 
     @Override
-    public void cancelApplication(Application application)
-	    throws EntityNotFoundException, EntityAlreadyExistsException {
+    public void cancelApplication(Application application){
 	new ApplicationCancel().execute(application);
     }
 

@@ -2,6 +2,7 @@ package uo.sdi.business.impl.classes.maintenance;
 
 import java.util.List;
 
+import alb.util.log.Log;
 import uo.sdi.infrastructure.Factories;
 import uo.sdi.model.Application;
 import uo.sdi.model.Seat;
@@ -37,19 +38,16 @@ public class ApplicationsYSeatsActualizarAutomaticamente {
 	SeatDao sd = Factories.persistence.createSeatDao();
 
 	for (Application a : applications) {
+	    Factories.services.getSeatsService().removeApplication(a.getUserId(), a.getTripId());
 	    Seat seat = new Seat();
 	    seat.setComment("Sin Plaza");
 	    seat.setStatus(SeatStatus.SIN_PLAZA);
 	    seat.setTripId(a.getTripId());
 	    seat.setUserId(a.getUserId());
-	  
 		try {
 		    sd.save(seat);
 		} catch (AlreadyPersistedException e) {
-		    // TODO JORGE tu trabajo (Debería saltar excepción únicamente
-		    // si ya existe en bbdd una entrada con las mismas claves
-		    //que lo que se intenta introducir
-		    e.printStackTrace();
+		    Log.warn("Ya existe el asinento [trip:"+seat.getTripId() +", user"+seat.getUserId()+"].");
 		}
 	   
 	}

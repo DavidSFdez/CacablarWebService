@@ -1,7 +1,5 @@
 package uo.sdi.business.impl.classes.seat;
 
-import uo.sdi.business.exception.EntityAlreadyExistsException;
-import uo.sdi.business.exception.EntityNotFoundException;
 import uo.sdi.infrastructure.Factories;
 import uo.sdi.model.Application;
 import uo.sdi.model.Seat;
@@ -10,11 +8,11 @@ import uo.sdi.persistence.ApplicationDao;
 import uo.sdi.persistence.SeatDao;
 import uo.sdi.persistence.exception.AlreadyPersistedException;
 import uo.sdi.persistence.exception.NotPersistedException;
+import alb.util.log.Log;
 
 public class ApplicationCancel {
 
-    public void execute(Application application)
-	    throws EntityNotFoundException, EntityAlreadyExistsException {
+    public void execute(Application application){
 	Long[] ids = { application.getUserId(), application.getTripId() };
 	// ids[0] = userId
 	// ids[1] = tripId
@@ -33,15 +31,13 @@ public class ApplicationCancel {
 	try {
 	    applicationDao.delete(ids);
 	} catch (NotPersistedException e) {
-	    throw new EntityNotFoundException(
-		    "No existe la peticion que quiere borrar.", e);
+	    Log.warn("No existe la peticion que quiere borrar.");
 	}
 
 	try {
 	    seatDao.save(seat);
 	} catch (AlreadyPersistedException e) {
-	    throw new EntityAlreadyExistsException(
-		    "No existe la peticion que quiere borrar.", e);
+	    Log.warn("Ya existe el asiento.");
 	}
 
     }

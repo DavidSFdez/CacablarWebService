@@ -4,7 +4,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-import uo.sdi.business.ApplicationService;
+//import uo.sdi.business.ApplicationService;
 import uo.sdi.business.ClientService;
 import uo.sdi.business.LoginService;
 import uo.sdi.business.RattingsService;
@@ -35,10 +35,11 @@ public class LocalEJBServiceLocator implements ServicesFactory {
 	    + "sdi3-204/" + "sdi3-204.EJB/" + "EJBSeatsService!"
 	    + "uo.sdi.business.impl.local.LocalSeatsService";
 
-    private static final String APPLICATIONS_SERVICE_JNDI_KEY = "java:global/"
-	    + "sdi3-204/" + "sdi3-204.EJB/" + "EJBApplicationsService!"
-	    + "uo.sdi.business.impl.local.LocalApplicationsService";
-    
+    // private static final String APPLICATIONS_SERVICE_JNDI_KEY =
+    // "java:global/"
+    // + "sdi3-204/" + "sdi3-204.EJB/" + "EJBApplicationsService!"
+    // + "uo.sdi.business.impl.local.LocalApplicationsService";
+
     private static final String CLIENT_SERVICE_JNDI_KEY = "java:global/"
 	    + "sdi3-204/" + "sdi3-204.EJB/" + "EJBClientService!"
 	    + "uo.sdi.business.impl.local.LocalClientService";
@@ -83,16 +84,16 @@ public class LocalEJBServiceLocator implements ServicesFactory {
 	}
     }
 
-    @Override
-    public ApplicationService getApplicationService() {
-	try {
-	    Context ctx = new InitialContext();
-	    return (ApplicationService) ctx
-		    .lookup(APPLICATIONS_SERVICE_JNDI_KEY);
-	} catch (NamingException e) {
-	    throw new RuntimeException("JNDI problem", e);
-	}
-    }
+    // @Override
+    // public ApplicationService getApplicationService() {
+    // try {
+    // Context ctx = new InitialContext();
+    // return (ApplicationService) ctx
+    // .lookup(APPLICATIONS_SERVICE_JNDI_KEY);
+    // } catch (NamingException e) {
+    // throw new RuntimeException("JNDI problem", e);
+    // }
+    // }
 
     @Override
     public RattingsService getRattingsService() {
