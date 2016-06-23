@@ -40,13 +40,21 @@
 		<servlet-name>resteasy</servlet-name>
 		<url-pattern>/rest/*</url-pattern>
 	</servlet-mapping>
-
 	<welcome-file-list>
 		<welcome-file>index.xhtml</welcome-file>
 	</welcome-file-list>
 
-	<login-config>
+	<filter>
+		<filter-name>RESTAuthenticationFilter</filter-name>
+		<filter-class>uo.sdi.rest.filter.RestAuthenticationFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>RESTAuthenticationFilter</filter-name>
+		<url-pattern>/rest/*</url-pattern>
+	</filter-mapping>
+
+	<!-- <login-config>
 		<auth-method>BASIC</auth-method>
 		<realm-name>ApplicationRealm</realm-name>
-	</login-config>
+	</login-config> -->
 </web-app>
