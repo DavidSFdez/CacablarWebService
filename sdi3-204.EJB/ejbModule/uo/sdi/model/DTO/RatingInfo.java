@@ -1,10 +1,10 @@
 package uo.sdi.model.DTO;
 
 import java.io.Serializable;
-import java.util.Date;
 
-import uo.sdi.model.Rating;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement
 public class RatingInfo implements Serializable{
 
     /**

@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 import uo.sdi.business.ClientService;
 import uo.sdi.business.impl.RemoteEJBServiceLocator;
-import uo.sdi.model.User;
 import uo.sdi.model.DTO.RatingInfo;
 import uo.sdi.model.DTO.UserInfo;
 
@@ -69,13 +68,13 @@ public class Main {
 
     private void imprimirDatosUsuarioViajes(UserInfo user) {
 
-	System.out.println("----------User id: " + user.getUser().getId()
+	System.out.println("----------User id: " + user.getId()
 		+ " Info-----------------");
 
-	System.out.println("\nUsuario: " + user.getUser().getLogin()
-		+ "\t apellidos: " + user.getUser().getSurname()
-		+ "\t e-mail: " + user.getUser().getEmail() + "\t status: "
-		+ user.getUser().getStatus());
+	System.out.println("\nUsuario: " + user.getName()
+		+ "\t apellidos: " + user.getSurname()
+		+ "\t e-mail: " + user.getEmail() + "\t status: "
+		+ user.getStatus());
 
 	System.out.println("\nPromocionados: " + user.getNumPromoted()
 		+ "\nParticipa: " + user.getNumParticipated());

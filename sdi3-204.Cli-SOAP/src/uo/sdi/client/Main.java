@@ -1,150 +1,127 @@
 package uo.sdi.client;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
+import java.util.Scanner;
 
-import com.sdi.ws.EJBRattingsServiceService;
-import com.sdi.ws.EJBTripsServiceService;
-import com.sdi.ws.EJBUsersServiceService;
-import com.sdi.ws.Rating;
-import com.sdi.ws.RattingsService;
-import com.sdi.ws.Trip;
-import com.sdi.ws.TripsService;
-import com.sdi.ws.User;
-import com.sdi.ws.UsersService;
+import com.sdi.ws.*;
 
 public class Main {
 
+    ClientService cs = new EJBClientServiceService().getClientServicePort();
+    Scanner in = null;
+
     public static void main(String[] args) throws Exception {
-	run();
+	new Main().run();
 
     }
 
-    private static void run() throws Exception {
-	metodocutre();
+    private void run() throws Exception {
 
-	 System.out.println("###listarUsuariosSistema();");
-	 listarUsuariosSistema();
-	
-	 System.out.println("###deshabilitarUsuario();");
-	 deshabilitarUsuario();
-	
-	 System.out.println("###listarComentariosYPuntuaciones();");
-	 listarComentariosYPuntuaciones();
-	
-	 System.out.println("###eliminarRatting();");
-	 eliminarRatting();
-    }
+	in = new Scanner(System.in);
 
-    private static void metodocutre() {
+	while (true) {
+	    System.out.println("introduce opción 1-4 (0 para salir)");
+	    System.out.println("1-Listar usuarios del sistema"
+		    + "\n2-Deshabilitar usuario"
+		    + "\n3-Listar comentarios y puntuaciones de los viajes "
+		    + "realizados en el último mes"
+		    + "\n4-Eliminar comentarios y puntuaciones" + "\n0-Salir");
+	    String opcion = in.next();
 
-	UsersService us = new EJBUsersServiceService().getUsersServicePort();
-
-	System.out.println("Usuarios del sistema");
-	List<User> users = us.findAllUsers();
-	for (User u : users)
-	    System.out.println(u);
-
-	System.out.println("Viajes del sistema");
-	List<Trip> trips = new EJBTripsServiceService().getTripsServicePort()
-		.findAllTrips();
-	for (Trip t : trips)
-	    System.out.println(t);
-    }
-
-    private static void listarUsuariosSistema() throws Exception {
-	UsersService us = new EJBUsersServiceService().getUsersServicePort();
-	TripsService ts = new EJBTripsServiceService().getTripsServicePort();
-	List<User> users = us.findAllUsers();
-	System.out.println("-----------------------------");
-	for (User u : users) {
-	    List<Trip> promotedTrips = ts.findAllPromoted(u.getId());
-	    List<Trip> participateTrips = ts.findAllParticipated(u.getId());
-	    imprimirDatosUsuarioViajes(u, promotedTrips.size(),
-		    participateTrips.size());
-	    System.out.println("-------");
-	}
-    }
-
-    private static void imprimirDatosUsuarioViajes(User user,
-	    int numberPromoted, int numberParticipated) {
-
-	System.out.println("\nId: " + user.getId() + "\nUsuario: "
-		+ user.getLogin());
-
-	System.out.println("\nPromocionados: " + numberPromoted
-		+ "\nParticipa: " + numberParticipated);
-
-    }
-
-    private static void deshabilitarUsuario() throws Exception {
-
-	User user;
-
-	UsersService us = new EJBUsersServiceService().getUsersServicePort();
-	user = us.findUserById(101L);
-
-	if (user != null)
-	    us.cancelUser(user.getId());
-    }
-
-    private static void listarComentariosYPuntuaciones() {
-
-	RattingsService rs = new EJBRattingsServiceService()
-		.getRattingsServicePort();
-	TripsService ts = new EJBTripsServiceService().getTripsServicePort();
-	try {
-
-	    List<Trip> trips = ts.findAllTrips();
-
-	    List<Trip> tripsLastMonth = new LinkedList<>();
-	    Date actual = new Date();
-	    Date unMesAntes = getNewDateMonth(actual, -1);
-
-	    for (Trip t : trips) {
-		if (t.getArrivalDate().toGregorianCalendar().getTime()
-			.after(unMesAntes)
-			&& t.getArrivalDate().toGregorianCalendar().getTime()
-				.before(actual)) {
-		    tripsLastMonth.add(t);
-		}
+	    switch (opcion) {
+	    case "0":
+		in.close();
+		return;
+	    case "1":
+		listarUsuariosSistema();
+		break;
+	    case "2":
+		deshabilitarUsuario();
+		break;
+	    case "3":
+		listarComentariosYPuntuaciones();
+		break;
+	    case "4":
+		eliminarRatting();
+		break;
+	    default:
+		break;
 	    }
 
-	    List<Rating> rattings = new LinkedList<>();
-	    for (Trip t : tripsLastMonth) {
-		rattings.add(rs.listByTrip(t.getId()));
-	    }
-
-	    imprimeRattings(rattings);
-
-	} catch (Exception e) {
-	    
-	    e.printStackTrace();
 	}
 
     }
 
-    private static Date getNewDateMonth(Date actual, int months) {
-	Calendar cal = Calendar.getInstance();
-	cal.setTime(actual);
-	cal.add(Calendar.MONTH, months);
-	return cal.getTime();
+    private void listarUsuariosSistema() throws Exception {
+
+	System.out.println("###listarUsuariosSistema");
+
+	List<UserInfo> usersInfo = cs.listUsersInfo();
+
+	for (UserInfo u : usersInfo)
+	    imprimirDatosUsuarioViajes(u);
+
     }
 
-    private static void imprimeRattings(List<Rating> rattings) {
-	
+    private void imprimirDatosUsuarioViajes(UserInfo user) {
+
+	System.out.println("----------User id: " + user.getId()
+		+ " Info-----------------");
+
+	System.out.println("\nUsuario: " + user.getName()
+		+ "\t apellidos: " + user.getSurname()
+		+ "\t e-mail: " + user.getEmail() + "\t status: "
+		+ user.getStatus());
+
+	System.out.println("\nPromocionados: " + user.getNumPromoted()
+		+ "\nParticipa: " + user.getNumParticipated());
+
+	System.out.println("------------------------------------------------");
 
     }
 
-    private static void eliminarRatting() {
-	RattingsService rs = new EJBRattingsServiceService()
-		.getRattingsServicePort();
+    private void deshabilitarUsuario() {
+	System.out.println("###deshabilitarUsuario");
 
-	Rating r = new Rating();
+	System.out.println("Introduce Id del Usuario que desea deshabilitar");
+	Long userId = in.nextLong();
 
-	rs.delete(r.getId());
+	cs.disableUser(userId);
+
+    }
+
+    private void listarComentariosYPuntuaciones() {
+	System.out.println("###listarComentariosYPuntuaciones");
+
+	List<RatingInfo> ratings = cs.listRatings();
+
+	imprimirRatings(ratings);
+
+    }
+
+    private void imprimirRatings(List<RatingInfo> ri) {
+	System.out.println("----------ratings-----------------");
+
+	for (RatingInfo r : ri) {
+	    System.out.println("----------------------------------");
+	    System.out.println("Destino: " + r.getDestino()
+		    + "\nComentario realizado por: "
+		    + r.getFromUserId()
+		    + "\nSobre el usuario: "
+		    + r.getAboutUserId() + "\nValoración: "
+		    + r.getValue() + "\nComentario: "
+		    + r.getComment());
+	    System.out.println("----------------------------------");
+	}
+    }
+
+    private void eliminarRatting() {
+	System.out.println("###eliminarRatting");
+
+	System.out.println("Introduce Id del rating que desea eliminar");
+	Long ratingId = in.nextLong();
+
+	cs.removeRating(ratingId);
 
     }
 

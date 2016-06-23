@@ -1,8 +1,6 @@
 package uo.sdi.business.impl.ejb;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -20,14 +18,10 @@ import uo.sdi.business.impl.local.LocalTripsService;
 import uo.sdi.business.impl.local.LocalUsersService;
 import uo.sdi.business.impl.remote.RemoteClientService;
 import uo.sdi.infrastructure.Factories;
-import uo.sdi.model.Rating;
 import uo.sdi.model.Trip;
 import uo.sdi.model.User;
 import uo.sdi.model.DTO.RatingInfo;
 import uo.sdi.model.DTO.UserInfo;
-
-import com.wagnerandade.coollection.Coollection;
-import com.wagnerandade.coollection.query.order.Order;
 
 @Stateless
 @WebService(name = "ClientService")
@@ -63,7 +57,11 @@ public class EJBClientService implements LocalClientService,
 		    .findAllPromoted(u.getId());
 	    List<Trip> participatedTrips = Factories.services.getTripsService()
 		    .findAllParticipated(u.getId());
-	    ui.setUser(u);
+	    ui.setId(u.getId());
+	    ui.setEmail(u.getEmail());
+	    ui.setName(ui.getName());
+	    ui.setStatus(ui.getStatus());
+	    ui.setSurname(ui.getSurname());
 	    ui.setNumPromoted(promotedTrips.size());
 	    ui.setNumParticipated(participatedTrips.size());
 	    usersInfo.add(ui);
@@ -81,16 +79,6 @@ public class EJBClientService implements LocalClientService,
     public List<RatingInfo> listRatings() {
 	
 	return ratingsService.findRatingsLastMonth();
-    }
-
-    // Le pasas una fecha y el tiempo y te devuelve esa fecha
-    // Por ejemplo, fecha actual y -1 mes, te devuelve un date con la fecha
-    // Del mes pasado
-    private Date getNewDateMonth(Date actual, int months) {
-	Calendar cal = Calendar.getInstance();
-	cal.setTime(actual);
-	cal.add(Calendar.MONTH, months);
-	return cal.getTime();
     }
 
     @Override
