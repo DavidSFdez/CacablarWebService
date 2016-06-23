@@ -97,7 +97,7 @@ public class Main {
     private void listarComentariosYPuntuaciones() {
 	System.out.println("###listarComentariosYPuntuaciones");
 
-	List<RatingInfo> ratings = cs.listRatings(-1);
+	List<RatingInfo> ratings = cs.listRatings();
 
 	imprimirRatings(ratings);
 
@@ -110,11 +110,11 @@ public class Main {
 	    System.out.println("----------------------------------");
 	    System.out.println("Destino: " + r.getDestino()
 		    + "\nComentario realizado por: "
-		    + r.getRating().getSeatFromUserId()
+		    + r.getFromUserId()
 		    + "\nSobre el usuario: "
-		    + r.getRating().getSeatAboutUserId() + "\nValoración: "
-		    + r.getRating().getValue() + "\nComentario: "
-		    + r.getRating().getComment());
+		    + r.getAboutUserId() + "\nValoración: "
+		    + r.getValue() + "\nComentario: "
+		    + r.getComment());
 	    System.out.println("----------------------------------");
 	}
     }

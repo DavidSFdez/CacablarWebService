@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import uo.sdi.model.Rating;
+import uo.sdi.model.DTO.RatingInfo;
 import uo.sdi.persistence.RatingDao;
 import uo.sdi.persistence.util.JdbcTemplate;
 import uo.sdi.persistence.util.RowMapper;
@@ -24,6 +25,23 @@ public class RatingDaoJdbcImpl implements RatingDao {
 	    dto.setSeatAboutUserId(rs.getLong("ABOUT_USER_ID"));
 	    dto.setSeatFromTripId(rs.getLong("FROM_TRIP_ID"));
 	    dto.setSeatFromUserId(rs.getLong("FROM_USER_ID"));
+
+	    return dto;
+	}
+
+    }
+
+    public class RatingInfoMapper implements RowMapper<RatingInfo> {
+
+	@Override
+	public RatingInfo toObject(ResultSet rs) throws SQLException {
+	    RatingInfo dto = new RatingInfo();
+
+	    dto.setDestino(rs.getString("DESTINATION_CITY"));
+	    dto.setAboutUserId(rs.getLong("ABOUT_USER_ID"));
+	    dto.setFromUserId(rs.getLong("FROM_USER_ID"));
+	    dto.setComment(rs.getString("COMMENT"));
+	    dto.setValue(rs.getInt("VALUE"));
 
 	    return dto;
 	}
@@ -80,6 +98,12 @@ public class RatingDaoJdbcImpl implements RatingDao {
     public List<Rating> findByTrip(Long idTrip) {
 	return jdbcTemplate.queryForList("RATING_FIND_BY_TRIP",
 		new RatingMapper(), idTrip);
+    }
+
+    @Override
+    public List<RatingInfo> findLastMonth() {
+	return jdbcTemplate.queryForList("RATING_FIND_LAST_MONTH",
+		new RatingInfoMapper());
     }
 
 }

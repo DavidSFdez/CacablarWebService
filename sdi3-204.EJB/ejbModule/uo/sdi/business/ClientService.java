@@ -12,7 +12,7 @@ public interface ClientService {
     
     void disableUser(Long userId);
     
-    List<RatingInfo> listRatings(int numMonths);
+    List<RatingInfo> listRatings();
     
     void removeRating(Long ratingId);
 

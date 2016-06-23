@@ -78,37 +78,9 @@ public class EJBClientService implements LocalClientService,
     }
 
     @Override
-    public List<RatingInfo> listRatings(int numMonths) {
-
-	System.out.println("------------");
-	List<Trip> allTrips = tripsService.findAllTrips();
-	Date actual = new Date();
-	Date ant = getNewDateMonth(actual, numMonths);
-	System.out.println("Actual: "+actual);
-	System.out.println("Otra: "+ant);
-	List<Trip> trips = new ArrayList<>();
-
-	for (Trip t : allTrips)
-	    if (t.getArrivalDate().after(ant)
-		    && t.getArrivalDate().before(actual))
-		trips.add(t);
-	List<Rating> ratings = null;
-	List<RatingInfo> ri = new ArrayList<>();
-
-	for (Trip t : trips) {
-	    ratings = ratingsService.listByTrip(t.getId());
-	    for (Rating r : ratings) {
-		RatingInfo rat = new RatingInfo();
-		rat.setRating(r);
-		rat.setDestino(t.getDestination().getCity());
-		rat.setArrivalDate(t.getArrivalDate());
-		ri.add(rat);
-	    }
-	}
-
-	//ri = Coollection.from(ri).orderBy("fecha", Order.DESC).all();
-
-	return ri;
+    public List<RatingInfo> listRatings() {
+	
+	return ratingsService.findRatingsLastMonth();
     }
 
     // Le pasas una fecha y el tiempo y te devuelve esa fecha

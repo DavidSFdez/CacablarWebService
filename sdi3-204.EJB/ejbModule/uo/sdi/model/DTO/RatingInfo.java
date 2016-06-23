@@ -11,22 +11,64 @@ public class RatingInfo implements Serializable{
      * 
      */
     private static final long serialVersionUID = 8611846701284485685L;
-    private Rating rating;
+    private Long aboutUserId;
+    private Long fromUserId;
+    private String comment;
+    private int value;
     private String destino;
-    private Date arrivalDate;
+    
     
     
     public RatingInfo(){}
 
 
-    public Rating getRating() {
-        return rating;
+
+    public Long getAboutUserId() {
+        return aboutUserId;
     }
 
 
-    public void setRating(Rating rating) {
-        this.rating = rating;
+
+    public void setAboutUserId(Long aboutUserId) {
+        this.aboutUserId = aboutUserId;
     }
+
+
+
+    public Long getFromUserId() {
+        return fromUserId;
+    }
+
+
+
+    public void setFromUserId(Long fromUserId) {
+        this.fromUserId = fromUserId;
+    }
+
+
+
+    public String getComment() {
+        return comment;
+    }
+
+
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+
+
+    public int getValue() {
+        return value;
+    }
+
+
+
+    public void setValue(int value) {
+        this.value = value;
+    }
+
 
 
     public String getDestino() {
@@ -34,19 +76,19 @@ public class RatingInfo implements Serializable{
     }
 
 
+
     public void setDestino(String destino) {
         this.destino = destino;
     }
 
 
-    public Date getArrivalDate() {
-        return arrivalDate;
+
+    public static long getSerialversionuid() {
+        return serialVersionUID;
     }
 
 
-    public void setArrivalDate(Date arrivalDate) {
-        this.arrivalDate = arrivalDate;
-    }
+
 
   
     
