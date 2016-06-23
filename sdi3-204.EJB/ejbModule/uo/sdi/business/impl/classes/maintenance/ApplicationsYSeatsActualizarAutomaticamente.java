@@ -33,24 +33,23 @@ public class ApplicationsYSeatsActualizarAutomaticamente {
 
 	List<Application> applications = ad.findToUpdate();
 
-	// borro las applications
 	ad.deleteToUpdate();
 
 	SeatDao sd = Factories.persistence.createSeatDao();
 
 	for (Application a : applications) {
+	    Factories.services.getSeatsService().removeApplication(a.getUserId(), a.getTripId());
 	    Seat seat = new Seat();
 	    seat.setComment("Sin Plaza");
 	    seat.setStatus(SeatStatus.SIN_PLAZA);
 	    seat.setTripId(a.getTripId());
 	    seat.setUserId(a.getUserId());
-	    try {
-		sd.save(seat);
-	    } catch (AlreadyPersistedException e) {
-		Log.warn("Ya existe el asinento [trip:" + seat.getTripId()
-			+ ", user" + seat.getUserId() + "].");
-	    }
-
+		try {
+		    sd.save(seat);
+		} catch (AlreadyPersistedException e) {
+		    Log.warn("Ya existe el asinento [trip:"+seat.getTripId() +", user"+seat.getUserId()+"].");
+		}
+	   
 	}
 
     }
