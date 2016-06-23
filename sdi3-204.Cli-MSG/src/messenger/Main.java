@@ -18,12 +18,9 @@ import uo.sdi.business.impl.RemoteEJBServiceLocator;
 import uo.sdi.model.Trip;
 import uo.sdi.model.User;
 import util.Jndi;
+import static java.lang.System.out;
 
 public class Main {
-    // PARA QQUE FUNCIONE LA MENSAJERÍA:
-    // En el servidor poner en el fichero <<application-roles.properties>>
-    // el rol guest en sdi
-    // sdi=NotaneitorAdmin,Administrador,Invitado,guest
 
     private static final String JMS_CONNECTION_FACTORY = "jms/RemoteConnectionFactory";
     private static final String MESSAGE_TOPIC = "jms/topic/msg";
@@ -32,69 +29,102 @@ public class Main {
     private Connection con;
     private Session session;
     private MessageProducer sender;
-    @SuppressWarnings("unused")
     private MessageConsumer consumer;
 
-    public static void main(String[] args) throws Exception {
-	new Main().run();
+    LoginService ls = new RemoteEJBServiceLocator().getLoginService();
+
+    private Scanner in = new Scanner(System.in);
+
+    public static void main(String[] args) {
+	Main m = new Main();
+	try {
+	    m.run();
+	} catch (Exception e) {
+	    out.println(e.getMessage());
+	}
     }
 
-    private Long tripId;
-    private Long userId;
-    private static ThreadLocal<User> UserLocal = new ThreadLocal<>();
-    public static User getCUrrentUser(){
-	return UserLocal.get();
+    // Como no se pueden mandar al listener parametros por constructor se almacenan en el hilo
+    // en esta clase
+    
+    private static ThreadLocal<User> currentUser = new ThreadLocal<>();
+    private static ThreadLocal<Long> currentTrip = new ThreadLocal<>();
+
+    public static User getCurrentUser() {
+	return currentUser.get();
+    }
+    
+    public static Long getCurrentTrip() {
+	return currentTrip.get();
     }
 
-    @SuppressWarnings("static-access")
     private void run() throws Exception {
-	LoginService ls = new RemoteEJBServiceLocator().getLoginService();
-	@SuppressWarnings("resource")
-	Scanner in = new Scanner(System.in);
-	System.out.println("Nombre de usuario:");
-	String login = in.next();
-	System.out.println("Contraseña:");
-	String password = in.next();
-	User user = ls.verify(login, password);
-	if (user != null) {
-	    this.userId = user.getId();
-	    this.UserLocal.set(user);
-	    List<Trip> trips;
-	    System.out.println("Selecciona el viaje");
-	    try {
-		trips = new RemoteEJBServiceLocator().getTripsService()
-			.listRelated(userId);
-	    } catch (Exception e) {
-		throw new Exception();
-	    }
-	    List<Long> longs = new LinkedList<>();
-	    for (Trip t : trips) {
-		System.out.println(t.getId());
-		longs.add(t.getId());
-	    }
-	    System.out.println("Seleccione viaje:");
-	    Long idViaje = in.nextLong();
-	    if (!longs.contains(idViaje))
-		throw new Exception();
+	String login = pedirDato("Nombre de usuario:");
+	String pass = pedirDato("Contraseña:");
 
-	    this.tripId = idViaje;
+	User user = ls.verify(login, pass);
 
-	    init();
-	    //Aqui se consumen los mensaje
+	if (user == null)
+	    throw new Exception("Usuario incorrecto.");
 
-	    System.out.println("¿Desea mandar textos? (Y/N)");
-	    if (in.next().equalsIgnoreCase("y")) {
-		System.out.println("Escriba [quit] para salir");
-		while (true) {
-		    String texto = in.next();
-		    if (texto.equalsIgnoreCase("quit"))
-			break;
-		    sendMessage(texto);
-		}
+	Long userId = user.getId();
+	Long tripId = seleccionarViaje(userId);
+	
+	currentTrip.set(tripId);
+
+	currentUser.set(user);
+
+	init();
+	// Aqui aparecen los mensajes del viaje seleccionado automaticamente porque el 
+	// listener que imprime los mensajes se inicializa en este momento.
+	
+	enviar: {
+	    String text = pedirDato("¿Desea mandar mensajes a este viaje? (Y/N)");
+	    
+	    if(!text.equalsIgnoreCase("y"))
+		break enviar;
+
+	    out.println("Escriba los mensajes que quiera enviar a ese viaje.");
+	    out.println("Escriba .quit para salir.");
+	    while (true) {
+		text = in.next();
+		if (text.equalsIgnoreCase(".quit"))
+		    break;
+		sendMessage(text, tripId, userId);
 	    }
-	    close();
-	} else
-	    throw new Exception();
+	}
+	close();
+	out.println("Buen viaje.");
+    }
+
+    private Long seleccionarViaje(Long userId) throws Exception {
+	out.println("Sus viajes:");
+	
+	List<Trip> trips = new RemoteEJBServiceLocator().getTripsService()
+		.listRelated(userId);
+	
+	if(trips.isEmpty())
+	    throw new Exception("No tiene viajes disponibles.");
+
+	List<Long> longs = new LinkedList<>();
+
+	for (Trip trip : trips) {
+	    longs.add(trip.getId());
+	    out.print("ID: ");
+	    out.print(trip.getId());
+	    out.print("\t Destino: ");
+	    out.println(trip.getDestination().getCity());
+	}
+
+	String selected = pedirDato("selecciona un viaje:");
+
+	if (selected.matches("\\d+")) {
+	    Long selectedID = Long.parseLong(selected);
+	    if (longs.contains(selectedID))
+		return selectedID;
+	}
+
+	throw new Exception("Viaje inválido.");
     }
 
     public void init() throws JMSException {
@@ -103,8 +133,8 @@ public class Main {
 	Destination topic = (Destination) Jndi.find(MESSAGE_TOPIC);
 	Destination queue = (Destination) Jndi.find(MESSAGE_QUEUE);
 	con = factory.createConnection("sdi", "password");
-	Session session = con.createSession(false, Session.AUTO_ACKNOWLEDGE);
-	MessageConsumer consumer = session.createConsumer(topic);
+	session = con.createSession(false, Session.AUTO_ACKNOWLEDGE);
+	consumer = session.createConsumer(topic);
 	consumer.setMessageListener(new CCBMessageListener());
 	sender = session.createProducer(queue);
 	con.start();
@@ -121,13 +151,19 @@ public class Main {
 	}
     }
 
-    private void sendMessage(String string) throws JMSException {
+    private void sendMessage(String string, long tripId, long userId)
+	    throws JMSException {
 	MapMessage msg = session.createMapMessage();
 	msg.setString("message", string);
 	msg.setLong("tripId", tripId);
 	msg.setLong("userId", userId);
 	sender.send(msg);
 
+    }
+
+    private String pedirDato(String msg) {
+	out.println(msg);
+	return in.next();
     }
 
 }

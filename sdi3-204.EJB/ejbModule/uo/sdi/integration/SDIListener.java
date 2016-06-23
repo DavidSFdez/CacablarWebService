@@ -25,8 +25,11 @@ import uo.sdi.model.User;
  * Los mensajes se envian a aquí y se mandan al canal adecuado
  *
  */
-@MessageDriven(activationConfig = { @ActivationConfigProperty(propertyName = "destination", propertyValue = "queue/msg") })
-public class Messenger implements MessageListener {
+@MessageDriven(activationConfig = { 
+	@ActivationConfigProperty(
+		propertyName = "destination", 
+		propertyValue = "queue/msg") })
+public class SDIListener implements MessageListener {
 
     @EJB(beanInterface = LocalUsersService.class)
     private UsersService service;
@@ -51,6 +54,7 @@ public class Messenger implements MessageListener {
 
     private void processMessage(Message msg) throws BusinessException,
 	    JMSException, EntityAlreadyExistsException, EntityNotFoundException {
+	
 	if (!messageOfExpectedType(msg)) {
 	    System.out.println("Not of expected type " + msg);
 	    return;

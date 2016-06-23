@@ -25,11 +25,15 @@ public class CCBMessageListener implements MessageListener {
 	    System.out.println("Message not of expected type");
 	    return;
 	}
-	User user = Main.getCUrrentUser();
+	User user = Main.getCurrentUser();
+	Long tripID = Main.getCurrentTrip();
+	
 	if (user == null)
 	    return;
+	
 	MapMessage mmsg = (MapMessage) msg;
-	if (mmsg.getLong("userId") == user.getId()) {
+	if (mmsg.getLong("userId") == user.getId() &&
+		mmsg.getLong("tripId") == tripID) {
 	    out.print(mmsg.getLong("userId"));
 	    out.print(": ");
 	    out.println(mmsg.getString("message"));

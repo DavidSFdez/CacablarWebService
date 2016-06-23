@@ -10,9 +10,9 @@ public interface TripsService {
 
     List<Trip> listActive();
 
-    List<Trip> listRelated(Long idUser) throws Exception;
+    List<Trip> listRelated(Long idUser);
 
-    List<Trip> listActiveToUser(Long idUser) throws Exception;
+    List<Trip> listActiveToUser(Long idUser);
 
     void update(Trip trip, Long idUser) throws EntityNotFoundException;
 
