@@ -1,11 +1,16 @@
 package uo.sdi.model.DTO;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import uo.sdi.model.Rating;
 
-public class RatingInfo {
+public class RatingInfo implements Serializable{
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 8611846701284485685L;
     private Rating rating;
     private String destino;
     private Date arrivalDate;

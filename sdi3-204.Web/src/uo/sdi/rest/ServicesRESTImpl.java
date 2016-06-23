@@ -5,25 +5,21 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.Context;
 
-import uo.sdi.business.ApplicationService;
 import uo.sdi.business.SeatsService;
 import uo.sdi.business.TripsService;
 import uo.sdi.business.exception.BusinessException;
 import uo.sdi.business.exception.EntityAlreadyExistsException;
 import uo.sdi.business.exception.EntityNotFoundException;
 import uo.sdi.infrastructure.Factories;
-import uo.sdi.model.Application;
 import uo.sdi.model.Trip;
 import uo.sdi.model.User;
 
 public class ServicesRESTImpl implements ServiceREST {
 
     private TripsService tripsService;
-    private ApplicationService applicationService;
     private SeatsService seatsService;
     {
 	tripsService = Factories.services.getTripsService();
-	applicationService = Factories.services.getApplicationService();
 	seatsService = Factories.services.getSeatsService();
     }
 
@@ -63,7 +59,7 @@ public class ServicesRESTImpl implements ServiceREST {
     @Override
     public void acceptSeat(uo.sdi.model.Application application) {
 	try {
-	    applicationService.acceptApplication(application);
+	    seatsService.acceptApplication(application);
 	} catch (EntityAlreadyExistsException e) {
 	  
 	    e.printStackTrace();

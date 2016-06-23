@@ -1,9 +1,15 @@
 package uo.sdi.model.DTO;
 
+import java.io.Serializable;
+
 import uo.sdi.model.User;
 
-public class UserInfo {
+public class UserInfo implements Serializable{
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1821081568348658031L;
     private User user;
     private int numPromoted;
     private int numParticipated;

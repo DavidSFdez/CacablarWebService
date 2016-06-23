@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import uo.sdi.business.ClientService;
 import uo.sdi.business.impl.RemoteEJBServiceLocator;
+import uo.sdi.model.User;
 import uo.sdi.model.DTO.RatingInfo;
 import uo.sdi.model.DTO.UserInfo;
 
@@ -29,20 +30,26 @@ public class Main {
 		    + "\n3-Listar comentarios y puntuaciones de los viajes "
 		    + "realizados en el último mes"
 		    + "\n4-Eliminar comentarios y puntuaciones" + "\n0-Salir");
-	    int opcion = in.nextInt();
+	    String opcion = in.next();
 
 	    switch (opcion) {
-	    case 0:
+	    case "0":
 		in.close();
 		return;
-	    case 1:
+	    case "1":
 		listarUsuariosSistema();
-	    case 2:
+		break;
+	    case "2":
 		deshabilitarUsuario();
-	    case 3:
+		break;
+	    case "3":
 		listarComentariosYPuntuaciones();
-	    case 4:
+		break;
+	    case "4":
 		eliminarRatting();
+		break;
+	    default:
+		break;
 	    }
 
 	}

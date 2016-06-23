@@ -19,6 +19,7 @@ import uo.sdi.business.impl.local.LocalSeatsService;
 import uo.sdi.business.impl.local.LocalTripsService;
 import uo.sdi.business.impl.local.LocalUsersService;
 import uo.sdi.business.impl.remote.RemoteClientService;
+import uo.sdi.infrastructure.Factories;
 import uo.sdi.model.Rating;
 import uo.sdi.model.Trip;
 import uo.sdi.model.User;
@@ -46,16 +47,22 @@ public class EJBClientService implements LocalClientService,
     private RattingsService ratingsService;
 
     @Override
+    public List<User> getUsers(){
+	return usersService.findAllUsers();
+    }
+    
+    @Override
     public List<UserInfo> listUsersInfo() {
-	List<User> users = usersService.findAllUsers();
+	List<User> users = Factories.services.getUsersService().findAllUsers();
 	List<UserInfo> usersInfo = new ArrayList<>();
 	UserInfo ui = null;
 
 	for (User u : users) {
 	    ui = new UserInfo();
-	    List<Trip> promotedTrips = tripsService.findAllPromoted(u.getId());
-	    List<Trip> participatedTrips = tripsService.findAllParticipated(u
-		    .getId());
+	    List<Trip> promotedTrips = Factories.services.getTripsService()
+		    .findAllPromoted(u.getId());
+	    List<Trip> participatedTrips = Factories.services.getTripsService()
+		    .findAllParticipated(u.getId());
 	    ui.setUser(u);
 	    ui.setNumPromoted(promotedTrips.size());
 	    ui.setNumParticipated(participatedTrips.size());
@@ -73,9 +80,12 @@ public class EJBClientService implements LocalClientService,
     @Override
     public List<RatingInfo> listRatings(int numMonths) {
 
+	System.out.println("------------");
 	List<Trip> allTrips = tripsService.findAllTrips();
 	Date actual = new Date();
 	Date ant = getNewDateMonth(actual, numMonths);
+	System.out.println("Actual: "+actual);
+	System.out.println("Otra: "+ant);
 	List<Trip> trips = new ArrayList<>();
 
 	for (Trip t : allTrips)
@@ -96,7 +106,7 @@ public class EJBClientService implements LocalClientService,
 	    }
 	}
 
-	ri = Coollection.from(ri).orderBy("fecha", Order.DESC).all();
+	//ri = Coollection.from(ri).orderBy("fecha", Order.DESC).all();
 
 	return ri;
     }
