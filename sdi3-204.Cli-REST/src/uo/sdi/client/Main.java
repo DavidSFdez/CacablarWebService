@@ -12,7 +12,7 @@ public class Main {
 
     private static final String REST_SERVICE_URL = "http://localhost:8180/sdi3-204.WEB/rest/";
 
-    CacablarRestService client;
+    SdiRestService client;
 
     public static void main(String[] args) {
 	new Main().run();
@@ -22,9 +22,7 @@ public class Main {
 
 	BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 
-	client = new ResteasyClientBuilder().build()
-		.register(new Authenticator("sdi", "password")).target(REST_SERVICE_URL)
-		.proxy(CacablarRestService.class);
+	
 	try {
 
 	    System.out.println("Nombre de usuario: ");
@@ -33,39 +31,48 @@ public class Main {
 	    System.out.println("Contraseña: ");
 	    String password = in.readLine().trim();
 
-	    // login
-	    client.login(usuario, password);
-
-	    listTrips(client.listPromotedActiveTrips());
-
-	    String[] id;
-
-	    System.out.println("Introduzca id del viaje: ");
-	    id = in.readLine().split(" ");
-	    long idTrip = Long.parseLong(id[0]);
-	    List<Application> applications = ListApplications(client
-		    .selectTrip(idTrip));
-
-	    System.out
-		    .println("Seleccione el/los usuario/s que desea aceptar (separados por ',':");
-	    String[] ids;
-
-	    ids = in.readLine().split(",");
-
-	    List<Long> idUsers = new ArrayList<>();
-
-	    for (int i = 0; i < ids.length; i++)
-		idUsers.add(Long.parseLong(ids[i]));
-
-	    List<Application> selected = new ArrayList<>();
-
-	    for (Application a : applications)
-		for (Long i : idUsers)
-		    if (a.getUserId().equals(i))
-			selected.add(a);
-
-	    for (Application a : selected)
-		client.acceptSeat(a);
+	    client = new ResteasyClientBuilder().build()
+			.register(new Authenticator(usuario,password)).target(REST_SERVICE_URL)
+			.proxy(SdiRestService.class);
+	    System.out.println("-----");
+	    List<Trip> trips = client.tripsAll();
+	    
+	    for(Trip t : trips)
+		System.out.println(t.getId());
+//	    
+//	    // login
+//	    client.login(usuario, password);
+//
+//	    listTrips(client.listPromotedActiveTrips());
+//
+//	    String[] id;
+//
+//	    System.out.println("Introduzca id del viaje: ");
+//	    id = in.readLine().split(" ");
+//	    long idTrip = Long.parseLong(id[0]);
+//	    List<Application> applications = ListApplications(client
+//		    .selectTrip(idTrip));
+//
+//	    System.out
+//		    .println("Seleccione el/los usuario/s que desea aceptar (separados por ',':");
+//	    String[] ids;
+//
+//	    ids = in.readLine().split(",");
+//
+//	    List<Long> idUsers = new ArrayList<>();
+//
+//	    for (int i = 0; i < ids.length; i++)
+//		idUsers.add(Long.parseLong(ids[i]));
+//
+//	    List<Application> selected = new ArrayList<>();
+//
+//	    for (Application a : applications)
+//		for (Long i : idUsers)
+//		    if (a.getUserId().equals(i))
+//			selected.add(a);
+//
+//	    for (Application a : selected)
+//		client.acceptSeat(a);
 
 	} catch (IOException e) {
 
