@@ -23,7 +23,7 @@ public interface TripsService {
 
     Trip findByIdandPromoter(Long idTrip, Long idUser);
 
-    Trip findTripById(Long idTrip) throws EntityNotFoundException;
+    Trip findTripById(Long idTrip);
 
     void updateTripsStatus();
 

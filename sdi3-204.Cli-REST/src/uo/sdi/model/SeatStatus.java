@@ -1,4 +1,4 @@
-package uo.sdi.client;
+package uo.sdi.model;
 
 public enum SeatStatus {
     ADMITIDO, EXCLUIDO, PENDIENTE, SIN_PLAZA;

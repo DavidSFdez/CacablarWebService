@@ -45,6 +45,7 @@ public class RestAuthenticationFilter implements javax.servlet.Filter {
 
 		request.setAttribute(CURRENT_USER, user);
 		filter.doFilter(request, response);
+		return;
 	    }
 
 	    if (response instanceof HttpServletResponse) {

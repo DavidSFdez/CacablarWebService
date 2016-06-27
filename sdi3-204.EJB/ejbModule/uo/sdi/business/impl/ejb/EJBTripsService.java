@@ -67,7 +67,7 @@ public class EJBTripsService implements LocalTripsService, RemoteTripsService {
     }
 
     @Override
-    public Trip findTripById(Long idTrip) throws EntityNotFoundException {
+    public Trip findTripById(Long idTrip){
 	return new TripsFindById().find(idTrip);
     }
 

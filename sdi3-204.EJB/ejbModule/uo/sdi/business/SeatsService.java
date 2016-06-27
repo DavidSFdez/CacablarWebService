@@ -46,7 +46,7 @@ public interface SeatsService {
      * @throws EntityAlreadyExistsException
      */
     void acceptApplication(Application application)
-	    throws EntityNotFoundException, EntityAlreadyExistsException;
+	    throws EntityAlreadyExistsException;
 
     List<Application> findApplicationByTrip(Long id);
 

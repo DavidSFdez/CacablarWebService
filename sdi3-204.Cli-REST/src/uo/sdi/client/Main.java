@@ -8,6 +8,9 @@ import java.util.List;
 
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 
+import uo.sdi.model.Application;
+import uo.sdi.model.Trip;
+
 public class Main {
 
     private static final String REST_SERVICE_URL = "http://localhost:8180/sdi3-204.Web/rest/";
@@ -22,7 +25,6 @@ public class Main {
 
 	BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 
-	
 	try {
 
 	    System.out.println("Nombre de usuario: ");
@@ -32,49 +34,45 @@ public class Main {
 	    String password = in.readLine().trim();
 
 	    client = new ResteasyClientBuilder().build()
-			.register(new Authenticator(usuario,password)).target(REST_SERVICE_URL)
-			.proxy(SdiRestService.class);
-	    
+		    .register(new Authenticator(usuario, password))
+		    .target(REST_SERVICE_URL).proxy(SdiRestService.class);
+
 	    System.out.println("-----");
-	    
+
 	    List<Trip> trips = client.tripsPromoted();
-	    
-	    for(Trip t : trips)
-		System.out.println(t.getId());
-//	    
-//	    // login
-//	    client.login(usuario, password);
-//
-//	    listTrips(client.listPromotedActiveTrips());
-//
-//	    String[] id;
-//
-//	    System.out.println("Introduzca id del viaje: ");
-//	    id = in.readLine().split(" ");
-//	    long idTrip = Long.parseLong(id[0]);
-//	    List<Application> applications = ListApplications(client
-//		    .selectTrip(idTrip));
-//
-//	    System.out
-//		    .println("Seleccione el/los usuario/s que desea aceptar (separados por ',':");
-//	    String[] ids;
-//
-//	    ids = in.readLine().split(",");
-//
-//	    List<Long> idUsers = new ArrayList<>();
-//
-//	    for (int i = 0; i < ids.length; i++)
-//		idUsers.add(Long.parseLong(ids[i]));
-//
-//	    List<Application> selected = new ArrayList<>();
-//
-//	    for (Application a : applications)
-//		for (Long i : idUsers)
-//		    if (a.getUserId().equals(i))
-//			selected.add(a);
-//
-//	    for (Application a : selected)
-//		client.acceptSeat(a);
+
+	    listTrips(trips);
+	    System.out.println("Escoja un viaje: ");
+	    String tripId = in.readLine().trim();
+	    Long tId = null;
+	    try {
+		   tId = Long.parseLong(tripId);
+		} catch (NumberFormatException e) {
+		    System.out.println(e.getMessage());
+		}
+	    List<Application> applications = client.getApplicationsByTrip(tId);
+	    if (applications.size() > 0) {
+		listApplications(applications);
+
+		while (applications.size() > 0) {
+		    System.out
+			    .println("escoja usuario para aceptar (exit para salir)");
+		    String userId = in.readLine().trim();
+		    switch (userId) {
+		    case "exit":
+			return;
+		    default:
+			try {
+			    Long uId = Long.parseLong(userId);
+			    client.aceptApplications(new Application(uId, tId));
+			} catch (NumberFormatException e) {
+			    System.out.println(e.getMessage());
+			}
+			break;
+		    }
+		}
+
+	    }// fin
 
 	} catch (IOException e) {
 
@@ -83,11 +81,10 @@ public class Main {
 
     }
 
-    private List<Application> ListApplications(List<Application> selectTrip) {
+    private void listApplications(List<Application> selectTrip) {
 	printApplicationHeader();
 	for (Application a : selectTrip)
 	    printApplicationLine(a);
-	return selectTrip;
     }
 
     private void printApplicationHeader() {
@@ -108,12 +105,13 @@ public class Main {
     }
 
     private void printTripLine(Trip t) {
-	System.out.printf("%s %s %s\n", t.getDepartureDate().toString(), t
-		.getDeparture().getCity(), t.getDestination().getCity());
+	System.out.printf("%d %s %s %s\n", t.getId(), t.getDepartureDate()
+		.toString(), t.getDeparture().getCity(), t.getDestination()
+		.getCity());
     }
 
     private void printTripHeader() {
-	System.out.printf("%s %s %s\n", "_FECHA______", "_ORIGEN_____",
-		"_DESTINO_____");
+	System.out.printf("%s %s %s %s\n", "_ID__", "_FECHA__________",
+		"_ORIGEN_________", "_DESTINO_________");
     }
 }

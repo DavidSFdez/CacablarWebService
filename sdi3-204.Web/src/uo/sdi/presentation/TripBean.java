@@ -152,12 +152,9 @@ public class TripBean implements Serializable {
     }
 
     public String view(Long idTrip) {
-	try {
+	
 	    trip = Factories.services.getTripsService().findTripById(idTrip);
-	} catch (EntityNotFoundException e) {
-	    Log.error("Fracaso view trip", e);
-	    return "fracaso";
-	}
+	
 	return "exito";
     }
 

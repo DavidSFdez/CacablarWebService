@@ -67,7 +67,7 @@ public class EJBSeatsService implements LocalSeatsService, RemoteSeatsService {
 
     @Override
     public void acceptApplication(Application application)
-	    throws EntityNotFoundException, EntityAlreadyExistsException {
+	    throws EntityAlreadyExistsException {
 	new ApplicationsAccept().execute(application);
     }
 
