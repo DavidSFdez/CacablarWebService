@@ -19,6 +19,8 @@ public class Waypoint implements Serializable{
 		this.lon = lon;
 	}
 
+	public Waypoint(){}
+	
 	public Double getLat() {
 		return lat;
 	}

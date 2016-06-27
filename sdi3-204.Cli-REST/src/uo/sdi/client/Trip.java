@@ -7,6 +7,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.crypto.Data;
 
+import org.jboss.resteasy.annotations.providers.jaxb.IgnoreMediaTypes;
+
 /**
  * This class is not an entity, it is a DTO with the same fields as a row in the
  * table
@@ -32,6 +34,7 @@ public class Trip implements Serializable {
     private Double estimatedCost = 0.0;
     private String comments;
     private TripStatus status;
+    private String stringId;
 
     private Long promoterId;
 
@@ -62,9 +65,9 @@ public class Trip implements Serializable {
 	this.id = id;
     }
 
-    @XmlElement
+    
     public String getStringId() {
-	return id + "";
+	return stringId;
     }
 
     @XmlElement

@@ -62,7 +62,6 @@ public class Trip implements Serializable {
 	this.id = id;
     }
 
-    @XmlElement
     public String getStringId() {
 	return id + "";
     }

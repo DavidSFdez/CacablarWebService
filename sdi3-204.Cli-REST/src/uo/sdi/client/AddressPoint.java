@@ -29,6 +29,9 @@ public class AddressPoint implements Serializable{
 		this.zipCode = zipCode;
 		this.waypoint = waypoint;
 	}
+	
+	public AddressPoint() {
+	}
 
 	public String getAddress() {
 		return address;

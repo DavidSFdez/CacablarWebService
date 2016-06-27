@@ -10,7 +10,7 @@ import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 
 public class Main {
 
-    private static final String REST_SERVICE_URL = "http://localhost:8180/sdi3-204.WEB/rest/";
+    private static final String REST_SERVICE_URL = "http://localhost:8180/sdi3-204.Web/rest/";
 
     SdiRestService client;
 
@@ -34,8 +34,10 @@ public class Main {
 	    client = new ResteasyClientBuilder().build()
 			.register(new Authenticator(usuario,password)).target(REST_SERVICE_URL)
 			.proxy(SdiRestService.class);
+	    
 	    System.out.println("-----");
-	    List<Trip> trips = client.tripsAll();
+	    
+	    List<Trip> trips = client.tripsPromoted();
 	    
 	    for(Trip t : trips)
 		System.out.println(t.getId());
