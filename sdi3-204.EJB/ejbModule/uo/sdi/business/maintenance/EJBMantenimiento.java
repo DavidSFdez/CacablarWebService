@@ -1,5 +1,7 @@
 package uo.sdi.business.maintenance;
 
+import java.util.Date;
+
 import javax.ejb.Schedule;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
@@ -11,10 +13,9 @@ import alb.util.log.Log;
 @Startup
 public class EJBMantenimiento {
 
-    @Schedule(second = "0", minute = "*/5", hour = "*")
+    @Schedule(second = "10", minute = "*", hour = "*")
     public void runTask1() {
 	Log.trace("Actualizando viajes y asientos.");
-	
 	
 	// Todos los viajes que se hayan acabado sus plazas disponibles
 	// o que haya pasado la fecha de cierre
