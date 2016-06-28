@@ -59,9 +59,9 @@ public class EJBClientService implements LocalClientService,
 		    .findAllParticipated(u.getId());
 	    ui.setId(u.getId());
 	    ui.setEmail(u.getEmail());
-	    ui.setName(ui.getName());
-	    ui.setStatus(ui.getStatus());
-	    ui.setSurname(ui.getSurname());
+	    ui.setName(u.getName());
+	    ui.setStatus(u.getStatus());
+	    ui.setSurname(u.getSurname());
 	    ui.setNumPromoted(promotedTrips.size());
 	    ui.setNumParticipated(participatedTrips.size());
 	    usersInfo.add(ui);

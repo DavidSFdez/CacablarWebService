@@ -2,6 +2,7 @@ package uo.sdi.rest;
 
 import static uo.sdi.rest.filter.RestAuthenticationFilter.CURRENT_USER;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -41,12 +42,7 @@ public class RestServiceImpl implements RestService {
 	Trip trip = tripsService.findTripById(idTrip);
 
 	if (!trip.getPromoterId().equals(user.getId())) {
-	    // TODO JORGE qué quieres hacer aquí? excepción o simplemente que el
-	    // método
-	    // no haga nada? esto se daría si el notas introduce una ID de un
-	    // viaje
-	    // que no fuese de los listados por el anterior método
-	    // lo que viene a ser un TROLASO
+	    return new LinkedList<>();
 	}
 
 	return seatsService.findApplicationByTrip(idTrip);

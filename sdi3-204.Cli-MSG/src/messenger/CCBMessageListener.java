@@ -25,6 +25,7 @@ public class CCBMessageListener implements MessageListener {
 	    System.out.println("Message not of expected type");
 	    return;
 	}
+	System.out.println(msg);
 	User user = Main.getCurrentUser();
 	Long tripID = Main.getCurrentTrip();
 	
