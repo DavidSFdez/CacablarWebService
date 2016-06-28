@@ -19,6 +19,7 @@ import uo.sdi.model.Trip;
 import uo.sdi.model.User;
 import util.Jndi;
 import static java.lang.System.out;
+import static java.lang.System.err;
 
 public class Main {
 
@@ -153,7 +154,7 @@ public class Main {
 	    if (con != null)
 		con.close();
 	} catch (JMSException e) {
-	    e.printStackTrace();
+	    err.println("Error: " + e.getMessage());
 	}
     }
 

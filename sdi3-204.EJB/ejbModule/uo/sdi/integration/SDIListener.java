@@ -48,8 +48,7 @@ public class SDIListener implements MessageListener {
 	    processMessage(msg);
 	} catch (JMSException | BusinessException
 		| EntityAlreadyExistsException | EntityNotFoundException e) {
-	    Log.warn("Error on message Listener.");
-	    // e.printStackTrace();
+	    Log.warn("Error on message Listener:" + e.getMessage());
 	}
     }
 

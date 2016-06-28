@@ -16,6 +16,7 @@ import javax.jms.TopicConnection;
 import javax.jms.TopicConnectionFactory;
 import javax.jms.TopicSession;
 
+import alb.util.log.Log;
 import uo.sdi.model.User;
 
 @Stateless
@@ -43,7 +44,7 @@ public class MessageSender {
 	    con = factory.createTopicConnection("sdi", "password");
 	    session = con.createTopicSession(false, Session.AUTO_ACKNOWLEDGE);
 	} catch (JMSException e) {
-	    e.printStackTrace();
+	    Log.warn("Error on message Listener:" + e.getMessage());
 	}
     }
 
@@ -70,7 +71,7 @@ public class MessageSender {
 	    MapMessage msg = createJmsMapMessage(map, session);
 	    sender.send(msg);
 	} catch (JMSException e) {
-	    e.printStackTrace();
+	    Log.warn("Error on message Listener:" + e.getMessage());
 	}
     }
 
@@ -89,7 +90,7 @@ public class MessageSender {
 	    session.close();
 	    con.close();
 	} catch (JMSException e) {
-	    e.printStackTrace();
+	    Log.warn("Error on message Listener:" + e.getMessage());
 	}
     }
 }

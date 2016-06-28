@@ -74,8 +74,7 @@ public class Main {
 	    }// fin
 
 	} catch (IOException e) {
-
-	    e.printStackTrace();
+	    System.err.println("Error: "+ e.getMessage());
 	}
 
     }

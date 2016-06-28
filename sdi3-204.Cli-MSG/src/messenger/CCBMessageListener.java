@@ -16,7 +16,7 @@ public class CCBMessageListener implements MessageListener {
 	try {
 	    processMessage(msg);
 	} catch (JMSException e) {
-	    e.printStackTrace();
+	    System.err.println("Error: "+ e.getMessage());
 	}
     }
 

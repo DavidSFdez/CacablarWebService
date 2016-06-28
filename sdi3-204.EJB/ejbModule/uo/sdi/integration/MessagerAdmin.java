@@ -11,6 +11,8 @@ import javax.jms.MapMessage;
 import javax.jms.MessageProducer;
 import javax.jms.Session;
 
+import alb.util.log.Log;
+
 @Stateless
 public class MessagerAdmin {
 
@@ -35,7 +37,7 @@ public class MessagerAdmin {
 	    con = factory.createConnection("sdi", "password");
 	    session = con.createSession(false, Session.AUTO_ACKNOWLEDGE);
 	} catch (JMSException e) {
-	    e.printStackTrace();
+	    Log.warn("Error on message Listener:" + e.getMessage());
 	}
     }
 
@@ -45,7 +47,7 @@ public class MessagerAdmin {
 	    sender = session.createProducer(queue);
 	    sender.send(mm);
 	} catch (JMSException e) {
-	    e.printStackTrace();
+	    Log.warn("Error on message Listener:" + e.getMessage());
 	}
 
     }
@@ -55,7 +57,7 @@ public class MessagerAdmin {
 	    session.close();
 	    con.close();
 	} catch (JMSException e) {
-	    e.printStackTrace();
+	    Log.warn("Error on message Listener:" + e.getMessage());
 	}
     }
 
