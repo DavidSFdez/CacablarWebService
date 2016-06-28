@@ -25,6 +25,8 @@ public class Main {
     private static final String JMS_CONNECTION_FACTORY = "jms/RemoteConnectionFactory";
     private static final String MESSAGE_TOPIC = "jms/topic/msg";
     private static final String MESSAGE_QUEUE = "jms/queue/msg";
+    
+    public final static boolean DEBBUG_MESSAGES = true;
 
     private Connection con;
     private Session session;
@@ -36,6 +38,8 @@ public class Main {
     private Scanner in = new Scanner(System.in);
 
     public static void main(String[] args) {
+	if(DEBBUG_MESSAGES)
+	    out.println("Modo debugg activo.");
 	Main m = new Main();
 	try {
 	    m.run();
@@ -47,15 +51,15 @@ public class Main {
     // Como no se pueden mandar al listener parametros por constructor se almacenan en el hilo
     // en esta clase
     
-    private static ThreadLocal<User> currentUser = new ThreadLocal<>();
-    private static ThreadLocal<Long> currentTrip = new ThreadLocal<>();
+    private static User currentUser;
+    private static Long currentTripId;
 
     public static User getCurrentUser() {
-	return currentUser.get();
+	return currentUser;
     }
     
     public static Long getCurrentTrip() {
-	return currentTrip.get();
+	return currentTripId;
     }
 
     private void run() throws Exception {
@@ -70,9 +74,9 @@ public class Main {
 	Long userId = user.getId();
 	Long tripId = seleccionarViaje(userId);
 	
-	currentTrip.set(tripId);
+	currentTripId = (tripId);
 
-	currentUser.set(user);
+	currentUser = (user);
 
 	init();
 	// Aqui aparecen los mensajes del viaje seleccionado automaticamente porque el 

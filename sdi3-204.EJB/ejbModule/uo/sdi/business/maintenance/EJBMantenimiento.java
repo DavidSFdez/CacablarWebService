@@ -1,7 +1,5 @@
 package uo.sdi.business.maintenance;
 
-import java.util.Date;
-
 import javax.ejb.Schedule;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;

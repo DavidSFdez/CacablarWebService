@@ -10,6 +10,7 @@ import javax.jms.MessageListener;
 import uo.sdi.model.User;
 
 public class CCBMessageListener implements MessageListener {
+    
 
     @Override
     public void onMessage(Message msg) {
@@ -19,13 +20,12 @@ public class CCBMessageListener implements MessageListener {
 	    e.printStackTrace();
 	}
     }
-
+    
     private void processMessage(Message msg) throws JMSException {
 	if (!(msg instanceof MapMessage)) {
 	    System.out.println("Message not of expected type");
 	    return;
 	}
-	System.out.println(msg);
 	User user = Main.getCurrentUser();
 	Long tripID = Main.getCurrentTrip();
 	
@@ -33,12 +33,16 @@ public class CCBMessageListener implements MessageListener {
 	    return;
 	
 	MapMessage mmsg = (MapMessage) msg;
-	if (mmsg.getLong("userId") == user.getId() &&
-		mmsg.getLong("tripId") == tripID) {
-	    out.print(mmsg.getLong("userId"));
+	if ( isDebbugOn() || 
+		(mmsg.getLong("userId") == user.getId() && mmsg.getLong("tripId") == tripID)) {
+	    out.print(mmsg.getLong("from"));
 	    out.print(": ");
 	    out.println(mmsg.getString("message"));
 	}
+    }
+    
+    private boolean isDebbugOn(){
+	return Main.DEBBUG_MESSAGES;
     }
 
 }

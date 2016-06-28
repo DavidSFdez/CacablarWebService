@@ -31,10 +31,10 @@ public class MessageSender {
     private TopicConnection con;
     private TopicSession session;
 
-    public void sendMessage(List<User> users, MapMessage men)
+    public void sendMessage(Long from, List<User> users, MapMessage men)
 	    throws JMSException {
 	init();
-	send(users, men);
+	send(from, users, men);
 	close();
     }
 
@@ -47,13 +47,14 @@ public class MessageSender {
 	}
     }
 
-    private void send(List<User> users, MapMessage men) throws JMSException {
+    private void send(Long from, List<User> users, MapMessage men) throws JMSException {
 	Long tripId = men.getLong("tripId");
 	String message = men.getString("message");
 
 	Map<String, Object> msg = new HashMap<String, Object>();
 	msg.put("message", message);
 	msg.put("tripId", tripId);
+	msg.put("from", from);
 	for (User user : users) {
 	    // id destinatario
 	    msg.put("userId", user.getId());
@@ -78,6 +79,7 @@ public class MessageSender {
 	msg.setString("message", (String) map.get("message"));
 	msg.setLong("userId", (Long) map.get("userId"));
 	msg.setLong("tripId", (Long) map.get("tripId"));
+	msg.setLong("from", (Long) map.get("from"));
 	return msg;
     }
 
