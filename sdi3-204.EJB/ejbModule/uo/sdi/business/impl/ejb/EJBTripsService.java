@@ -67,14 +67,13 @@ public class EJBTripsService implements LocalTripsService, RemoteTripsService {
     }
 
     @Override
-    public Trip findTripById(Long idTrip){
+    public Trip findTripById(Long idTrip) {
 	return new TripsFindById().find(idTrip);
     }
 
     /**
-     * Todos los viajes que se hayan acabado sus plazas disponibles
-     * o que haya pasado la fecha de cierre
-     * cambia su estado a 1 (CLOSED) 
+     * Todos los viajes que se hayan acabado sus plazas disponibles o que haya
+     * pasado la fecha de cierre cambia su estado a 1 (CLOSED)
      */
     @Override
     public void updateTripsStatus() {

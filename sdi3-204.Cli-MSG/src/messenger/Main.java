@@ -25,7 +25,7 @@ public class Main {
     private static final String JMS_CONNECTION_FACTORY = "jms/RemoteConnectionFactory";
     private static final String MESSAGE_TOPIC = "jms/topic/msg";
     private static final String MESSAGE_QUEUE = "jms/queue/msg";
-    
+
     public final static boolean DEBBUG_MESSAGES = true;
 
     private Connection con;
@@ -38,7 +38,7 @@ public class Main {
     private Scanner in = new Scanner(System.in);
 
     public static void main(String[] args) {
-	if(DEBBUG_MESSAGES)
+	if (DEBBUG_MESSAGES)
 	    out.println("Modo debugg activo.");
 	Main m = new Main();
 	try {
@@ -48,16 +48,17 @@ public class Main {
 	}
     }
 
-    // Como no se pueden mandar al listener parametros por constructor se almacenan en el hilo
+    // Como no se pueden mandar al listener parametros por constructor se
+    // almacenan en el hilo
     // en esta clase
-    
+
     private static User currentUser;
     private static Long currentTripId;
 
     public static User getCurrentUser() {
 	return currentUser;
     }
-    
+
     public static Long getCurrentTrip() {
 	return currentTripId;
     }
@@ -73,19 +74,20 @@ public class Main {
 
 	Long userId = user.getId();
 	Long tripId = seleccionarViaje(userId);
-	
+
 	currentTripId = (tripId);
 
 	currentUser = (user);
 
 	init();
-	// Aqui aparecen los mensajes del viaje seleccionado automaticamente porque el 
+	// Aqui aparecen los mensajes del viaje seleccionado automaticamente
+	// porque el
 	// listener que imprime los mensajes se inicializa en este momento.
-	
+
 	enviar: {
 	    String text = pedirDato("¿Desea mandar mensajes a este viaje? (Y/N)");
-	    
-	    if(!text.equalsIgnoreCase("y"))
+
+	    if (!text.equalsIgnoreCase("y"))
 		break enviar;
 
 	    out.println("Escriba los mensajes que quiera enviar a ese viaje.");
@@ -103,11 +105,11 @@ public class Main {
 
     private Long seleccionarViaje(Long userId) throws Exception {
 	out.println("Sus viajes:");
-	
+
 	List<Trip> trips = new RemoteEJBServiceLocator().getTripsService()
 		.listRelated(userId);
-	
-	if(trips.isEmpty())
+
+	if (trips.isEmpty())
 	    throw new Exception("No tiene viajes disponibles.");
 
 	List<Long> longs = new LinkedList<>();

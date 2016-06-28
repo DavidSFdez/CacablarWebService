@@ -47,7 +47,6 @@ public class EJBSeatsService implements LocalSeatsService, RemoteSeatsService {
 	return new SeatsFindByTrip().find(idTrip);
     }
 
-
     @Override
     public List<Application> findApplicationByTrip(Long id) {
 	ApplicationsByTrip action = new ApplicationsByTrip();
@@ -72,16 +71,14 @@ public class EJBSeatsService implements LocalSeatsService, RemoteSeatsService {
     }
 
     @Override
-    public void cancelApplication(Application application){
+    public void cancelApplication(Application application) {
 	new ApplicationCancel().execute(application);
     }
-
 
     @Override
     public void actualizarAsientosAutomaticamente() {
 	new ApplicationsYSeatsActualizarAutomaticamente().actualizar();
-	
-    }
 
+    }
 
 }

@@ -17,7 +17,6 @@ public class Authenticator implements ClientRequestFilter {
 	this.password = password;
     }
 
-
     @Override
     public void filter(ClientRequestContext ctx) throws IOException {
 	MultivaluedMap<String, Object> headers = ctx.getHeaders();

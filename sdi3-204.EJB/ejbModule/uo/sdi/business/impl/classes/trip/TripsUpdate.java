@@ -32,7 +32,7 @@ public class TripsUpdate {
 	    else if (trip.getEstimatedCost() < 0)
 		throw new BusinessException("El coste estimado no puede ser "
 			+ "negativo");
-		Factories.persistence.createTripDao().update(trip);
+	    Factories.persistence.createTripDao().update(trip);
 	} catch (NotPersistedException ex) {
 	    throw new EntityNotFoundException();
 	}

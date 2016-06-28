@@ -12,7 +12,7 @@ import alb.util.log.Log;
 
 public class ApplicationCancel {
 
-    public void execute(Application application){
+    public void execute(Application application) {
 	Long[] ids = { application.getUserId(), application.getTripId() };
 	// ids[0] = userId
 	// ids[1] = tripId

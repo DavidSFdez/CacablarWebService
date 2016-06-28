@@ -5,7 +5,7 @@ import java.io.Serializable;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class RatingInfo implements Serializable{
+public class RatingInfo implements Serializable {
 
     /**
      * 
@@ -16,80 +16,52 @@ public class RatingInfo implements Serializable{
     private String comment;
     private int value;
     private String destino;
-    
-    
-    
-    public RatingInfo(){}
 
-
+    public RatingInfo() {
+    }
 
     public Long getAboutUserId() {
-        return aboutUserId;
+	return aboutUserId;
     }
-
-
 
     public void setAboutUserId(Long aboutUserId) {
-        this.aboutUserId = aboutUserId;
+	this.aboutUserId = aboutUserId;
     }
-
-
 
     public Long getFromUserId() {
-        return fromUserId;
+	return fromUserId;
     }
-
-
 
     public void setFromUserId(Long fromUserId) {
-        this.fromUserId = fromUserId;
+	this.fromUserId = fromUserId;
     }
-
-
 
     public String getComment() {
-        return comment;
+	return comment;
     }
-
-
 
     public void setComment(String comment) {
-        this.comment = comment;
+	this.comment = comment;
     }
-
-
 
     public int getValue() {
-        return value;
+	return value;
     }
-
-
 
     public void setValue(int value) {
-        this.value = value;
+	this.value = value;
     }
-
-
 
     public String getDestino() {
-        return destino;
+	return destino;
     }
-
-
 
     public void setDestino(String destino) {
-        this.destino = destino;
+	this.destino = destino;
     }
-
-
 
     public static long getSerialversionuid() {
-        return serialVersionUID;
+	return serialVersionUID;
     }
 
-
-
-
-  
-    
 }

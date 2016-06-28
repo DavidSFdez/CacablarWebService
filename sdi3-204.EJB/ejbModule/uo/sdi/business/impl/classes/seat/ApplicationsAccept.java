@@ -29,7 +29,7 @@ public class ApplicationsAccept {
 	seat.setTripId(ids[1]);
 	seat.setStatus(SeatStatus.ADMITIDO);
 	// seat.setComment(comment);
-	
+
 	Trip trip = Factories.persistence.createTripDao().findById(ids[1]);
 	if (trip == null)
 	    throw new BusinessException("No se enuentra el viaje [" + ids[1]
@@ -52,17 +52,16 @@ public class ApplicationsAccept {
 	} catch (NotPersistedException e) {
 	    Log.warn("No se enuentra la petición.");
 	}
-	
+
 	try {
 	    seatDao.save(seat);
 	} catch (AlreadyPersistedException e) {
 	    Log.warn("Ya existe el asiento.");
 	}
-	
-	
+
 	// Reducir en uno las plazas disponibles para tal viaje
 	trip.setAvailablePax(trip.getAvailablePax() - 1);
-	
+
 	// Si el número de plazas disponibles es 0, actualiza el estado del
 	// viaje a cerrado, y todas las solicitudes pendientes las pone como
 	// Seats con el estado SIN_PLAZA
@@ -97,7 +96,6 @@ public class ApplicationsAccept {
 	    throw new BusinessException("No se enuentra el viaje ["
 		    + trip.getId() + "].", e);
 	}
-	
 
     }
 

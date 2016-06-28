@@ -11,7 +11,6 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 
 import uo.sdi.model.Trip;
 
@@ -33,7 +32,7 @@ public interface SdiRestService {
     @Produces({ APPLICATION_JSON, APPLICATION_XML })
     List<uo.sdi.model.Application> getApplicationsByTrip(
 	    @PathParam("idTrip") Long idTrip);
-    
+
     @Path("/seats/acept")
     @PUT
     @Consumes({ APPLICATION_JSON, APPLICATION_XML })

@@ -6,13 +6,13 @@ import alb.util.log.Log;
 
 public class ApplicationsRemove {
 
-    public void remove(Long idUser, Long idTrip){
+    public void remove(Long idUser, Long idTrip) {
 	Long[] ids = { idUser, idTrip };
 
 	try {
 	    Factories.persistence.createApplicationDao().delete(ids);
 	} catch (NotPersistedException e) {
-	   Log.warn("No existe la peticion que quiere borrar.");
+	    Log.warn("No existe la peticion que quiere borrar.");
 	}
 
     }

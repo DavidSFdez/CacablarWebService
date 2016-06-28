@@ -47,7 +47,8 @@ public class MessageSender {
 	}
     }
 
-    private void send(Long from, List<User> users, MapMessage men) throws JMSException {
+    private void send(Long from, List<User> users, MapMessage men)
+	    throws JMSException {
 	Long tripId = men.getLong("tripId");
 	String message = men.getString("message");
 

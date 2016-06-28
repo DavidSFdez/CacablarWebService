@@ -3,7 +3,6 @@ package uo.sdi.client;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
@@ -46,10 +45,10 @@ public class Main {
 	    String tripId = in.readLine().trim();
 	    Long tId = null;
 	    try {
-		   tId = Long.parseLong(tripId);
-		} catch (NumberFormatException e) {
-		    System.out.println(e.getMessage());
-		}
+		tId = Long.parseLong(tripId);
+	    } catch (NumberFormatException e) {
+		System.out.println(e.getMessage());
+	    }
 	    List<Application> applications = client.getApplicationsByTrip(tId);
 	    if (applications.size() > 0) {
 		listApplications(applications);

@@ -41,10 +41,10 @@ public class EJBClientService implements LocalClientService,
     private RattingsService ratingsService;
 
     @Override
-    public List<User> getUsers(){
+    public List<User> getUsers() {
 	return usersService.findAllUsers();
     }
-    
+
     @Override
     public List<UserInfo> listUsersInfo() {
 	List<User> users = Factories.services.getUsersService().findAllUsers();
@@ -77,7 +77,7 @@ public class EJBClientService implements LocalClientService,
 
     @Override
     public List<RatingInfo> listRatings() {
-	
+
 	return ratingsService.findRatingsLastMonth();
     }
 

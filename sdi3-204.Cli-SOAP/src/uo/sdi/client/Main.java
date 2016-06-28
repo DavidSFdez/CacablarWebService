@@ -68,10 +68,9 @@ public class Main {
 	System.out.println("----------User id: " + user.getId()
 		+ " Info-----------------");
 
-	System.out.println("\nUsuario: " + user.getName()
-		+ "\t apellidos: " + user.getSurname()
-		+ "\t e-mail: " + user.getEmail() + "\t status: "
-		+ user.getStatus());
+	System.out.println("\nUsuario: " + user.getName() + "\t apellidos: "
+		+ user.getSurname() + "\t e-mail: " + user.getEmail()
+		+ "\t status: " + user.getStatus());
 
 	System.out.println("\nPromocionados: " + user.getNumPromoted()
 		+ "\nParticipa: " + user.getNumParticipated());
@@ -105,11 +104,9 @@ public class Main {
 	for (RatingInfo r : ri) {
 	    System.out.println("----------------------------------");
 	    System.out.println("Destino: " + r.getDestino()
-		    + "\nComentario realizado por: "
-		    + r.getFromUserId()
-		    + "\nSobre el usuario: "
-		    + r.getAboutUserId() + "\nValoración: "
-		    + r.getValue() + "\nComentario: "
+		    + "\nComentario realizado por: " + r.getFromUserId()
+		    + "\nSobre el usuario: " + r.getAboutUserId()
+		    + "\nValoración: " + r.getValue() + "\nComentario: "
 		    + r.getComment());
 	    System.out.println("----------------------------------");
 	}

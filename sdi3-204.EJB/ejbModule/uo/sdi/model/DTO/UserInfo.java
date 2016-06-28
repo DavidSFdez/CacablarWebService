@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import uo.sdi.model.UserStatus;
 
 @XmlRootElement
-public class UserInfo implements Serializable{
+public class UserInfo implements Serializable {
 
     /**
      * 
@@ -20,66 +20,64 @@ public class UserInfo implements Serializable{
     private int numPromoted;
     private int numParticipated;
     private Long id;
- 
+
     public Long getId() {
-        return id;
+	return id;
     }
 
     public void setId(Long id) {
-        this.id = id;
+	this.id = id;
     }
 
-    public UserInfo(){}
+    public UserInfo() {
+    }
 
     public String getName() {
-        return name;
+	return name;
     }
 
     public void setName(String name) {
-        this.name = name;
+	this.name = name;
     }
 
     public String getSurname() {
-        return surname;
+	return surname;
     }
 
     public void setSurname(String surname) {
-        this.surname = surname;
+	this.surname = surname;
     }
 
     public String getEmail() {
-        return email;
+	return email;
     }
 
     public void setEmail(String email) {
-        this.email = email;
+	this.email = email;
     }
 
     public UserStatus getStatus() {
-        return status;
+	return status;
     }
 
     public void setStatus(UserStatus status) {
-        this.status = status;
+	this.status = status;
     }
 
     public int getNumPromoted() {
-        return numPromoted;
+	return numPromoted;
     }
 
     public void setNumPromoted(int numPromoted) {
-        this.numPromoted = numPromoted;
+	this.numPromoted = numPromoted;
     }
 
     public int getNumParticipated() {
-        return numParticipated;
+	return numParticipated;
     }
 
     public void setNumParticipated(int numParticipated) {
-        this.numParticipated = numParticipated;
+	this.numParticipated = numParticipated;
     }
 
-   
-    
-    
 }

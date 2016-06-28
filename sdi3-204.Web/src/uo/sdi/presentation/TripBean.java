@@ -152,9 +152,9 @@ public class TripBean implements Serializable {
     }
 
     public String view(Long idTrip) {
-	
-	    trip = Factories.services.getTripsService().findTripById(idTrip);
-	
+
+	trip = Factories.services.getTripsService().findTripById(idTrip);
+
 	return "exito";
     }
 

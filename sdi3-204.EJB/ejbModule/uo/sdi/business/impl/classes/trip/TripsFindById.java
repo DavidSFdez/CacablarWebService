@@ -5,7 +5,7 @@ import uo.sdi.model.Trip;
 
 public class TripsFindById {
 
-    public Trip find(Long idTrip){
+    public Trip find(Long idTrip) {
 
 	Trip trip = Factories.persistence.createTripDao().findById(idTrip);
 

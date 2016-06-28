@@ -9,11 +9,11 @@ import uo.sdi.model.DTO.UserInfo;
 public interface ClientService {
 
     List<UserInfo> listUsersInfo();
-    
+
     void disableUser(Long userId);
-    
+
     List<RatingInfo> listRatings();
-    
+
     void removeRating(Long ratingId);
 
     List<User> getUsers();

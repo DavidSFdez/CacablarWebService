@@ -65,8 +65,7 @@ public class TripsBean implements Serializable {
 	try {
 	    if (tripsToCancel != null && tripsToCancel.size() != 0)
 		for (Trip trip : tripsToCancel)
-		    Factories.services.getTripsService()
-			    .cancel(trip, idUser);
+		    Factories.services.getTripsService().cancel(trip, idUser);
 	    tripsToCancel = new LinkedList<>();
 	} catch (EntityNotFoundException e) {
 	    Log.error("No se han contrado los viajes a cancelar.");

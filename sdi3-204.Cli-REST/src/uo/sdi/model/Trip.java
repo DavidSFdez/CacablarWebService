@@ -7,8 +7,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.crypto.Data;
 
-import org.jboss.resteasy.annotations.providers.jaxb.IgnoreMediaTypes;
-
 /**
  * This class is not an entity, it is a DTO with the same fields as a row in the
  * table
@@ -65,7 +63,6 @@ public class Trip implements Serializable {
 	this.id = id;
     }
 
-    
     public String getStringId() {
 	return stringId;
     }

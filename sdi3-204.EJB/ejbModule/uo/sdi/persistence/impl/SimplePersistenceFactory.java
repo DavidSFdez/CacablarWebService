@@ -44,7 +44,7 @@ public class SimplePersistenceFactory implements PersistenceFactory {
 
     @Override
     public RatingDao createRattingDao() {
-	
+
 	return new RatingDaoJdbcImpl();
     }
 
