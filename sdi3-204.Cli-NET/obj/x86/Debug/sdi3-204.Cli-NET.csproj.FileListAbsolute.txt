@@ -1,0 +1,5 @@
+c:\users\d\documents\visual studio 2010\Projects\sdi3-204.Cli-NET\bin\Debug\sdi3-204.Cli-NET.exe.config
+c:\users\d\documents\visual studio 2010\Projects\sdi3-204.Cli-NET\bin\Debug\sdi3-204.Cli-NET.exe
+c:\users\d\documents\visual studio 2010\Projects\sdi3-204.Cli-NET\bin\Debug\sdi3-204.Cli-NET.pdb
+c:\users\d\documents\visual studio 2010\Projects\sdi3-204.Cli-NET\obj\x86\Debug\sdi3-204.Cli-NET.exe
+c:\users\d\documents\visual studio 2010\Projects\sdi3-204.Cli-NET\obj\x86\Debug\sdi3-204.Cli-NET.pdb

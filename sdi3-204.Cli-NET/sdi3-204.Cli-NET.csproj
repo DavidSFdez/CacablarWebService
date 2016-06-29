@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{440FD628-E08F-41DD-8596-4FFB4513CBD7}</ProjectGuid>
+    <ProjectGuid>{8886CCC3-CE3C-44B0-A252-B69B2F54BB3D}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>sdi3_204.Cli_NET</RootNamespace>
@@ -47,32 +47,7 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service References\ApplicationsService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Service References\LoginService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Service References\RattingsService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Service References\SeatsService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Service References\TripsService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Service References\UsersService\Reference.cs">
+    <Compile Include="Service References\ClientService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -83,110 +58,28 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Service References\ApplicationsService\EJBApplicationsServiceService.wsdl" />
-    <None Include="Service References\ApplicationsService\sdi3_204.Cli_NET.ApplicationsService.application.datasource">
+    <None Include="Service References\ClientService\EJBClientServiceService.wsdl" />
+    <None Include="Service References\ClientService\sdi3_204.Cli_NET.ClientService.ratingInfo.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\LoginService\EJBLoginServiceService.wsdl" />
-    <None Include="Service References\LoginService\sdi3_204.Cli_NET.LoginService.user.datasource">
+    <None Include="Service References\ClientService\sdi3_204.Cli_NET.ClientService.user.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\RattingsService\EJBRattingsServiceService.wsdl" />
-    <None Include="Service References\RattingsService\sdi3_204.Cli_NET.RattingsService.rating.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\SeatsService\EJBSeatsServiceService.wsdl" />
-    <None Include="Service References\SeatsService\sdi3_204.Cli_NET.SeatsService.application.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\SeatsService\sdi3_204.Cli_NET.SeatsService.seat.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\TripsService\EJBTripsServiceService.wsdl" />
-    <None Include="Service References\TripsService\sdi3_204.Cli_NET.TripsService.trip.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\UsersService\EJBUsersServiceService.wsdl" />
-    <None Include="Service References\UsersService\sdi3_204.Cli_NET.UsersService.user.datasource">
+    <None Include="Service References\ClientService\sdi3_204.Cli_NET.ClientService.userInfo.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Service References\ApplicationsService\" />
-    <WCFMetadataStorage Include="Service References\LoginService\" />
-    <WCFMetadataStorage Include="Service References\RattingsService\" />
-    <WCFMetadataStorage Include="Service References\SeatsService\" />
-    <WCFMetadataStorage Include="Service References\TripsService\" />
-    <WCFMetadataStorage Include="Service References\UsersService\" />
+    <WCFMetadataStorage Include="Service References\ClientService\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\UsersService\configuration91.svcinfo" />
+    <None Include="Service References\ClientService\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\UsersService\configuration.svcinfo" />
+    <None Include="Service References\ClientService\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\UsersService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\ApplicationsService\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\ApplicationsService\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\ApplicationsService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\RattingsService\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\RattingsService\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\RattingsService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\SeatsService\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\SeatsService\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\SeatsService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\TripsService\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\TripsService\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\TripsService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\LoginService\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\LoginService\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\LoginService\Reference.svcmap">
+    <None Include="Service References\ClientService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

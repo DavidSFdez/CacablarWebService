@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="77dc687d-e4af-4ff5-bd51-c96928227c6f" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="1f3e7c34-e460-4876-b8b0-cd8322e1810a" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <EnableDataBinding>true</EnableDataBinding>
@@ -18,10 +18,10 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:8180/sdi3-204.EJB/TripsService?wsdl" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost:8180/sdi3-204.EJB/ClientService?wsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="EJBTripsServiceService.wsdl" MetadataType="Wsdl" ID="bc0c9513-24b2-4ec3-948c-a835677aea68" SourceId="1" SourceUrl="http://localhost:8180/sdi3-204.EJB/TripsService?wsdl" />
+    <MetadataFile FileName="EJBClientServiceService.wsdl" MetadataType="Wsdl" ID="0a76ae2e-5e24-483a-a4a5-7d9545164f18" SourceId="1" SourceUrl="http://localhost:8180/sdi3-204.EJB/ClientService?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
