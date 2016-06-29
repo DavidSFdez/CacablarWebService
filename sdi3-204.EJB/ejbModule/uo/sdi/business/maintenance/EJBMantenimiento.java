@@ -3,6 +3,7 @@ package uo.sdi.business.maintenance;
 import javax.ejb.Schedule;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
+import javax.ejb.Timeout;
 
 import uo.sdi.infrastructure.Factories;
 import alb.util.log.Log;
@@ -28,4 +29,8 @@ public class EJBMantenimiento {
 
     }
 
+    @Timeout
+    public void timeout(){
+ 	// Nada
+     }
 }
